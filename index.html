@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Étoiles et Navigation - Un petit traité de navigation astronomique par Jean-Clément Louche">
+    <title>Étoiles et Navigation - Navigation Astronomique</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1a3a52;
+            --secondary-color: #2c5aa0;
+            --accent-color: #f39c12;
+            --light-bg: #f8f9fa;
+            --text-dark: #2c3e50;
+            --text-light: #7f8c8d;
+            --border-color: #ecf0f1;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: #ffffff;
+        }
+
+        /* Header / Navigation */
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        header .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            font-style: italic;
+        }
+
+        header .author {
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+            opacity: 0.9;
+        }
+
+        /* Navigation menu */
+        nav {
+            background-color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Main container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Hero section with cover */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            padding: 3rem 1rem;
+            background-color: var(--light-bg);
+        }
+
+        .hero-cover {
+            text-align: center;
+        }
+
+        .hero-cover img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .hero-cover img:hover {
+            transform: translateY(-5px);
+        }
+
+        .hero-content h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .hero-content .description {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .cta-button:hover {
+            background-color: #e67e22;
+            transform: translateY(-2px);
+        }
+
+        /* Extraits section */
+        .extraits-section {
+            padding: 3rem 1rem;
+            background-color: white;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        .extraits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .extrait-card {
+            background-color: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .extrait-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .extrait-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .extrait-card .card-content {
+            padding: 1.5rem;
+        }
+
+        .extrait-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .extrait-card p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Index section */
+        .index-section {
+            padding: 3rem 1rem;
+            background-color: var(--light-bg);
+        }
+
+        .index-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .index-image {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .index-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Contact form section */
+        .contact-section {
+            padding: 3rem 1rem;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+        }
+
+        .contact-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-section .section-title {
+            color: white;
+        }
+
+        .contact-section .section-title::after {
+            background-color: var(--accent-color);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            background-color: rgba(255, 255, 255, 0.95);
+            color: var(--text-dark);
+            transition: background-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(243, 156, 18, 0.3);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-submit {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .form-submit:hover {
+            background-color: #e67e22;
+            transform: translateY(-2px);
+        }
+
+        .form-submit:active {
+            transform: translateY(0);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            header .subtitle {
+                font-size: 0.95rem;
+            }
+
+            nav {
+                gap: 1rem;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 2rem 1rem;
+            }
+
+            .hero-content h2 {
+                font-size: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .extraits-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .extrait-card img {
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.4rem;
+            }
+
+            header .subtitle {
+                font-size: 0.85rem;
+            }
+
+            nav {
+                gap: 0.5rem;
+                flex-direction: column;
+            }
+
+            nav a {
+                font-size: 0.85rem;
+            }
+
+            .hero {
+                padding: 1.5rem 0.5rem;
+            }
+
+            .hero-content h2 {
+                font-size: 1.2rem;
+            }
+
+            .hero-content .description {
+                font-size: 0.9rem;
+            }
+
+            .cta-button {
+                padding: 0.6rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .section-title {
+                font-size: 1.2rem;
+                margin-bottom: 2rem;
+            }
+
+            .extraits-grid {
+                gap: 1rem;
+            }
+
+            .extrait-card img {
+                height: 200px;
+            }
+
+            .extrait-card .card-content {
+                padding: 1rem;
+            }
+
+            .contact-section,
+            .extraits-section,
+            .index-section {
+                padding: 2rem 0.5rem;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .extrait-card {
+            animation: fadeIn 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Étoiles et Navigation</h1>
+        <p class="subtitle">Un petit traité de navigation astronomique</p>
+        <p class="author">par Jean-Clément Louche</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#presentation">Présentation</a>
+        <a href="#index">Table des matières</a>
+        <a href="#extraits">Extraits</a>
+        <a href="#contact">Commander</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="presentation">
+        <div class="hero-cover">
+            <img src="images/couverture.png" alt="Couverture du livre Étoiles et Navigation">
+        </div>
+        <div class="hero-content">
+            <h2>Découvrez l'art de la navigation par les astres</h2>
+            <p class="description">
+                Pour ne pas oublier, j'ai fabriqué ces quelques pages…
+            </p>
+            <p class="description">
+                Les hommes ont toujours utilisé le ciel et les étoiles comme référents privilégiés, pour se déplacer sur la mer. Le besoin d'étendre les voyages maritimes sur toutes les parties du globe, a nécessité de perfectionner les anciennes techniques de navigation avec l'aide de sextants et de gardes de temps.
+            </p>
+            <p class="description">
+                Bien que ces techniques, permettant de naviguer avec les astres ne soient plus guère utilisées, elles restent toujours pertinentes. Elles constituent un moyen simple et efficace de se diriger en mer, par des mesures de hauteurs d'astres au-dessus de l'horizon. Loin des côtes, nous disposons de remarquables amers célestes : soleil, lune, planètes, étoiles.
+            </p>
+            <a href="#contact" class="cta-button">Commander une impression</a>
+        </div>
+    </section>
+
+    <!-- Index Section -->
+    <section class="index-section" id="index">
+        <div class="index-content">
+            <h2 class="section-title">Table des matières</h2>
+            <div class="index-image">
+                <img src="images/index.png" alt="Table des matières du livre">
+            </div>
+        </div>
+    </section>
+
+    <!-- Extraits Section -->
+    <section class="extraits-section" id="extraits">
+        <div class="container">
+            <h2 class="section-title">Extraits du livre</h2>
+            <div class="extraits-grid">
+                <div class="extrait-card">
+                    <img src="images/ch1.png" alt="Chapitre 1">
+                    <div class="card-content">
+                        <h3>Chapitre 1</h3>
+                        <p>Introduction aux principes fondamentaux de la navigation astronomique</p>
+                    </div>
+                </div>
+
+                <div class="extrait-card">
+                    <img src="images/ch2.png" alt="Chapitre 2">
+                    <div class="card-content">
+                        <h3>Chapitre 2</h3>
+                        <p>Les instruments de navigation : sextant et garde de temps</p>
+                    </div>
+                </div>
+
+                <div class="extrait-card">
+                    <img src="images/ch3.png" alt="Chapitre 3">
+                    <div class="card-content">
+                        <h3>Chapitre 3</h3>
+                        <p>Mesure des hauteurs d'astres et calculs de position</p>
+                    </div>
+                </div>
+
+                <div class="extrait-card">
+                    <img src="images/ch4.png" alt="Chapitre 4">
+                    <div class="card-content">
+                        <h3>Chapitre 4</h3>
+                        <p>Utilisation des tables de navigation et des éphémérides</p>
+                    </div>
+                </div>
+
+                <div class="extrait-card">
+                    <img src="images/ch5.png" alt="Chapitre 5">
+                    <div class="card-content">
+                        <h3>Chapitre 5</h3>
+                        <p>Navigation par le Soleil : techniques et applications</p>
+                    </div>
+                </div>
+
+                <div class="extrait-card">
+                    <img src="images/ch6.png" alt="Chapitre 6">
+                    <div class="card-content">
+                        <h3>Chapitre 6</h3>
+                        <p>Navigation par les étoiles et la Lune</p>
+                    </div>
+                </div>
+
+                <div class="extrait-card">
+                    <img src="images/ch7.png" alt="Chapitre 7">
+                    <div class="card-content">
+                        <h3>Chapitre 7</h3>
+                        <p>Correction des erreurs et précision des mesures</p>
+                    </div>
+                </div>
+
+                <div class="extrait-card">
+                    <img src="images/ch8.png" alt="Chapitre 8">
+                    <div class="card-content">
+                        <h3>Chapitre 8</h3>
+                        <p>Pratiques avancées et cas particuliers</p>
+                    </div>
+                </div>
+
+                <div class="extrait-card">
+                    <img src="images/ch9.png" alt="Chapitre 9">
+                    <div class="card-content">
+                        <h3>Chapitre 9</h3>
+                        <p>Navigation en conditions difficiles</p>
+                    </div>
+                </div>
+
+                <div class="extrait-card">
+                    <img src="images/ch10.png" alt="Chapitre 10">
+                    <div class="card-content">
+                        <h3>Chapitre 10</h3>
+                        <p>Historique et évolution des techniques</p>
+                    </div>
+                </div>
+
+                <div class="extrait-card">
+                    <img src="images/ch11.png" alt="Chapitre 11">
+                    <div class="card-content">
+                        <h3>Chapitre 11</h3>
+                        <p>Applications modernes et navigation contemporaine</p>
+                    </div>
+                </div>
+
+                <div class="extrait-card">
+                    <img src="images/ch12.png" alt="Chapitre 12">
+                    <div class="card-content">
+                        <h3>Chapitre 12</h3>
+                        <p>Conclusion et perspectives futures</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="contact-container">
+            <h2 class="section-title">Commander une impression</h2>
+            <form action="https://formsubmit.co/blagrimage@gmail.com" method="POST">
+                <input type="hidden" name="_subject" value="Nouvelle commande d'impression - Étoiles et Navigation">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_next" value="https://etoiles-navigation.pages.dev/success.html">
+                <div class="form-group">
+                    <label for="name">Nom complet *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Adresse e-mail *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Téléphone</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+
+                <div class="form-group">
+                    <label for="quantity">Nombre d'exemplaires *</label>
+                    <input type="number" id="quantity" name="quantity" min="1" value="1" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message ou demandes spéciales</label>
+                    <textarea id="message" name="message" placeholder="Parlez-nous de votre commande..."></textarea>
+                </div>
+
+                <button type="submit" class="form-submit">Envoyer ma commande</button>
+            </form>
+            <p style="text-align: center; margin-top: 1.5rem; font-size: 0.85rem; opacity: 0.9;">
+                Nous vous recontacterons rapidement pour confirmer votre commande.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Étoiles et Navigation - Jean-Clément Louche</p>
+        <p>Un petit traité de navigation astronomique</p>
+    </footer>
+</body>
+</html>
