@@ -32,8 +32,12 @@
         /* Header / Navigation */
         header {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            background-image: linear-gradient(135deg, rgba(26, 58, 82, 0.85) 0%, rgba(44, 90, 160, 0.85) 100%), url('images/fond_bandeau.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             color: white;
-            padding: 2rem 1rem;
+            padding: 3rem 1rem;
             text-align: center;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             position: sticky;
@@ -45,18 +49,21 @@
             font-size: 2.5rem;
             margin-bottom: 0.5rem;
             font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         header .subtitle {
             font-size: 1.1rem;
             opacity: 0.95;
             font-style: italic;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
 
         header .author {
             font-size: 0.95rem;
             margin-top: 0.5rem;
             opacity: 0.9;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
 
         /* Navigation menu */
@@ -175,45 +182,78 @@
 
         .extraits-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1.5rem;
             margin-bottom: 2rem;
         }
 
         .extrait-card {
-            background-color: white;
-            border: 1px solid var(--border-color);
+            position: relative;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .extrait-card .card-title {
+            background-color: var(--light-bg);
+            border: 2px solid var(--primary-color);
             border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .extrait-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
-
-        .extrait-card img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            display: block;
-        }
-
-        .extrait-card .card-content {
-            padding: 1.5rem;
-        }
-
-        .extrait-card h3 {
+            padding: 1.5rem 1rem;
             color: var(--primary-color);
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 80px;
         }
 
-        .extrait-card p {
-            color: var(--text-light);
-            font-size: 0.9rem;
+        .extrait-card:hover .card-title {
+            background-color: var(--primary-color);
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(26, 58, 82, 0.3);
+        }
+
+        .extrait-card .image-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .extrait-card .image-modal.active {
+            display: flex;
+        }
+
+        .extrait-card .image-modal img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .extrait-card .image-modal .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+            z-index: 1001;
+        }
+
+        .extrait-card .image-modal .close-btn:hover {
+            color: var(--accent-color);
         }
 
         /* Index section */
@@ -237,6 +277,27 @@
             height: auto;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .pdf-note {
+            background-color: white;
+            border-left: 4px solid var(--accent-color);
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin-top: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .pdf-note h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .pdf-note p {
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            line-height: 1.7;
         }
 
         /* Contact form section */
@@ -302,19 +363,15 @@
             border: none;
             border-radius: 5px;
             font-weight: 600;
-            font-size: 1rem;
             cursor: pointer;
             width: 100%;
+            font-size: 1rem;
             transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
         .form-submit:hover {
             background-color: #e67e22;
             transform: translateY(-2px);
-        }
-
-        .form-submit:active {
-            transform: translateY(0);
         }
 
         /* Footer */
@@ -327,7 +384,7 @@
         }
 
         footer p {
-            margin-bottom: 0.5rem;
+            margin: 0.5rem 0;
         }
 
         /* Responsive design */
@@ -340,10 +397,6 @@
                 font-size: 0.95rem;
             }
 
-            nav {
-                gap: 1rem;
-            }
-
             .hero {
                 grid-template-columns: 1fr;
                 gap: 2rem;
@@ -354,98 +407,54 @@
                 font-size: 1.5rem;
             }
 
+            .extraits-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                gap: 1rem;
+            }
+
             .section-title {
                 font-size: 1.5rem;
             }
 
-            .extraits-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .extrait-card img {
-                height: 250px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            header h1 {
-                font-size: 1.4rem;
-            }
-
-            header .subtitle {
-                font-size: 0.85rem;
-            }
-
             nav {
-                gap: 0.5rem;
-                flex-direction: column;
+                gap: 1rem;
             }
 
             nav a {
                 font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 2rem 0.5rem;
+            }
+
+            header h1 {
+                font-size: 1.5rem;
             }
 
             .hero {
                 padding: 1.5rem 0.5rem;
             }
 
-            .hero-content h2 {
-                font-size: 1.2rem;
-            }
-
-            .hero-content .description {
-                font-size: 0.9rem;
-            }
-
-            .cta-button {
-                padding: 0.6rem 1.5rem;
-                font-size: 0.9rem;
+            .extraits-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
 
             .section-title {
-                font-size: 1.2rem;
+                font-size: 1.3rem;
                 margin-bottom: 2rem;
             }
 
-            .extraits-grid {
-                gap: 1rem;
+            nav {
+                gap: 0.5rem;
+                padding: 0.5rem 0.5rem;
             }
 
-            .extrait-card img {
-                height: 200px;
+            nav a {
+                font-size: 0.8rem;
             }
-
-            .extrait-card .card-content {
-                padding: 1rem;
-            }
-
-            .contact-section,
-            .extraits-section,
-            .index-section {
-                padding: 2rem 0.5rem;
-            }
-        }
-
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Loading animation */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .extrait-card {
-            animation: fadeIn 0.6s ease-out;
         }
     </style>
 </head>
@@ -460,38 +469,27 @@
     <!-- Navigation -->
     <nav>
         <a href="#presentation">Présentation</a>
-        <a href="#index">Table des matières</a>
         <a href="#extraits">Extraits</a>
         <a href="#contact">Commander</a>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero Section with Presentation -->
     <section class="hero" id="presentation">
         <div class="hero-cover">
-            <img src="images/couverture.png" alt="Couverture du livre Étoiles et Navigation">
+            <img src="images/4eme_couverture.jpeg" alt="4ème de couverture - Étoiles et Navigation">
         </div>
         <div class="hero-content">
-            <h2>Découvrez l'art de la navigation par les astres</h2>
+            <h2>À propos du livre</h2>
             <p class="description">
-                Pour ne pas oublier, j'ai fabriqué ces quelques pages…
-            </p>
-            <p class="description">
-                Les hommes ont toujours utilisé le ciel et les étoiles comme référents privilégiés, pour se déplacer sur la mer. Le besoin d'étendre les voyages maritimes sur toutes les parties du globe, a nécessité de perfectionner les anciennes techniques de navigation avec l'aide de sextants et de gardes de temps.
-            </p>
-            <p class="description">
-                Bien que ces techniques, permettant de naviguer avec les astres ne soient plus guère utilisées, elles restent toujours pertinentes. Elles constituent un moyen simple et efficace de se diriger en mer, par des mesures de hauteurs d'astres au-dessus de l'horizon. Loin des côtes, nous disposons de remarquables amers célestes : soleil, lune, planètes, étoiles.
+                En 4ème de couverture, un montage photographique, réalisé par son fils Gabriel, capturant Jean-Clément à la barre d'un voilier sur le Grand Large, naviguant sous un ciel étoilé, symbole de sa vie guidée par les astres et la mer.
+                <br><br>
+                Né le 2 septembre 1937 à Loisy, en Saône-et-Loire, et décédé le 29 janvier 2016, Jean-Clément Louche a vécu avec une passion débordante pour le vol à voile, l'aéronautique et la navigation. Mécanicien d'avion breveté, il forgea une carrière exemplaire, passant de mécanicien poids lourds à chef de service à la voirie de la ville de Lyon, après des années de cours du soir et une ascension aux bureaux d'études de la ville.
+                <br><br>
+                Amoureux de la mer, il obtint tous ses permis de navigation – fluvial et hauturier – et s'investit avec ferveur dans l'organisation de la base de voile de la ville de Lyon au Grand Large. Régatier aguerri, il sillonna les eaux, notamment dans la région de Bandol. Également fasciné par l'astronomie, il scrutait les étoiles et s'engagea dans l'observation des objets célestes, devenant membre et enquêteur de la revue Lumière dans la Nuit, explorant le mystère des OVNI.
+                <br><br>
+                Homme de savoir, Jean consacra des années à rédiger une encyclopédie de la navigation astronomique, un ouvrage unique, aujourd'hui mis en page pour une possible édition. Ce livre est un hommage à sa vie, à ses passions et à son héritage, naviguant entre ciel et mer, toujours en quête de l'horizon.
             </p>
             <a href="#contact" class="cta-button">Commander une impression</a>
-        </div>
-    </section>
-
-    <!-- Index Section -->
-    <section class="index-section" id="index">
-        <div class="index-content">
-            <h2 class="section-title">Table des matières</h2>
-            <div class="index-image">
-                <img src="images/index.png" alt="Table des matières du livre">
-            </div>
         </div>
     </section>
 
@@ -499,102 +497,105 @@
     <section class="extraits-section" id="extraits">
         <div class="container">
             <h2 class="section-title">Extraits du livre</h2>
+            <p style="text-align: center; margin-bottom: 2rem; color: var(--text-light);">Cliquez sur les titres des chapitres pour voir les extraits en détail</p>
             <div class="extraits-grid">
                 <div class="extrait-card">
-                    <img src="images/ch1.png" alt="Chapitre 1">
-                    <div class="card-content">
-                        <h3>Chapitre 1</h3>
-                        <p>Introduction aux principes fondamentaux de la navigation astronomique</p>
+                    <div class="card-title">Index général</div>
+                    <div class="image-modal">
+                        <button class="close-btn">&times;</button>
+                        <img src="images/index_general.png" alt="Index général">
                     </div>
                 </div>
-
                 <div class="extrait-card">
-                    <img src="images/ch2.png" alt="Chapitre 2">
-                    <div class="card-content">
-                        <h3>Chapitre 2</h3>
-                        <p>Les instruments de navigation : sextant et garde de temps</p>
+                    <div class="card-title">Chapitre 1</div>
+                    <div class="image-modal">
+                        <button class="close-btn">&times;</button>
+                        <img src="images/ch1.png" alt="Chapitre 1">
                     </div>
                 </div>
-
                 <div class="extrait-card">
-                    <img src="images/ch3.png" alt="Chapitre 3">
-                    <div class="card-content">
-                        <h3>Chapitre 3</h3>
-                        <p>Mesure des hauteurs d'astres et calculs de position</p>
+                    <div class="card-title">Chapitre 2</div>
+                    <div class="image-modal">
+                        <button class="close-btn">&times;</button>
+                        <img src="images/ch2.png" alt="Chapitre 2">
                     </div>
                 </div>
-
                 <div class="extrait-card">
-                    <img src="images/ch4.png" alt="Chapitre 4">
-                    <div class="card-content">
-                        <h3>Chapitre 4</h3>
-                        <p>Utilisation des tables de navigation et des éphémérides</p>
+                    <div class="card-title">Chapitre 3</div>
+                    <div class="image-modal">
+                        <button class="close-btn">&times;</button>
+                        <img src="images/ch3.png" alt="Chapitre 3">
                     </div>
                 </div>
-
                 <div class="extrait-card">
-                    <img src="images/ch5.png" alt="Chapitre 5">
-                    <div class="card-content">
-                        <h3>Chapitre 5</h3>
-                        <p>Navigation par le Soleil : techniques et applications</p>
+                    <div class="card-title">Chapitre 4</div>
+                    <div class="image-modal">
+                        <button class="close-btn">&times;</button>
+                        <img src="images/ch4.png" alt="Chapitre 4">
                     </div>
                 </div>
-
                 <div class="extrait-card">
-                    <img src="images/ch6.png" alt="Chapitre 6">
-                    <div class="card-content">
-                        <h3>Chapitre 6</h3>
-                        <p>Navigation par les étoiles et la Lune</p>
+                    <div class="card-title">Chapitre 5</div>
+                    <div class="image-modal">
+                        <button class="close-btn">&times;</button>
+                        <img src="images/ch5.png" alt="Chapitre 5">
                     </div>
                 </div>
-
                 <div class="extrait-card">
-                    <img src="images/ch7.png" alt="Chapitre 7">
-                    <div class="card-content">
-                        <h3>Chapitre 7</h3>
-                        <p>Correction des erreurs et précision des mesures</p>
+                    <div class="card-title">Chapitre 6</div>
+                    <div class="image-modal">
+                        <button class="close-btn">&times;</button>
+                        <img src="images/ch6.png" alt="Chapitre 6">
                     </div>
                 </div>
-
                 <div class="extrait-card">
-                    <img src="images/ch8.png" alt="Chapitre 8">
-                    <div class="card-content">
-                        <h3>Chapitre 8</h3>
-                        <p>Pratiques avancées et cas particuliers</p>
+                    <div class="card-title">Chapitre 7</div>
+                    <div class="image-modal">
+                        <button class="close-btn">&times;</button>
+                        <img src="images/ch7.png" alt="Chapitre 7">
                     </div>
                 </div>
-
                 <div class="extrait-card">
-                    <img src="images/ch9.png" alt="Chapitre 9">
-                    <div class="card-content">
-                        <h3>Chapitre 9</h3>
-                        <p>Navigation en conditions difficiles</p>
+                    <div class="card-title">Chapitre 8</div>
+                    <div class="image-modal">
+                        <button class="close-btn">&times;</button>
+                        <img src="images/ch8.png" alt="Chapitre 8">
                     </div>
                 </div>
-
                 <div class="extrait-card">
-                    <img src="images/ch10.png" alt="Chapitre 10">
-                    <div class="card-content">
-                        <h3>Chapitre 10</h3>
-                        <p>Historique et évolution des techniques</p>
+                    <div class="card-title">Chapitre 9</div>
+                    <div class="image-modal">
+                        <button class="close-btn">&times;</button>
+                        <img src="images/ch9.png" alt="Chapitre 9">
                     </div>
                 </div>
-
                 <div class="extrait-card">
-                    <img src="images/ch11.png" alt="Chapitre 11">
-                    <div class="card-content">
-                        <h3>Chapitre 11</h3>
-                        <p>Applications modernes et navigation contemporaine</p>
+                    <div class="card-title">Chapitre 10</div>
+                    <div class="image-modal">
+                        <button class="close-btn">&times;</button>
+                        <img src="images/ch10.png" alt="Chapitre 10">
                     </div>
                 </div>
-
                 <div class="extrait-card">
-                    <img src="images/ch12.png" alt="Chapitre 12">
-                    <div class="card-content">
-                        <h3>Chapitre 12</h3>
-                        <p>Conclusion et perspectives futures</p>
+                    <div class="card-title">Chapitre 11</div>
+                    <div class="image-modal">
+                        <button class="close-btn">&times;</button>
+                        <img src="images/ch11.png" alt="Chapitre 11">
                     </div>
                 </div>
+                <div class="extrait-card">
+                    <div class="card-title">Chapitre 12</div>
+                    <div class="image-modal">
+                        <button class="close-btn">&times;</button>
+                        <img src="images/ch12.png" alt="Chapitre 12">
+                    </div>
+                </div>
+            </div>
+            <div class="pdf-note">
+                <h4>📖 À propos du PDF interactif</h4>
+                <p>
+                    La version PDF du livre dispose d'une <strong>indexation interactive</strong> qui vous permet de naviguer facilement entre les chapitres. Les <strong>étoiles en bas de chaque page</strong> servent de boutons de navigation : cliquez sur elles pour revenir à l'index général ou naviguer vers d'autres chapitres. Cette fonctionnalité vous offre une expérience de lecture fluide et intuitive, guidée par les astres, comme il se doit pour un livre sur la navigation astronomique.
+                </p>
             </div>
         </div>
     </section>
@@ -606,32 +607,27 @@
             <form action="https://formsubmit.co/blagrimage@gmail.com" method="POST">
                 <input type="hidden" name="_subject" value="Nouvelle commande d'impression - Étoiles et Navigation">
                 <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_next" value="https://etoiles-navigation.pages.dev/success.html">
+                <input type="hidden" name="_next" value="https://etoilesetnavigation.github.io/etoiles-navigation/success.html">
                 <div class="form-group">
                     <label for="name">Nom complet *</label>
                     <input type="text" id="name" name="name" required>
                 </div>
-
                 <div class="form-group">
                     <label for="email">Adresse e-mail *</label>
                     <input type="email" id="email" name="email" required>
                 </div>
-
                 <div class="form-group">
                     <label for="phone">Téléphone</label>
                     <input type="tel" id="phone" name="phone">
                 </div>
-
                 <div class="form-group">
                     <label for="quantity">Nombre d'exemplaires *</label>
                     <input type="number" id="quantity" name="quantity" min="1" value="1" required>
                 </div>
-
                 <div class="form-group">
                     <label for="message">Message ou demandes spéciales</label>
                     <textarea id="message" name="message" placeholder="Parlez-nous de votre commande..."></textarea>
                 </div>
-
                 <button type="submit" class="form-submit">Envoyer ma commande</button>
             </form>
             <p style="text-align: center; margin-top: 1.5rem; font-size: 0.85rem; opacity: 0.9;">
@@ -645,5 +641,43 @@
         <p>&copy; 2025 Étoiles et Navigation - Jean-Clément Louche</p>
         <p>Un petit traité de navigation astronomique</p>
     </footer>
+
+    <script>
+        // Gestion des modales d'images
+        document.querySelectorAll('.extrait-card').forEach(card => {
+            const modal = card.querySelector('.image-modal');
+            const closeBtn = card.querySelector('.close-btn');
+            const title = card.querySelector('.card-title');
+
+            // Ouvrir la modale au clic sur le titre
+            title.addEventListener('click', () => {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+
+            // Fermer la modale au clic sur le bouton X
+            closeBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+
+            // Fermer la modale au clic en dehors de l'image
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            // Fermer avec la touche Échap
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.classList.contains('active')) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
