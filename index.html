@@ -645,39 +645,19 @@
     </footer>
 
     <script>
-        // Gestion des modales d'images
+        // Gestion des modales d'images au survol
         document.querySelectorAll('.extrait-card').forEach(card => {
             const modal = card.querySelector('.image-modal');
-            const closeBtn = card.querySelector('.close-btn');
             const title = card.querySelector('.card-title');
 
-            // Ouvrir la modale au clic sur le titre
-            title.addEventListener('click', () => {
+            // Ouvrir la modale au survol
+            title.addEventListener('mouseenter', () => {
                 modal.classList.add('active');
-                document.body.style.overflow = 'hidden';
             });
 
-            // Fermer la modale au clic sur le bouton X
-            closeBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
+            // Fermer la modale lorsque la souris quitte la carte
+            card.addEventListener('mouseleave', () => {
                 modal.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            });
-
-            // Fermer la modale au clic en dehors de l'image
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    modal.classList.remove('active');
-                    document.body.style.overflow = 'auto';
-                }
-            });
-
-            // Fermer avec la touche Échap
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && modal.classList.contains('active')) {
-                    modal.classList.remove('active');
-                    document.body.style.overflow = 'auto';
-                }
             });
         });
     </script>
