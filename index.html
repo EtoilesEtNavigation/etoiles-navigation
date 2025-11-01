@@ -107,14 +107,15 @@
 
         .hero-cover {
             text-align: center;
-            /* CORRECTION POUR L'AFFICHAGE CÔTE À CÔTE SUR GRAND ÉCRAN */
+            /* CORRECTION POUR L'AFFICHAGE EN COLONNE PAR DÉFAUT */
             display: flex;
-            justify-content: center;
-            gap: 10px;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
         }
 
         .hero-cover img {
-            max-width: 48%; /* Réduction de la taille pour afficher les deux */
+            max-width: 80%; /* Taille par défaut pour les deux images */
             height: auto;
             border-radius: 8px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -490,7 +491,7 @@
     <!-- Hero Section with Presentation -->
     <section class="hero" id="presentation">
         <div class="hero-cover">
-            <!-- AJOUT DE L'IMAGE DE COUVERTURE ET MODIFICATION DU CHEMIN DE LA 4ÈME DE COUVERTURE -->
+            <!-- AFFICHAGE EN COLONNE (SUPERPOSÉ) PAR DÉFAUT -->
             <img src="images/couverture.png" alt="Couverture - Étoiles et Navigation">
             <img src="images/4medecouverture.jpeg" alt="4ème de couverture - Étoiles et Navigation">
         </div>
