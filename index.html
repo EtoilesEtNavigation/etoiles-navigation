@@ -32,8 +32,8 @@
         /* Header / Navigation */
         header {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            /* CORRECTION ICI : Utilisation du nom de fichier sans espace ni accent */
-            background-image: linear-gradient(135deg, rgba(26, 58, 82, 0.85) 0%, rgba(44, 90, 160, 0.85) 100%), url('/etoiles-navigation/images/fondbandeau.png');
+            /* CORRECTION FINALE DU CHEMIN D'ACCÈS */
+            background-image: linear-gradient(135deg, rgba(26, 58, 82, 0.85) 0%, rgba(44, 90, 160, 0.85) 100%), url('images/fondbandeau.png');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -107,10 +107,14 @@
 
         .hero-cover {
             text-align: center;
+            /* AJOUT DU FLEX POUR ALIGNER LES DEUX COUVERTURES */
+            display: flex;
+            justify-content: center;
+            gap: 10px;
         }
 
         .hero-cover img {
-            max-width: 100%;
+            max-width: 48%; /* Réduction de la taille pour afficher les deux */
             height: auto;
             border-radius: 8px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -404,6 +408,15 @@
                 padding: 2rem 1rem;
             }
 
+            .hero-cover {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .hero-cover img {
+                max-width: 80%;
+            }
+
             .hero-content h2 {
                 font-size: 1.5rem;
             }
@@ -477,7 +490,8 @@
     <!-- Hero Section with Presentation -->
     <section class="hero" id="presentation">
         <div class="hero-cover">
-            <!-- CORRECTION ICI : Utilisation du nom de fichier sans espace ni accent -->
+            <!-- AJOUT DE L'IMAGE DE COUVERTURE ET MODIFICATION DU CHEMIN DE LA 4ÈME DE COUVERTURE -->
+            <img src="images/couverture.png" alt="Couverture - Étoiles et Navigation">
             <img src="images/4medecouverture.jpeg" alt="4ème de couverture - Étoiles et Navigation">
         </div>
         <div class="hero-content">
@@ -505,7 +519,7 @@
                     <div class="card-title">Index général</div>
                     <div class="image-modal">
                         <button class="close-btn">&times;</button>
-                        <img src="images/index.png" alt="Index général">
+                        <img src="images/index_general.png" alt="Index général">
                     </div>
                 </div>
                 <div class="extrait-card">
@@ -606,29 +620,27 @@
     <section class="contact-section" id="contact">
         <div class="contact-container">
             <h2 class="section-title">Commander une impression</h2>
+            <!-- CORRECTION FINALE DU FORMULAIRE POUR FORMSPREE -->
             <form action="https://formspree.io/f/mblpzwlq" method="POST">
-                <input type="hidden" name="_subject" value="Nouvelle commande d'impression - Étoiles et Navigation">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_next" value="https://etoilesetnavigation.github.io/etoiles-navigation/success.html">
                 <div class="form-group">
                     <label for="name">Nom complet *</label>
                     <input type="text" id="name" name="name" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Adresse e-mail *</label>
-                    <input type="email" id="email" name="email" required>
+                    <input type="email" id="email" name="_replyto" required>
                 </div>
                 <div class="form-group">
                     <label for="phone">Téléphone</label>
-                    <input type="tel" id="phone" name="phone">
+                    <input type="tel" id="phone" name="Téléphone">
                 </div>
                 <div class="form-group">
                     <label for="quantity">Nombre d'exemplaires *</label>
-                    <input type="number" id="quantity" name="quantity" min="1" value="1" required>
+                    <input type="number" id="quantity" name="Nombre d'exemplaires" min="1" value="1" required>
                 </div>
                 <div class="form-group">
                     <label for="message">Message ou demandes spéciales</label>
-                    <textarea id="message" name="message" placeholder="Parlez-nous de votre commande..."></textarea>
+                    <textarea id="message" name="Message" placeholder="Parlez-nous de votre commande..."></textarea>
                 </div>
                 <button type="submit" class="form-submit">Envoyer ma commande</button>
             </form>
