@@ -668,6 +668,11 @@
             title.addEventListener('mouseenter', () => {
                 modal.classList.add('active');
             });
+            
+            // Fermer la modale sur un clic de souris
+            card.addEventListener('mouseclick', () => {
+                modal.classList.remove('active');
+            });
 
             // Fermer la modale lorsque la souris quitte la carte
             card.addEventListener('mouseleave', () => {
