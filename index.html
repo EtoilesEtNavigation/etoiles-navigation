@@ -246,20 +246,8 @@
         }
 
         .extrait-card .image-modal .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            color: white;
-            font-size: 2rem;
-            cursor: pointer;
-            background: none;
-            border: none;
-            padding: 0;
-            z-index: 1001;
-        }
-
-        .extrait-card .image-modal .close-btn:hover {
-            color: var(--accent-color);
+            /* Le bouton de fermeture est maintenant masqué */
+            display: none;
         }
 
         /* Index section */
@@ -612,7 +600,7 @@
             <div class="pdf-note">
                 <h4>📖 À propos du PDF interactif</h4>
                 <p>
-                    La version PDF du livre dispose d'une <strong>indexation interactive</strong> qui vous permet de naviguer facilement entre les chapitres. Les <strong>étoiles en bas de chaque page</strong> servent de boutons de navigation : cliquez sur elles pour revenir à l'index consulté, tandis que les étoiles en bas de chaque page d'index permettent un retour à l'index général. Cette fonctionnalité vous offre une expérience de lecture fluide et intuitive, guidée par les astres, comme il se doit pour un livre sur la navigation astronomique.
+                    La version PDF du livre dispose d'une <strong>indexation interactive</strong> qui vous permet de naviguer facilement entre les chapitres. Les <strong>étoiles en bas de chaque page</strong> servent de boutons de navigation : cliquez sur elles pour revenir à l'index général ou naviguer vers d'autres chapitres. Cette fonctionnalité vous offre une expérience de lecture fluide et intuitive, guidée par les astres, comme il se doit pour un livre sur la navigation astronomique.
                 </p>
             </div>
         </div>
@@ -655,7 +643,8 @@
     <!-- Footer -->
     <footer>
         <p>&copy; Étoiles et Navigation - Jean-Clément Louche</p>
-        <p>Un petit traité de navigation astronomique - édition 2025</p>
+        <p>Un petit traité de navigation astronomique</p>
+        <p>Edition 2025</p>
     </footer>
 
     <script>
@@ -668,15 +657,18 @@
             title.addEventListener('mouseenter', () => {
                 modal.classList.add('active');
             });
-            
-            // Fermer la modale sur un clic de souris
-            card.addEventListener('mouseclick', () => {
-                modal.classList.remove('active');
-            });
 
             // Fermer la modale lorsque la souris quitte la carte
             card.addEventListener('mouseleave', () => {
                 modal.classList.remove('active');
+            });
+
+            // Fermer la modale au clic sur l'image (ou le fond)
+            modal.addEventListener('click', (e) => {
+                // Vérifie si le clic est sur le fond de la modale ou l'image elle-même
+                if (e.target === modal || e.target.tagName === 'IMG') {
+                    modal.classList.remove('active');
+                }
             });
         });
     </script>
