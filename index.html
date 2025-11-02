@@ -34,7 +34,7 @@
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             /* CORRECTION FINALE DU CHEMIN D'ACCÈS (CHEMIN ABSOLU) */
             background-image: linear-gradient(135deg, rgba(26, 58, 82, 0.85) 0%, rgba(44, 90, 160, 0.85) 100%), url('https://etoilesetnavigation.github.io/etoiles-navigation/images/fondbandeau.png');
-            background-size: cover;
+            background-size: cover; /* Assure que l'image couvre tout le bandeau */
             background-position: center;
             background-attachment: fixed;
             color: white;
@@ -107,7 +107,7 @@
 
         .hero-cover {
             text-align: center;
-            /* CORRECTION POUR L'AFFICHAGE EN COLONNE PAR DÉFAUT */
+            /* AFFICHAGE EN COLONNE (SUPERPOSÉ) PAR DÉFAUT */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -479,13 +479,16 @@
     <!-- Hero Section with Presentation -->
     <section class="hero" id="presentation">
         <div class="hero-cover">
-            <!-- AFFICHAGE EN COLONNE (SUPERPOSÉ) PAR DÉFAUT -->
-            <img src="images/couverture.png" alt="Couverture - Étoiles et Navigation">
-            <img src="images/4medecouverture.jpeg" alt="4ème de couverture - Étoiles et Navigation">
+            <!-- IMAGE DE COUVERTURE SEULE AU DESSUS -->
+            <img src="images/couverture.png" alt="Couverture - Étoiles et Navigation" style="max-width: 50%; margin-bottom: 20px;">
         </div>
         <div class="hero-content">
             <h2>À propos du livre</h2>
             <p class="description">
+                <div class="hero-cover" style="margin-bottom: 20px;">
+                    <!-- IMAGE DE 4ÈME DE COUVERTURE EN DESSOUS DU TEXTE -->
+                    <img src="images/4medecouverture.jpeg" alt="4ème de couverture - Étoiles et Navigation" style="max-width: 80%; margin-bottom: 20px;">
+                </div>
                 En 4ème de couverture, un montage photographique, réalisé par son fils Gabriel, capturant Jean-Clément à la barre d'un voilier sur le Grand Large, naviguant sous un ciel étoilé, symbole de sa vie guidée par les astres et la mer.
                 <br><br>
                 Né le 2 septembre 1937 à Loisy, en Saône-et-Loire, et décédé le 29 janvier 2016, Jean-Clément Louche a vécu avec une passion débordante pour le vol à voile, l'aéronautique et la navigation. Mécanicien d'avion breveté, il forgea une carrière exemplaire, passant de mécanicien poids lourds à chef de service à la voirie de la ville de Lyon, après des années de cours du soir et une ascension aux bureaux d'études de la ville.
