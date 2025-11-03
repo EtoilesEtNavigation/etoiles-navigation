@@ -33,7 +33,7 @@
         header {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             /* CORRECTION FINALE DU CHEMIN D'ACCÈS (CHEMIN ABSOLU) */
-            background-image: linear-gradient(135deg, rgba(26, 58, 82, 0.85) 0%, rgba(44, 90, 160, 0.85) 100%), url('https://etoilesetnavigation.github.io/etoiles-navigation/images/fondbandeau.png');
+            background-image: linear-image(135deg, rgba(26, 58, 82, 0.85) 0%, rgba(44, 90, 160, 0.85) 100%), url('https://etoilesetnavigation.github.io/etoiles-navigation/images/fondbandeau.png');
             background-size: cover; /* Assure que l'image couvre tout le bandeau */
             background-position: center;
             background-attachment: fixed;
@@ -95,7 +95,7 @@
             padding: 0 1rem;
         }
 
-        /* Hero section with cover */
+        /* Hero section with presentation */
         .hero {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -105,9 +105,28 @@
             background-color: var(--light-bg);
         }
 
+        /* NOUVEAU STYLE POUR LA COUVERTURE SEULE */
+        .hero-cover-top {
+            text-align: center;
+            margin-bottom: 2rem;
+            grid-column: 1 / -1; /* Prend toute la largeur */
+        }
+
+        .hero-cover-top img {
+            max-width: 300px; /* Taille fixe pour la couverture */
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .hero-cover-top img:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Ancien hero-cover pour la 4ème de couverture */
         .hero-cover {
             text-align: center;
-            /* AFFICHAGE EN COLONNE (SUPERPOSÉ) PAR DÉFAUT */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -115,7 +134,7 @@
         }
 
         .hero-cover img {
-            max-width: 80%; /* Taille par défaut pour les deux images */
+            max-width: 80%;
             height: auto;
             border-radius: 8px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -478,16 +497,16 @@
 
     <!-- Hero Section with Presentation -->
     <section class="hero" id="presentation">
-        <div class="hero-cover">
-            <!-- IMAGE DE COUVERTURE SEULE AU DESSUS -->
-            <img src="images/couverture.png" alt="Couverture - Étoiles et Navigation" style="max-width: 50%; margin-bottom: 20px;">
+        <!-- NOUVELLE STRUCTURE POUR LA COUVERTURE SEULE -->
+        <div class="hero-cover-top">
+            <img src="images/couverture.png" alt="Couverture - Étoiles et Navigation">
         </div>
         <div class="hero-content">
             <h2>À propos du livre</h2>
             <p class="description">
-                <div class="hero-cover" style="margin-bottom: 20px;">
-                    <!-- IMAGE DE 4ÈME DE COUVERTURE EN DESSOUS DU TEXTE -->
-                    <img src="images/4medecouverture.jpeg" alt="4ème de couverture - Étoiles et Navigation" style="max-width: 80%; margin-bottom: 20px;">
+                <!-- IMAGE DE 4ÈME DE COUVERTURE DANS LE TEXTE -->
+                <div class="hero-cover" style="float: right; margin-left: 20px; margin-bottom: 20px; max-width: 40%;">
+                    <img src="images/4medecouverture.jpeg" alt="4ème de couverture - Étoiles et Navigation" style="max-width: 100%;">
                 </div>
                 En 4ème de couverture, un montage photographique, réalisé par son fils Gabriel, capturant Jean-Clément à la barre d'un voilier sur le Grand Large, naviguant sous un ciel étoilé, symbole de sa vie guidée par les astres et la mer.
                 <br><br>
