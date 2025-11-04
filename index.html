@@ -10,6 +10,11 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
             transition: background-color 0.6s ease, color 0.6s ease;
         }
 
@@ -54,7 +59,6 @@
                 radial-gradient(circle at 80% 20%, rgba(120, 119, 198, 0.08) 0%, transparent 50%);
             background-attachment: fixed;
             position: relative;
-            overflow-x: hidden;
         }
 
         /* === FOND ÉTOILÉ ANIMÉ (Nuit uniquement) === */
@@ -82,47 +86,9 @@
             to { background-position: 200px 200px, 250px 250px, 350px 350px, 400px 400px; }
         }
 
-        /* === BOUTON JOUR/NUIT OVALE + POSITION INTELLIGENTE === */
-        .theme-toggle {
-            position: fixed;
-            top: 15px;
-            background: rgba(255,255,255,0.15);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            z-index: 1000;
-            backdrop-filter: blur(8px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            transition: all 0.4s ease;
-            border: 1px solid rgba(255,255,255,0.3);
-            min-width: 70px;
-            text-align: center;
-        }
-
-        .theme-toggle:hover {
-            transform: scale(1.05);
-            background: rgba(255,255,255,0.25);
-        }
-
-        /* Nuit → Bouton "Jour" à gauche */
-        .theme-toggle {
-            left: 15px;
-        }
-
-        /* Jour → Bouton "Nuit" à droite */
-        [data-theme="light"] .theme-toggle {
-            left: auto;
-            right: 15px;
-            background: rgba(0,0,0,0.1);
-            color: #2c3e50;
-            border-color: rgba(0,0,0,0.2);
-        }
-
-        /* === HEADER : ADAPTÉ MOBILE PORTRAIT === */
+        /* === HEADER + BOUTON DANS LE BANDEAU === */
         header {
+            position: relative;
             height: 280px;
             min-height: 280px;
             background-image: url('https://etoilesetnavigation.github.io/etoiles-navigation/images/fondbandeau.png');
@@ -134,18 +100,56 @@
             text-align: center;
             color: white;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-            position: relative;
             display: flex;
             flex-direction: column;
             justify-content: center;
             overflow: hidden;
-            margin-bottom: 1rem;
         }
 
         @supports (background-image: url('*.webp')) {
             header { background-image: url('https://etoilesetnavigation.github.io/etoiles-navigation/images/fondbandeau.webp'); }
         }
 
+        /* Bouton Jour/Nuit DANS le header */
+        .theme-toggle {
+            position: absolute;
+            top: 12px;
+            background: rgba(255,255,255,0.15);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            z-index: 100;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            min-width: 64px;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+            background: rgba(255,255,255,0.25);
+        }
+
+        /* Nuit → "Jour" à gauche */
+        .theme-toggle {
+            left: 12px;
+        }
+
+        /* Jour → "Nuit" à droite */
+        [data-theme="light"] .theme-toggle {
+            left: auto;
+            right: 12px;
+            background: rgba(0,0,0,0.1);
+            color: #2c3e50;
+            border-color: rgba(0,0,0,0.2);
+        }
+
+        /* Étoiles décoratives */
         header::before, header::after {
             color: var(--gold-star);
             opacity: 0.7;
@@ -171,6 +175,9 @@
             text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
             letter-spacing: 0.8px;
             line-height: 1.1;
+            max-width: 90%;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         header .subtitle {
@@ -187,7 +194,7 @@
             font-weight: 500;
         }
 
-        /* === MOBILE PORTRAIT : HAUTEUR RÉDUITE + TEXTE CENTRÉ === */
+        /* === MOBILE PORTRAIT : TOUT PARFAIT === */
         @media (max-width: 480px) and (orientation: portrait) {
             header {
                 height: 200px;
@@ -195,13 +202,20 @@
                 padding: 1rem 0.8rem;
             }
             header h1 {
-                font-size: 1.7rem;
+                font-size: 1.65rem;
                 letter-spacing: 0.5px;
+                line-height: 1.15;
             }
-            header .subtitle { font-size: 0.85rem; }
-            header .author { font-size: 0.78rem; }
+            header .subtitle { font-size: 0.82rem; }
+            header .author { font-size: 0.75rem; }
             header::before { top: 10px; left: 10px; font-size: 1rem; }
             header::after { bottom: 15px; right: 15px; font-size: 0.85rem; }
+            .theme-toggle { 
+                top: 10px; 
+                font-size: 0.78rem; 
+                padding: 5px 12px; 
+                min-width: 58px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -218,6 +232,8 @@
             gap: 2rem;
             flex-wrap: wrap;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 99;
         }
         nav a {
             color: white;
@@ -228,8 +244,7 @@
         }
         nav a:hover { color: var(--accent-orange); }
 
-        /* === HERO, EXTRAITS, CONTACT, FOOTER === */
-        /* (Identique à la version précédente, avec variables dynamiques) */
+        /* === RESTE DU SITE (inchangé) === */
         .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
         .hero {
             display: flex;
@@ -277,7 +292,6 @@
             transform: translateY(-3px); box-shadow: 0 8px 25px rgba(230,126,34,0.6);
         }
 
-        /* === EXTRAITS === */
         .extraits-section { padding: 4rem 1rem; background: rgba(15,30,47,0.6); }
         [data-theme="light"] .extraits-section { background: #ffffff; }
 
@@ -379,7 +393,6 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        /* === CONTACT & FOOTER === */
         .contact-section {
             padding: 4rem 1rem;
             background: linear-gradient(135deg, #0b1a2e 0%, #142c44 100%);
@@ -405,7 +418,6 @@
             color: #bdc3c7;
         }
 
-        /* === RESPONSIVE === */
         @media (max-width: 768px) {
             .hero { padding: 2.5rem 1rem; }
             .hero-cover-top img { max-width: 280px; }
@@ -422,11 +434,9 @@
 </head>
 <body>
 
-    <!-- Bouton Jour/Nuit -->
-    <div class="theme-toggle" id="themeToggle">Jour</div>
-
-    <!-- Header -->
+    <!-- Header avec bouton intégré -->
     <header>
+        <div class="theme-toggle" id="themeToggle">Jour</div>
         <h1>Étoiles et Navigation</h1>
         <p class="subtitle">Un petit traité de navigation astronomique</p>
         <p class="author">par Jean-Clément Louche</p>
@@ -468,11 +478,12 @@
             <h2 class="section-title">Extraits du livre</h2>
             <p style="text-align: center; margin-bottom: 2rem; color: var(--text-muted);">Cliquez sur les titres pour voir les extraits en grand format</p>
             <div class="extraits-grid">
-                <!-- 13 extraits complets -->
+                <!-- 13 extraits -->
                 <div class="extrait-card">
                     <div class="card-title">Index général<span class="click-hint">Cliquez pour agrandir</span></div>
                     <div class="image-modal"><img src="images/index.png" alt="Index général"></div>
                 </div>
+                <!-- ... (les 12 chapitres identiques à avant) ... -->
                 <div class="extrait-card">
                     <div class="card-title">Chapitre 1<span class="click-hint">Cliquez pour agrandir</span></div>
                     <div class="image-modal"><img src="images/ch1.png" alt="Chapitre 1"></div>
@@ -576,7 +587,6 @@
         const toggle = document.getElementById('themeToggle');
         const body = document.body;
 
-        // Charger le thème
         const savedTheme = localStorage.getItem('theme') || 'dark';
         if (savedTheme === 'light') {
             body.setAttribute('data-theme', 'light');
@@ -597,7 +607,6 @@
             }
         });
 
-        // Fallback image + Extraits
         const img = new Image();
         img.src = 'https://etoilesetnavigation.github.io/etoiles-navigation/images/fondbandeau.webp';
         img.onerror = () => document.querySelector('header').classList.add('no-image');
