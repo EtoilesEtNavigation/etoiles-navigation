@@ -32,9 +32,10 @@
         /* Header / Navigation */
         header {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            /* CORRECTION FINALE DU CHEMIN D'ACCÈS (CHEMIN ABSOLU) */
-            background-image: linear-gradient(135deg, rgba(26, 58, 82, 0.85) 0%, rgba(44, 90, 160, 0.85) 100%), url('https://etoilesetnavigation.github.io/etoiles-navigation/images/fondbandeau.png');
-            background-size: cover; /* Assure que l'image couvre tout le bandeau */
+            /* CORRECTION FINALE DU CHEMIN D'ACCÈS (CHEMIN RELATIF) */
+            background-image: linear-gradient(135deg, rgba(26, 58, 82, 0.85) 0%, rgba(44, 90, 160, 0.85) 100%), url('images/fondbandeau.png');
+            background-size: contain; /* L'image est entièrement visible */
+            background-repeat: no-repeat;
             background-position: center;
             background-attachment: fixed;
             color: white;
@@ -97,9 +98,8 @@
 
         /* Hero section with presentation */
         .hero {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
+            display: flex;
+            flex-direction: column;
             align-items: center;
             padding: 3rem 1rem;
             background-color: var(--light-bg);
@@ -109,12 +109,12 @@
         .hero-cover-top {
             text-align: center;
             margin-bottom: 2rem;
-            grid-column: 1 / -1; /* Prend toute la largeur */
+            width: 100%;
         }
 
         .hero-cover-top img {
-            max-width: 350px; /* Taille agrandie pour la couverture */
-            width: 100%; /* Permet l'adaptation */
+            max-width: 300px; /* Taille maximale */
+            width: 80%; /* Taille relative pour l'adaptation */
             height: auto;
             border-radius: 8px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -152,6 +152,7 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
+            width: 100%;
         }
 
         .hero-content h2 {
@@ -166,7 +167,7 @@
             color: var(--text-dark);
             margin-bottom: 1.5rem;
             text-align: justify;
-            max-width: 600px; /* Limite la largeur du texte pour la lisibilité */
+            max-width: 800px; /* Limite la largeur du texte pour la lisibilité */
         }
 
         .cta-button {
@@ -421,22 +422,21 @@
             }
 
             .hero {
-                grid-template-columns: 1fr;
-                gap: 2rem;
                 padding: 2rem 1rem;
             }
 
-            .hero-cover {
-                flex-direction: column; /* Superposition en mode mobile */
-                gap: 20px;
+            .hero-cover-top img {
+                max-width: 250px;
             }
 
             .hero-cover img {
-                max-width: 80%;
+                max-width: 100%;
+                float: none;
+                margin: 0 auto 20px;
             }
 
-            .hero-content h2 {
-                font-size: 1.5rem;
+            .hero-content .description {
+                text-align: left;
             }
 
             .extraits-grid {
