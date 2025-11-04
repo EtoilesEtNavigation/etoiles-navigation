@@ -35,7 +35,7 @@
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
-            background-color: #000000; /* FOND NOIR PUR */
+            background-color: #000000;
             background-attachment: scroll;
             padding: 2rem 1rem;
             text-align: center;
@@ -51,14 +51,12 @@
             position: relative;
         }
 
-        /* WebP prioritaire si supporté */
         @supports (background-image: url('*.webp')) {
             header {
                 background-image: url('https://etoilesetnavigation.github.io/etoiles-navigation/images/fondbandeau.webp');
             }
         }
 
-        /* Texte avec ombre douce renforcée */
         header h1 {
             font-size: 2.5rem;
             margin-bottom: 0.5rem;
@@ -78,7 +76,6 @@
             text-shadow: 0 1px 5px rgba(0, 0, 0, 0.7);
         }
 
-        /* Fallback si image ne charge pas */
         header::before {
             content: "";
             position: absolute;
@@ -96,7 +93,6 @@
             z-index: 1;
         }
 
-        /* === RESPONSIVE === */
         @media (max-width: 768px) {
             header {
                 height: 250px;
@@ -150,20 +146,98 @@
         .cta-button { display: inline-block; background-color: var(--accent-color); color: white; padding: .75rem 2rem; border-radius: 5px; text-decoration: none; font-weight: 600; transition: background-color .3s, transform .2s; }
         .cta-button:hover { background-color: #e67e22; transform: translateY(-2px); }
 
-        /* === EXTRAITS === */
+        /* === EXTRAITS : CLIC AU LIEU DE HOVER === */
         .extraits-section { padding: 3rem 1rem; background-color: white; }
         .section-title { font-size: 2rem; color: var(--primary-color); text-align: center; margin-bottom: 3rem; position: relative; padding-bottom: 1rem; }
         .section-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background-color: var(--accent-color); border-radius: 2px; }
-        .extraits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
-        .extrait-card { position: relative; cursor: pointer; text-align: center; }
-        .extrait-card .card-title { background-color: var(--light-bg); border: 2px solid var(--primary-color); border-radius: 8px; padding: 1.5rem 1rem; color: var(--primary-color); font-weight: 600; font-size: .9rem; transition: all .3s; display: flex; align-items: center; justify-content: center; min-height: 80px; }
-        .extrait-card:hover .card-title { background-color: var(--primary-color); color: white; transform: scale(1.05); box-shadow: 0 4px 12px rgba(26,58,82,.3); }
-        .extrait-card .image-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,.85); display: none; align-items: center; justify-content: center; z-index: 1000; }
-        .extrait-card .image-modal.active { display: flex; }
-        .extrait-card .image-modal img { max-width: 90%; max-height: 90%; border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,.3); }
-        .extrait-card .image-modal .close-btn { display: none; }
 
-        .pdf-note { background-color: white; border-left: 4px solid var(--accent-color); padding: 1.5rem; border-radius: 4px; margin-top: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+        .extraits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .extrait-card {
+            position: relative;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .extrait-card .card-title {
+            background-color: var(--light-bg);
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            padding: 1.5rem 1rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: .9rem;
+            transition: all .3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .extrait-card:hover .card-title,
+        .extrait-card.active .card-title {
+            background-color: var(--primary-color);
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(26,58,82,.3);
+        }
+
+        .extrait-card .click-hint {
+            margin-top: 6px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 4px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .extrait-card:hover .click-hint,
+        .extrait-card.active .click-hint {
+            opacity: 1;
+        }
+
+        .extrait-card .image-modal {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .extrait-card .image-modal.active {
+            display: flex;
+        }
+
+        .extrait-card .image-modal img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .pdf-note {
+            background-color: white;
+            border-left: 4px solid var(--accent-color);
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin-top: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
         .pdf-note h4 { color: var(--primary-color); margin-bottom: .5rem; font-size: 1.1rem; }
         .pdf-note p { color: var(--text-dark); font-size: .95rem; line-height: 1.7; }
 
@@ -184,7 +258,7 @@
         footer { background-color: var(--primary-color); color: white; text-align: center; padding: 2rem 1rem; font-size: .9rem; }
         footer p { margin: .5rem 0; }
 
-        /* === RESPONSIVE GLOBAL === */
+        /* === RESPONSIVE === */
         @media (max-width: 768px) {
             .hero { padding: 2rem 1rem; }
             .hero-cover-top img { max-width: 250px; }
@@ -192,6 +266,11 @@
             .section-title { font-size: 1.5rem; }
             nav { gap: 1rem; }
             nav a { font-size: .85rem; }
+            .extrait-card .click-hint {
+                opacity: 1;
+                font-size: 0.7rem;
+                padding: 3px 8px;
+            }
         }
         @media (max-width: 480px) {
             .hero { padding: 1.5rem .5rem; }
@@ -245,98 +324,59 @@
     <section class="extraits-section" id="extraits">
         <div class="container">
             <h2 class="section-title">Extraits du livre</h2>
-            <p style="text-align: center; margin-bottom: 2rem; color: var(--text-light);">Survolez les titres des chapitres pour voir les extraits en détail</p>
+            <p style="text-align: center; margin-bottom: 2rem; color: var(--text-light);">Cliquez sur les titres pour voir les extraits en grand format</p>
             <div class="extraits-grid">
                 <div class="extrait-card">
-                    <div class="card-title">Index général</div>
-                    <div class="image-modal">
-                        <button class="close-btn">&times;</button>
-                        <img src="images/index.png" alt="Index général">
-                    </div>
+                    <div class="card-title">Index général<span class="click-hint">Cliquez pour agrandir</span></div>
+                    <div class="image-modal"><img src="images/index.png" alt="Index général"></div>
                 </div>
                 <div class="extrait-card">
-                    <div class="card-title">Chapitre 1</div>
-                    <div class="image-modal">
-                        <button class="close-btn">&times;</button>
-                        <img src="images/ch1.png" alt="Chapitre 1">
-                    </div>
+                    <div class="card-title">Chapitre 1<span class="click-hint">Cliquez pour agrandir</span></div>
+                    <div class="image-modal"><img src="images/ch1.png" alt="Chapitre 1"></div>
                 </div>
                 <div class="extrait-card">
-                    <div class="card-title">Chapitre 2</div>
-                    <div class="image-modal">
-                        <button class="close-btn">&times;</button>
-                        <img src="images/ch2.png" alt="Chapitre 2">
-                    </div>
+                    <div class="card-title">Chapitre 2<span class="click-hint">Cliquez pour agrandir</span></div>
+                    <div class="image-modal"><img src="images/ch2.png" alt="Chapitre 2"></div>
                 </div>
                 <div class="extrait-card">
-                    <div class="card-title">Chapitre 3</div>
-                    <div class="image-modal">
-                        <button class="close-btn">&times;</button>
-                        <img src="images/ch3.png" alt="Chapitre 3">
-                    </div>
+                    <div class="card-title">Chapitre 3<span class="click-hint">Cliquez pour agrandir</span></div>
+                    <div class="image-modal"><img src="images/ch3.png" alt="Chapitre 3"></div>
                 </div>
                 <div class="extrait-card">
-                    <div class="card-title">Chapitre 4</div>
-                    <div class="image-modal">
-                        <button class="close-btn">&times;</button>
-                        <img src="images/ch4.png" alt="Chapitre 4">
-                    </div>
+                    <div class="card-title">Chapitre 4<span class="click-hint">Cliquez pour agrandir</span></div>
+                    <div class="image-modal"><img src="images/ch4.png" alt="Chapitre 4"></div>
                 </div>
                 <div class="extrait-card">
-                    <div class="card-title">Chapitre 5</div>
-                    <div class="image-modal">
-                        <button class="close-btn">&times;</button>
-                        <img src="images/ch5.png" alt="Chapitre 5">
-                    </div>
+                    <div class="card-title">Chapitre 5<span class="click-hint">Cliquez pour agrandir</span></div>
+                    <div class="image-modal"><img src="images/ch5.png" alt="Chapitre 5"></div>
                 </div>
                 <div class="extrait-card">
-                    <div class="card-title">Chapitre 6</div>
-                    <div class="image-modal">
-                        <button class="close-btn">&times;</button>
-                        <img src="images/ch6.png" alt="Chapitre 6">
-                    </div>
+                    <div class="card-title">Chapitre 6<span class="click-hint">Cliquez pour agrandir</span></div>
+                    <div class="image-modal"><img src="images/ch6.png" alt="Chapitre 6"></div>
                 </div>
                 <div class="extrait-card">
-                    <div class="card-title">Chapitre 7</div>
-                    <div class="image-modal">
-                        <button class="close-btn">&times;</button>
-                        <img src="images/ch7.png" alt="Chapitre 7">
-                    </div>
+                    <div class="card-title">Chapitre 7<span class="click-hint">Cliquez pour agrandir</span></div>
+                    <div class="image-modal"><img src="images/ch7.png" alt="Chapitre 7"></div>
                 </div>
                 <div class="extrait-card">
-                    <div class="card-title">Chapitre 8</div>
-                    <div class="image-modal">
-                        <button class="close-btn">&times;</button>
-                        <img src="images/ch8.png" alt="Chapitre 8">
-                    </div>
+                    <div class="card-title">Chapitre 8<span class="click-hint">Cliquez pour agrandir</span></div>
+                    <div class="image-modal"><img src="images/ch8.png" alt="Chapitre 8"></div>
                 </div>
                 <div class="extrait-card">
-                    <div class="card-title">Chapitre 9</div>
-                    <div class="image-modal">
-                        <button class="close-btn">&times;</button>
-                        <img src="images/ch9.png" alt="Chapitre 9">
-                    </div>
+                    <div class="card-title">Chapitre 9<span class="click-hint">Cliquez pour agrandir</span></div>
+                    <div class="image-modal"><img src="images/ch9.png" alt="Chapitre 9"></div>
                 </div>
                 <div class="extrait-card">
-                    <div class="card-title">Chapitre 10</div>
-                    <div class="image-modal">
-                        <button class="close-btn">&times;</button>
-                        <img src="images/ch10.png" alt="Chapitre 10">
-                    </div>
+                    <div class="card-title">Chapitre 10<span class="click-hint">Cliquez pour agrandir</span></div>
+                    <div class="image-modal"><img src="images/ch10.png" alt="Chapitre 10"></div>
                 </div>
                 <div class="extrait-card">
-                    <div class="card-title">Chapitre 11</div>
-                    <div class="image-modal">
-                        <button class="close-btn">&times;</button>
-                        <img src="images/ch11.png" alt="Chapitre 11">
-                    </div>
+                    <div class="card-title">Chapitre 11<span class="click-hint">Cliquez pour agrandir</span></div>
+                    <div class="image-modal"><img src="images/ch11.png" alt="Chapitre 11"></div>
                 </div>
                 <div class="extrait-card">
-                    <div class="card-title">Chapitre 12</div>
-                    <div class="image-modal">
-                        <button class="close-btn">&times;</button>
-                        <img src="images/ch12.png" alt="Chapitre 12">
-                    </div>
+                    <div class="card-title">Chapitre 12<span class="click-hint">Cliquez pour agrandir</span></div>
+                    <div class="image-modal"><img src="images/ch12.png" alt="Chapitre 12"></div>
                 </div>
             </div>
             <div class="pdf-note">
@@ -388,23 +428,27 @@
         <p>Edition 2025</p>
     </footer>
 
-    <!-- JS -->
+    <!-- JavaScript -->
     <script>
-        // Fallback image
+        // Fallback header
         const img = new Image();
         img.src = 'https://etoilesetnavigation.github.io/etoiles-navigation/images/fondbandeau.webp';
-        img.onerror = () => {
-            document.querySelector('header').classList.add('no-image');
-        };
+        img.onerror = () => document.querySelector('header').classList.add('no-image');
 
-        // Modales
+        // Extraits : clic au lieu de hover
         document.querySelectorAll('.extrait-card').forEach(card => {
-            const modal = card.querySelector('.image-modal');
             const title = card.querySelector('.card-title');
-            title.addEventListener('mouseenter', () => modal.classList.add('active'));
-            card.addEventListener('mouseleave', () => modal.classList.remove('active'));
+            const modal = card.querySelector('.image-modal');
+
+            title.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isActive = card.classList.toggle('active');
+                modal.classList.toggle('active', isActive);
+            });
+
             modal.addEventListener('click', (e) => {
                 if (e.target === modal || e.target.tagName === 'IMG') {
+                    card.classList.remove('active');
                     modal.classList.remove('active');
                 }
             });
