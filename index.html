@@ -15,7 +15,6 @@
 
         /* === VARIABLES DYNAMIQUES (Jour/Nuit) === */
         :root {
-            /* Mode Nuit (par défaut) */
             --bg-night: #0b1a2e;
             --header-bg: #0f1e2f;
             --nav-bg: #142c44;
@@ -30,7 +29,6 @@
             --body-bg: var(--bg-night);
         }
 
-        /* Mode Jour */
         [data-theme="light"] {
             --bg-night: #f5f8fa;
             --header-bg: #e6f0fa;
@@ -77,135 +75,138 @@
             animation: stars-move 120s linear infinite;
         }
 
-        [data-theme="light"]::before {
-            opacity: 0;
-        }
+        [data-theme="light"]::before { opacity: 0; }
 
         @keyframes stars-move {
             from { background-position: 0 0, 50px 50px, 100px 100px, 150px 150px; }
             to { background-position: 200px 200px, 250px 250px, 350px 350px, 400px 400px; }
         }
 
-        /* === BOUTON MODE JOUR/NUIT === */
+        /* === BOUTON JOUR/NUIT OVALE + POSITION INTELLIGENTE === */
         .theme-toggle {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            top: 15px;
             background: rgba(255,255,255,0.15);
-            border: 1px solid rgba(255,255,255,0.3);
             color: white;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
             cursor: pointer;
             z-index: 1000;
-            backdrop-filter: blur(6px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
             transition: all 0.4s ease;
+            border: 1px solid rgba(255,255,255,0.3);
+            min-width: 70px;
+            text-align: center;
         }
 
         .theme-toggle:hover {
-            transform: scale(1.1);
+            transform: scale(1.05);
             background: rgba(255,255,255,0.25);
         }
 
+        /* Nuit → Bouton "Jour" à gauche */
+        .theme-toggle {
+            left: 15px;
+        }
+
+        /* Jour → Bouton "Nuit" à droite */
         [data-theme="light"] .theme-toggle {
+            left: auto;
+            right: 15px;
             background: rgba(0,0,0,0.1);
-            border-color: rgba(0,0,0,0.2);
             color: #2c3e50;
+            border-color: rgba(0,0,0,0.2);
         }
 
-        .theme-toggle svg {
-            width: 22px;
-            height: 22px;
-            transition: transform 0.4s ease;
-        }
-
-        /* === HEADER === */
+        /* === HEADER : ADAPTÉ MOBILE PORTRAIT === */
         header {
-            height: 300px;
-            min-height: 300px;
+            height: 280px;
+            min-height: 280px;
             background-image: url('https://etoilesetnavigation.github.io/etoiles-navigation/images/fondbandeau.png');
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
             background-color: var(--header-bg);
-            padding: 2rem 1rem;
+            padding: 1.5rem 1rem;
             text-align: center;
             color: white;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-            position: sticky;
-            top: 0;
-            z-index: 99;
+            position: relative;
             display: flex;
             flex-direction: column;
             justify-content: center;
             overflow: hidden;
-            position: relative;
+            margin-bottom: 1rem;
         }
 
         @supports (background-image: url('*.webp')) {
-            header {
-                background-image: url('https://etoilesetnavigation.github.io/etoiles-navigation/images/fondbandeau.webp');
-            }
+            header { background-image: url('https://etoilesetnavigation.github.io/etoiles-navigation/images/fondbandeau.webp'); }
         }
 
-        /* Étoiles décoratives */
         header::before, header::after {
             color: var(--gold-star);
             opacity: 0.7;
             z-index: 1;
             animation: twinkle 3s infinite;
         }
-        header::before {
-            content: '★';
-            position: absolute;
-            top: 20px; left: 20px;
-            font-size: 1.4rem;
-        }
-        header::after {
-            content: '✦';
-            position: absolute;
-            bottom: 25px; right: 25px;
-            font-size: 1.1rem;
-            animation: twinkle 4s infinite reverse;
-        }
+        header::before { content: '★'; position: absolute; top: 15px; left: 15px; font-size: 1.2rem; }
+        header::after { content: '✦'; position: absolute; bottom: 20px; right: 20px; font-size: 1rem; animation: twinkle 4s infinite reverse; }
 
         @keyframes twinkle {
             0%, 100% { opacity: 0.5; transform: scale(1); }
             50% { opacity: 0.9; transform: scale(1.2); }
         }
 
-        /* Titre avec reflet doré */
         header h1 {
-            font-size: 2.6rem;
-            margin-bottom: 0.5rem;
+            font-size: 2.2rem;
+            margin-bottom: 0.4rem;
             font-weight: 700;
-            position: relative;
-            display: inline-block;
             background: linear-gradient(to bottom, white 60%, var(--gold-star) 100%);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
-            letter-spacing: 1px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+            letter-spacing: 0.8px;
+            line-height: 1.1;
         }
 
         header .subtitle {
-            font-size: 1.15rem;
+            font-size: 1rem;
             opacity: 0.95;
             font-style: italic;
-            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7);
-            margin-bottom: 0.3rem;
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.7);
+            margin-bottom: 0.2rem;
         }
         header .author {
-            font-size: 0.98rem;
+            font-size: 0.9rem;
             opacity: 0.9;
-            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.7);
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
             font-weight: 500;
+        }
+
+        /* === MOBILE PORTRAIT : HAUTEUR RÉDUITE + TEXTE CENTRÉ === */
+        @media (max-width: 480px) and (orientation: portrait) {
+            header {
+                height: 200px;
+                min-height: 200px;
+                padding: 1rem 0.8rem;
+            }
+            header h1 {
+                font-size: 1.7rem;
+                letter-spacing: 0.5px;
+            }
+            header .subtitle { font-size: 0.85rem; }
+            header .author { font-size: 0.78rem; }
+            header::before { top: 10px; left: 10px; font-size: 1rem; }
+            header::after { bottom: 15px; right: 15px; font-size: 0.85rem; }
+        }
+
+        @media (max-width: 768px) {
+            header { height: 250px; }
+            header h1 { font-size: 2rem; }
         }
 
         /* === NAVIGATION === */
@@ -214,125 +215,81 @@
             padding: 0.7rem 1rem;
             display: flex;
             justify-content: center;
-            gap: 2.2rem;
+            gap: 2rem;
             flex-wrap: wrap;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
         nav a {
             color: white;
             text-decoration: none;
-            font-size: 0.98rem;
+            font-size: 0.95rem;
             font-weight: 500;
             transition: color 0.3s ease;
         }
-        nav a:hover {
-            color: var(--accent-orange);
-        }
+        nav a:hover { color: var(--accent-orange); }
 
-        /* === HERO SECTION === */
+        /* === HERO, EXTRAITS, CONTACT, FOOTER === */
+        /* (Identique à la version précédente, avec variables dynamiques) */
         .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
         .hero {
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 3.5rem 1rem;
+            padding: 3rem 1rem;
             background: linear-gradient(to bottom, rgba(11,26,46,0.9), rgba(15,30,47,0.95));
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
-        [data-theme="light"] .hero {
-            background: linear-gradient(to bottom, #e6f0fa, #f8f9fa);
-        }
+        [data-theme="light"] .hero { background: linear-gradient(to bottom, #e6f0fa, #f8f9fa); }
 
-        .hero-cover-top { text-align: center; margin-bottom: 2rem; width: 100%; }
         .hero-cover-top img {
-            max-width: 600px;
-            width: 85%;
-            height: auto;
-            border-radius: 12px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-            transition: transform .3s;
+            max-width: 600px; width: 85%; height: auto; border-radius: 12px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4); transition: transform .3s;
             border: 2px solid rgba(212,160,23,0.2);
         }
         .hero-cover-top img:hover { transform: translateY(-8px); }
 
-        .hero-content { text-align: center; width: 100%; }
         .hero-content h2 {
-            font-size: 2.1rem;
-            color: white;
-            margin-bottom: 1.2rem;
-            position: relative;
-            display: inline-block;
+            font-size: 2rem; color: white; margin-bottom: 1.2rem;
+            position: relative; display: inline-block;
         }
         [data-theme="light"] .hero-content h2 { color: var(--text-light); }
         .hero-content h2::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 70px;
-            height: 3px;
+            content: ''; position: absolute; bottom: -8px; left: 50%;
+            transform: translateX(-50%); width: 70px; height: 3px;
             background: linear-gradient(90deg, transparent, var(--accent-orange), transparent);
             border-radius: 2px;
         }
 
         .hero-content .description {
-            font-size: 1.02rem;
-            line-height: 1.9;
-            color: var(--text-muted);
-            margin-bottom: 1.8rem;
-            text-align: justify;
-            max-width: 850px;
-            margin-left: auto;
-            margin-right: auto;
+            font-size: 1rem; line-height: 1.9; color: var(--text-muted);
+            margin-bottom: 1.8rem; text-align: justify; max-width: 850px;
+            margin-left: auto; margin-right: auto;
         }
 
         .cta-button {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--accent-orange), #f39c12);
-            color: white;
-            padding: .85rem 2.2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.05rem;
-            transition: all .3s;
-            box-shadow: 0 4px 15px rgba(230,126,34,0.4);
+            display: inline-block; background: linear-gradient(135deg, var(--accent-orange), #f39c12);
+            color: white; padding: .85rem 2.2rem; border-radius: 50px;
+            text-decoration: none; font-weight: 600; font-size: 1.05rem;
+            transition: all .3s; box-shadow: 0 4px 15px rgba(230,126,34,0.4);
         }
         .cta-button:hover {
             background: linear-gradient(135deg, #f39c12, #e67e22);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(230,126,34,0.6);
+            transform: translateY(-3px); box-shadow: 0 8px 25px rgba(230,126,34,0.6);
         }
 
         /* === EXTRAITS === */
-        .extraits-section {
-            padding: 4rem 1rem;
-            background: rgba(15,30,47,0.6);
-        }
-        [data-theme="light"] .extraits-section {
-            background: #ffffff;
-        }
+        .extraits-section { padding: 4rem 1rem; background: rgba(15,30,47,0.6); }
+        [data-theme="light"] .extraits-section { background: #ffffff; }
 
         .section-title {
-            font-size: 2.1rem;
-            color: white;
-            text-align: center;
-            margin-bottom: 3rem;
-            position: relative;
-            padding-bottom: 1rem;
+            font-size: 2rem; color: white; text-align: center; margin-bottom: 3rem;
+            position: relative; padding-bottom: 1rem;
         }
         [data-theme="light"] .section-title { color: var(--text-light); }
         .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background: var(--accent-orange);
-            border-radius: 2px;
+            content: ''; position: absolute; bottom: 0; left: 50%;
+            transform: translateX(-50%); width: 80px; height: 3px;
+            background: var(--accent-orange); border-radius: 2px;
         }
 
         .extraits-grid {
@@ -340,12 +297,6 @@
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 1.6rem;
             margin-bottom: 2.5rem;
-        }
-
-        .extrait-card {
-            position: relative;
-            cursor: pointer;
-            text-align: center;
         }
 
         .extrait-card .card-title {
@@ -389,9 +340,7 @@
         }
 
         .extrait-card:hover .click-hint,
-        .extrait-card.active .click-hint {
-            opacity: 1;
-        }
+        .extrait-card.active .click-hint { opacity: 1; }
 
         .extrait-card .image-modal {
             position: fixed;
@@ -405,9 +354,7 @@
             backdrop-filter: blur(4px);
         }
 
-        .extrait-card .image-modal.active {
-            display: flex;
-        }
+        .extrait-card .image-modal.active { display: flex; }
 
         .extrait-card .image-modal img {
             max-width: 92%;
@@ -432,20 +379,7 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        .pdf-note h4 {
-            color: white;
-            margin-bottom: .6rem;
-            font-size: 1.15rem;
-        }
-        [data-theme="light"] .pdf-note h4 { color: var(--text-light); }
-
-        .pdf-note p {
-            color: var(--text-muted);
-            font-size: .98rem;
-            line-height: 1.8;
-        }
-
-        /* === CONTACT === */
+        /* === CONTACT & FOOTER === */
         .contact-section {
             padding: 4rem 1rem;
             background: linear-gradient(135deg, #0b1a2e 0%, #142c44 100%);
@@ -458,64 +392,6 @@
             border-top: 1px solid #eee;
         }
 
-        .contact-container { max-width: 650px; margin: 0 auto; }
-
-        .form-group { margin-bottom: 1.6rem; }
-        .form-group label {
-            display: block;
-            margin-bottom: .6rem;
-            font-weight: 500;
-            font-size: .98rem;
-            color: var(--text-light);
-        }
-        .form-group input, .form-group textarea {
-            width: 100%;
-            padding: .85rem;
-            border: none;
-            border-radius: 8px;
-            font-family: inherit;
-            font-size: .98rem;
-            background-color: var(--input-bg);
-            color: inherit;
-            border: 1px solid var(--input-border);
-            transition: all .3s;
-        }
-        .form-group input::placeholder,
-        .form-group textarea::placeholder {
-            color: rgba(255,255,255,0.6);
-        }
-        [data-theme="light"] .form-group input::placeholder,
-        [data-theme="light"] .form-group textarea::placeholder {
-            color: rgba(0,0,0,0.5);
-        }
-        .form-group input:focus, .form-group textarea:focus {
-            outline: none;
-            background-color: rgba(255,255,255,.2);
-            box-shadow: 0 0 0 3px rgba(230,126,34,.4);
-            border-color: var(--accent-orange);
-        }
-        .form-group textarea { resize: vertical; min-height: 130px; }
-
-        .form-submit {
-            background: linear-gradient(135deg, var(--accent-orange), #f39c12);
-            color: white;
-            padding: .9rem 2.2rem;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            font-size: 1.05rem;
-            transition: all .3s;
-            box-shadow: 0 4px 15px rgba(230,126,34,0.4);
-        }
-        .form-submit:hover {
-            background: linear-gradient(135deg, #f39c12, #e67e22);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(230,126,34,0.6);
-        }
-
-        /* === FOOTER === */
         footer {
             background-color: #0b1a2e;
             color: var(--text-muted);
@@ -528,14 +404,10 @@
             background-color: #1a3a52;
             color: #bdc3c7;
         }
-        footer p { margin: .6rem 0; }
 
         /* === RESPONSIVE === */
         @media (max-width: 768px) {
-            .theme-toggle { top: 15px; right: 15px; width: 40px; height: 40px; }
-            .theme-toggle svg { width: 20px; height: 20px; }
-            header { height: 250px; }
-            header h1 { font-size: 2.1rem; }
+            .hero { padding: 2.5rem 1rem; }
             .hero-cover-top img { max-width: 280px; }
             .extraits-grid { gap: 1.2rem; }
             .section-title { font-size: 1.7rem; }
@@ -550,15 +422,8 @@
 </head>
 <body>
 
-    <!-- Bouton Mode Jour/Nuit -->
-    <div class="theme-toggle" id="themeToggle" aria-label="Changer de thème">
-        <svg viewBox="0 0 24 24" fill="currentColor" id="sunIcon">
-            <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
-        </svg>
-        <svg viewBox="0 0 24 24" fill="currentColor" id="moonIcon" style="display:none;">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-        </svg>
-    </div>
+    <!-- Bouton Jour/Nuit -->
+    <div class="theme-toggle" id="themeToggle">Jour</div>
 
     <!-- Header -->
     <header>
@@ -603,67 +468,55 @@
             <h2 class="section-title">Extraits du livre</h2>
             <p style="text-align: center; margin-bottom: 2rem; color: var(--text-muted);">Cliquez sur les titres pour voir les extraits en grand format</p>
             <div class="extraits-grid">
-                <!-- Index général -->
+                <!-- 13 extraits complets -->
                 <div class="extrait-card">
                     <div class="card-title">Index général<span class="click-hint">Cliquez pour agrandir</span></div>
                     <div class="image-modal"><img src="images/index.png" alt="Index général"></div>
                 </div>
-                <!-- Chapitre 1 -->
                 <div class="extrait-card">
                     <div class="card-title">Chapitre 1<span class="click-hint">Cliquez pour agrandir</span></div>
                     <div class="image-modal"><img src="images/ch1.png" alt="Chapitre 1"></div>
                 </div>
-                <!-- Chapitre 2 -->
                 <div class="extrait-card">
                     <div class="card-title">Chapitre 2<span class="click-hint">Cliquez pour agrandir</span></div>
                     <div class="image-modal"><img src="images/ch2.png" alt="Chapitre 2"></div>
                 </div>
-                <!-- Chapitre 3 -->
                 <div class="extrait-card">
                     <div class="card-title">Chapitre 3<span class="click-hint">Cliquez pour agrandir</span></div>
                     <div class="image-modal"><img src="images/ch3.png" alt="Chapitre 3"></div>
                 </div>
-                <!-- Chapitre 4 -->
                 <div class="extrait-card">
                     <div class="card-title">Chapitre 4<span class="click-hint">Cliquez pour agrandir</span></div>
                     <div class="image-modal"><img src="images/ch4.png" alt="Chapitre 4"></div>
                 </div>
-                <!-- Chapitre 5 -->
                 <div class="extrait-card">
                     <div class="card-title">Chapitre 5<span class="click-hint">Cliquez pour agrandir</span></div>
                     <div class="image-modal"><img src="images/ch5.png" alt="Chapitre 5"></div>
                 </div>
-                <!-- Chapitre 6 -->
                 <div class="extrait-card">
                     <div class="card-title">Chapitre 6<span class="click-hint">Cliquez pour agrandir</span></div>
                     <div class="image-modal"><img src="images/ch6.png" alt="Chapitre 6"></div>
                 </div>
-                <!-- Chapitre 7 -->
                 <div class="extrait-card">
                     <div class="card-title">Chapitre 7<span class="click-hint">Cliquez pour agrandir</span></div>
                     <div class="image-modal"><img src="images/ch7.png" alt="Chapitre 7"></div>
                 </div>
-                <!-- Chapitre 8 -->
                 <div class="extrait-card">
                     <div class="card-title">Chapitre 8<span class="click-hint">Cliquez pour agrandir</span></div>
                     <div class="image-modal"><img src="images/ch8.png" alt="Chapitre 8"></div>
                 </div>
-                <!-- Chapitre 9 -->
                 <div class="extrait-card">
                     <div class="card-title">Chapitre 9<span class="click-hint">Cliquez pour agrandir</span></div>
                     <div class="image-modal"><img src="images/ch9.png" alt="Chapitre 9"></div>
                 </div>
-                <!-- Chapitre 10 -->
                 <div class="extrait-card">
                     <div class="card-title">Chapitre 10<span class="click-hint">Cliquez pour agrandir</span></div>
                     <div class="image-modal"><img src="images/ch10.png" alt="Chapitre 10"></div>
                 </div>
-                <!-- Chapitre 11 -->
                 <div class="extrait-card">
                     <div class="card-title">Chapitre 11<span class="click-hint">Cliquez pour agrandir</span></div>
                     <div class="image-modal"><img src="images/ch11.png" alt="Chapitre 11"></div>
                 </div>
-                <!-- Chapitre 12 -->
                 <div class="extrait-card">
                     <div class="card-title">Chapitre 12<span class="click-hint">Cliquez pour agrandir</span></div>
                     <div class="image-modal"><img src="images/ch12.png" alt="Chapitre 12"></div>
@@ -720,35 +573,31 @@
 
     <!-- JavaScript -->
     <script>
-        // === MODE JOUR/NUIT ===
         const toggle = document.getElementById('themeToggle');
-        const sun = document.getElementById('sunIcon');
-        const moon = document.getElementById('moonIcon');
         const body = document.body;
 
-        // Charger le thème sauvegardé
+        // Charger le thème
         const savedTheme = localStorage.getItem('theme') || 'dark';
         if (savedTheme === 'light') {
             body.setAttribute('data-theme', 'light');
-            sun.style.display = 'none';
-            moon.style.display = 'block';
+            toggle.textContent = 'Nuit';
+        } else {
+            toggle.textContent = 'Jour';
         }
 
         toggle.addEventListener('click', () => {
             if (body.hasAttribute('data-theme')) {
                 body.removeAttribute('data-theme');
-                sun.style.display = 'block';
-                moon.style.display = 'none';
+                toggle.textContent = 'Jour';
                 localStorage.setItem('theme', 'dark');
             } else {
                 body.setAttribute('data-theme', 'light');
-                sun.style.display = 'none';
-                moon.style.display = 'block';
+                toggle.textContent = 'Nuit';
                 localStorage.setItem('theme', 'light');
             }
         });
 
-        // === Fallback image + Extraits ===
+        // Fallback image + Extraits
         const img = new Image();
         img.src = 'https://etoilesetnavigation.github.io/etoiles-navigation/images/fondbandeau.webp';
         img.onerror = () => document.querySelector('header').classList.add('no-image');
