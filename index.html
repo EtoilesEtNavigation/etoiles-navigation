@@ -113,7 +113,8 @@
         }
 
         .hero-cover-top img {
-            max-width: 300px; /* Taille fixe pour la couverture */
+            max-width: 350px; /* Taille agrandie pour la couverture */
+            width: 100%; /* Permet l'adaptation */
             height: auto;
             border-radius: 8px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -145,6 +146,14 @@
             transform: translateY(-5px);
         }
 
+        .hero-content {
+            /* Centrage du texte et de l'image de 4ème de couverture */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
         .hero-content h2 {
             font-size: 2rem;
             color: var(--primary-color);
@@ -157,6 +166,7 @@
             color: var(--text-dark);
             margin-bottom: 1.5rem;
             text-align: justify;
+            max-width: 600px; /* Limite la largeur du texte pour la lisibilité */
         }
 
         .cta-button {
