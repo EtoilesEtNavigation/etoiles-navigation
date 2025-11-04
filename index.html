@@ -138,14 +138,14 @@
             50% { opacity: 0.9; transform: scale(1.3); }
         }
 
-        /* === NUAGES RÉALISTES === */
+        /* === NUAGES DIFFUS, LENTS, PLUS HAUTS === */
         .header-clouds {
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
             pointer-events: none;
-            z-index: 1;
+            z-index: 0;
             opacity: 0;
-            transition: opacity 0.8s ease;
+            transition: opacity 1s ease;
         }
 
         [data-theme="light"] .header-clouds {
@@ -154,13 +154,14 @@
 
         .cloud {
             position: absolute;
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.65);
             border-radius: 100px;
-            filter: blur(6px);
-            animation: drift 35s linear infinite;
+            filter: blur(12px);
+            animation: drift 60s linear infinite;
             box-shadow: 
-                0 8px 20px rgba(0,0,0,0.08),
-                inset 0 2px 4px rgba(255,255,255,0.6);
+                0 10px 25px rgba(0,0,0,0.06),
+                inset 0 2px 5px rgba(255,255,255,0.7);
+            opacity: 0.6;
         }
 
         .cloud::before,
@@ -171,23 +172,24 @@
             border-radius: 100px;
             filter: inherit;
             box-shadow: inherit;
+            opacity: 0.8;
         }
 
-        .cloud.large { width: 140px; height: 45px; }
-        .cloud.large::before { width: 70px; height: 70px; top: -35px; left: 20px; }
-        .cloud.large::after { width: 90px; height: 60px; top: -25px; right: 15px; }
+        .cloud.large { width: 150px; height: 48px; top: 12%; }
+        .cloud.large::before { width: 75px; height: 75px; top: -38px; left: 22px; }
+        .cloud.large::after { width: 95px; height: 65px; top: -28px; right: 18px; }
 
-        .cloud.medium { width: 100px; height: 35px; }
-        .cloud.medium::before { width: 50px; height: 50px; top: -25px; left: 15px; }
-        .cloud.medium::after { width: 65px; height: 45px; top: -20px; right: 10px; }
+        .cloud.medium { width: 110px; height: 38px; top: 22%; opacity: 0.55; }
+        .cloud.medium::before { width: 55px; height: 55px; top: -28px; left: 16px; }
+        .cloud.medium::after { width: 70px; height: 48px; top: -22px; right: 12px; }
 
-        .cloud.small { width: 80px; height: 28px; }
-        .cloud.small::before { width: 40px; height: 40px; top: -20px; left: 10px; }
-        .cloud.small::after { width: 50px; height: 35px; top: -18px; right: 8px; }
+        .cloud.small { width: 85px; height: 30px; top: 32%; opacity: 0.5; }
+        .cloud.small::before { width: 42px; height: 42px; top: -22px; left: 11px; }
+        .cloud.small::after { width: 55px; height: 38px; top: -19px; right: 9px; }
 
         @keyframes drift {
-            from { transform: translateX(-150px); }
-            to { transform: translateX(calc(100vw + 150px)); }
+            from { transform: translateX(-200px); }
+            to { transform: translateX(calc(100vw + 200px)); }
         }
 
         /* === BOUTON JOUR/NUIT === */
@@ -288,15 +290,24 @@
                 min-width: 58px;
             }
             .header-star { font-size: 0.9rem; }
-            .cloud.large { width: 100px; height: 32px; }
-            .cloud.large::before { width: 50px; height: 50px; top: -25px; }
-            .cloud.large::after { width: 65px; height: 45px; top: -20px; }
-            .cloud.medium { width: 75px; height: 26px; }
-            .cloud.medium::before { width: 38px; height: 38px; top: -19px; }
-            .cloud.medium::after { width: 48px; height: 34px; top: -16px; }
-            .cloud.small { width: 60px; height: 22px; }
-            .cloud.small::before { width: 30px; height: 30px; top: -15px; }
-            .cloud.small::after { width: 38px; height: 28px; top: -14px; }
+
+            .cloud.large { 
+                width: 110px; height: 35px; top: 10%;
+            }
+            .cloud.large::before { width: 55px; height: 55px; top: -28px; }
+            .cloud.large::after { width: 70px; height: 48px; top: -20px; }
+
+            .cloud.medium { 
+                width: 80px; height: 28px; top: 18%;
+            }
+            .cloud.medium::before { width: 40px; height: 40px; top: -20px; }
+            .cloud.medium::after { width: 52px; height: 36px; top: -16px; }
+
+            .cloud.small { 
+                width: 65px; height: 23px; top: 25%;
+            }
+            .cloud.small::before { width: 32px; height: 32px; top: -16px; }
+            .cloud.small::after { width: 40px; height: 30px; top: -14px; }
         }
 
         @media (max-width: 768px) {
@@ -543,10 +554,11 @@
             <div class="header-star" style="top: 75%; left: 20%; animation-delay: 1.5s;">★</div>
         </div>
 
+        <!-- Nuages diffus, lents, plus hauts -->
         <div class="header-clouds">
-            <div class="cloud large" style="top: 18%; left: -10%; animation-duration: 38s; animation-delay: 0s;"></div>
-            <div class="cloud medium" style="top: 32%; left: -15%; animation-duration: 45s; animation-delay: 8s; opacity: 0.7;"></div>
-            <div class="cloud small" style="top: 55%; left: -8%; animation-duration: 32s; animation-delay: 4s; opacity: 0.85;"></div>
+            <div class="cloud large" style="left: -12%; animation-duration: 65s; animation-delay: 0s;"></div>
+            <div class="cloud medium" style="left: -18%; animation-duration: 75s; animation-delay: 12s;"></div>
+            <div class="cloud small" style="left: -10%; animation-duration: 55s; animation-delay: 6s;"></div>
         </div>
 
         <h1>Étoiles et Navigation</h1>
