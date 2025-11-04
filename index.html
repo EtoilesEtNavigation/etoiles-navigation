@@ -61,7 +61,7 @@
             position: relative;
         }
 
-        /* === FOND ÉTOILÉ GLOBAL (Nuit uniquement) === */
+        /* === FOND ÉTOILÉ GLOBAL === */
         body::before {
             content: '';
             position: fixed;
@@ -110,7 +110,7 @@
             header { background-image: url('https://etoilesetnavigation.github.io/etoiles-navigation/images/fondbandeau.webp'); }
         }
 
-        /* === ÉTOILES DANS LE BANDEAU (Nuit uniquement) === */
+        /* === ÉTOILES DANS LE BANDEAU === */
         .header-stars {
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -138,7 +138,7 @@
             50% { opacity: 0.9; transform: scale(1.3); }
         }
 
-        /* === NUAGES RÉALISTES (Jour uniquement) === */
+        /* === NUAGES RÉALISTES === */
         .header-clouds {
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -399,18 +399,20 @@
             background-color: var(--card-bg);
             border: 2px solid var(--card-border);
             border-radius: 12px;
-            padding: 1.6rem 1rem;
+            padding: 1.2rem 0.8rem;
             color: var(--text-light);
             font-weight: 600;
-            font-size: .92rem;
+            font-size: 0.88rem;
             transition: all .3s;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 90px;
+            text-align: center;
+            min-height: 78px;
             position: relative;
             overflow: hidden;
+            line-height: 1.3;
         }
 
         .extrait-card:hover .card-title,
@@ -423,11 +425,11 @@
         }
 
         .extrait-card .click-hint {
-            margin-top: 8px;
+            margin-top: 6px;
             background-color: rgba(0, 0, 0, 0.75);
             color: white;
-            font-size: 0.76rem;
-            padding: 5px 12px;
+            font-size: 0.74rem;
+            padding: 4px 10px;
             border-radius: 6px;
             opacity: 0;
             transition: opacity 0.3s ease;
@@ -475,6 +477,24 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
+        /* === iPHONE FIX === */
+        @media (max-width: 480px) {
+            .extrait-card .card-title {
+                font-size: 0.82rem;
+                padding: 1rem 0.6rem;
+                min-height: 72px;
+            }
+            .extraits-grid {
+                gap: 1rem;
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .extrait-card .click-hint {
+                font-size: 0.70rem;
+                padding: 3px 8px;
+                margin-top: 4px;
+            }
+        }
+
         /* === CONTACT & FOOTER === */
         .contact-section {
             padding: 4rem 1rem;
@@ -504,25 +524,17 @@
         @media (max-width: 768px) {
             .hero { padding: 2.5rem 1rem; }
             .hero-cover-top img { max-width: 280px; }
-            .extraits-grid { gap: 1.2rem; }
             .section-title { font-size: 1.7rem; }
             nav { gap: 1.2rem; }
-            .extrait-card .click-hint { opacity: 1; font-size: 0.72rem; padding: 4px 10px; }
-        }
-        @media (max-width: 480px) {
-            .extraits-grid { grid-template-columns: repeat(2, 1fr); }
-            nav a { font-size: .82rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Header avec étoiles & nuages réalistes -->
+    <!-- Header -->
     <header>
-        <!-- Bouton Jour/Nuit -->
         <div class="theme-toggle" id="themeToggle">Jour</div>
 
-        <!-- Étoiles (nuit) -->
         <div class="header-stars">
             <div class="header-star" style="top: 15%; left: 12%; animation-delay: 0s;">★</div>
             <div class="header-star" style="top: 25%; left: 75%; animation-delay: 1s;">✦</div>
@@ -531,14 +543,12 @@
             <div class="header-star" style="top: 75%; left: 20%; animation-delay: 1.5s;">★</div>
         </div>
 
-        <!-- Nuages réalistes (jour) -->
         <div class="header-clouds">
             <div class="cloud large" style="top: 18%; left: -10%; animation-duration: 38s; animation-delay: 0s;"></div>
             <div class="cloud medium" style="top: 32%; left: -15%; animation-duration: 45s; animation-delay: 8s; opacity: 0.7;"></div>
             <div class="cloud small" style="top: 55%; left: -8%; animation-duration: 32s; animation-delay: 4s; opacity: 0.85;"></div>
         </div>
 
-        <!-- Titre -->
         <h1>Étoiles et Navigation</h1>
         <p class="subtitle">Un petit traité de navigation astronomique</p>
         <p class="author">par Jean-Clément Louche</p>
@@ -551,10 +561,10 @@
         <a href="#contact">Commander</a>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section class="hero" id="presentation">
         <div class="hero-cover-top">
-            <img src="images/couverture.png" alt="Couverture - Étoiles et Navigation">
+            <img src="images/couverture.png" alt="Couverture">
         </div>
         <div class="hero-content">
             <h2>À propos du livre</h2>
@@ -580,7 +590,6 @@
             <h2 class="section-title">Extraits du livre</h2>
             <p style="text-align: center; margin-bottom: 2rem; color: var(--text-muted);">Cliquez sur les titres pour voir les extraits en grand format</p>
             <div class="extraits-grid">
-                <!-- 13 extraits -->
                 <div class="extrait-card">
                     <div class="card-title">Index général<span class="click-hint">Cliquez pour agrandir</span></div>
                     <div class="image-modal"><img src="images/index.png" alt="Index général"></div>
