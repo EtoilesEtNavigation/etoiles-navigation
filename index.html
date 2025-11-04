@@ -11,7 +11,6 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         :root {
             --primary-color: #1a3a52;
             --secondary-color: #2c5aa0;
@@ -21,7 +20,6 @@
             --text-light: #7f8c8d;
             --border-color: #ecf0f1;
         }
-
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
@@ -29,43 +27,107 @@
             background-color: #ffffff;
         }
 
-        /* Header / Navigation */
+        /* === HEADER OPTIMISÉ === */
         header {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            /* CORRECTION FINALE DU CHEMIN D'ACCÈS (CHEMIN RELATIF) */
-            background-image: linear-gradient(135deg, rgba(26, 58, 82, 0.85) 0%, rgba(44, 90, 160, 0.85) 100%), url('https://etoilesetnavigation.github.io/etoiles-navigation/images/fondbandeau.png');
-            background-size: contain; /* L'image est entièrement visible */
-            background-repeat: no-repeat;
+            /* Image de fond uniquement */
+            background-image: url('https://etoilesetnavigation.github.io/etoiles-navigation/images/fondbandeau.png');
+            
+            /* Remplit tout le header, avec recadrage si besoin */
+            background-size: cover;
+            
+            /* Centre l'image */
             background-position: center;
+            
+            /* Pas de répétition */
+            background-repeat: no-repeat;
+            
+            /* Fixe sur desktop, scroll sur mobile */
             background-attachment: fixed;
+
+            /* Couleur du texte */
             color: white;
-            padding: 3rem 1rem;
             text-align: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+            /* Hauteur minimale pour que l'image soit bien visible */
+            min-height: 60vh;
+            padding: 4rem 1.5rem;
+
+            /* Ombre douce */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+
+            /* Sticky en haut */
             position: sticky;
             top: 0;
             z-index: 100;
+
+            /* Position relative pour le fallback */
+            position: relative;
+            overflow: hidden;
         }
 
+        /* Texte dans le header */
         header h1 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             margin-bottom: 0.5rem;
             font-weight: 700;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
         }
-
         header .subtitle {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             opacity: 0.95;
             font-style: italic;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+            margin-bottom: 0.3rem;
+        }
+        header .author {
+            font-size: 1rem;
+            opacity: 0.9;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
         }
 
-        header .author {
-            font-size: 0.95rem;
-            margin-top: 0.5rem;
-            opacity: 0.9;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        /* === FALLBACK SI L'IMAGE NE CHARGE PAS === */
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: -1;
+        }
+        header.no-image::before {
+            opacity: 1;
+        }
+        header > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* === RESPONSIVE MOBILE === */
+        @media (max-width: 768px) {
+            header {
+                min-height: 50vh;
+                padding: 3rem 1rem;
+                background-attachment: scroll; /* Meilleure perf sur mobile */
+            }
+            header h1 {
+                font-size: 2.2rem;
+            }
+            header .subtitle {
+                font-size: 1rem;
+            }
+            header .author {
+                font-size: 0.9rem;
+            }
+        }
+        @media (max-width: 480px) {
+            header {
+                min-height: 45vh;
+                padding: 2.5rem 1rem;
+            }
+            header h1 {
+                font-size: 1.9rem;
+            }
         }
 
         /* Navigation menu */
@@ -77,25 +139,21 @@
             gap: 2rem;
             flex-wrap: wrap;
         }
-
         nav a {
             color: white;
             text-decoration: none;
             font-size: 0.95rem;
             transition: color 0.3s ease;
         }
-
         nav a:hover {
             color: var(--accent-color);
         }
-
         /* Main container */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 1rem;
         }
-
         /* Hero section with presentation */
         .hero {
             display: flex;
@@ -104,27 +162,23 @@
             padding: 3rem 1rem;
             background-color: var(--light-bg);
         }
-
         /* NOUVEAU STYLE POUR LA COUVERTURE SEULE */
         .hero-cover-top {
             text-align: center;
             margin-bottom: 2rem;
             width: 100%;
         }
-
         .hero-cover-top img {
-            max-width: 600px; /* Taille maximale */
-            width: 80%; /* Taille relative pour l'adaptation */
+            max-width: 600px;
+            width: 80%;
             height: auto;
             border-radius: 8px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease;
         }
-
         .hero-cover-top img:hover {
             transform: translateY(-5px);
         }
-
         /* Ancien hero-cover pour la 4ème de couverture */
         .hero-cover {
             text-align: center;
@@ -133,7 +187,6 @@
             align-items: center;
             gap: 20px;
         }
-
         .hero-cover img {
             max-width: 80%;
             height: auto;
@@ -141,35 +194,29 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease;
         }
-
         .hero-cover img:hover {
             transform: translateY(-5px);
         }
-
         .hero-content {
-            /* Centrage du texte et de l'image de 4ème de couverture */
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
             width: 100%;
         }
-
         .hero-content h2 {
             font-size: 2rem;
             color: var(--primary-color);
             margin-bottom: 1rem;
         }
-
         .hero-content .description {
             font-size: 1rem;
             line-height: 1.8;
             color: var(--text-dark);
             margin-bottom: 1.5rem;
             text-align: justify;
-            max-width: 800px; /* Limite la largeur du texte pour la lisibilité */
+            max-width: 800px;
         }
-
         .cta-button {
             display: inline-block;
             background-color: var(--accent-color);
@@ -183,18 +230,15 @@
             cursor: pointer;
             font-size: 1rem;
         }
-
         .cta-button:hover {
             background-color: #e67e22;
             transform: translateY(-2px);
         }
-
         /* Extraits section */
         .extraits-section {
             padding: 3rem 1rem;
             background-color: white;
         }
-
         .section-title {
             font-size: 2rem;
             color: var(--primary-color);
@@ -203,7 +247,6 @@
             position: relative;
             padding-bottom: 1rem;
         }
-
         .section-title::after {
             content: '';
             position: absolute;
@@ -215,20 +258,17 @@
             background-color: var(--accent-color);
             border-radius: 2px;
         }
-
         .extraits-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
             gap: 1.5rem;
             margin-bottom: 2rem;
         }
-
         .extrait-card {
             position: relative;
             cursor: pointer;
             text-align: center;
         }
-
         .extrait-card .card-title {
             background-color: var(--light-bg);
             border: 2px solid var(--primary-color);
@@ -243,14 +283,12 @@
             justify-content: center;
             min-height: 80px;
         }
-
         .extrait-card:hover .card-title {
             background-color: var(--primary-color);
             color: white;
             transform: scale(1.05);
             box-shadow: 0 4px 12px rgba(26, 58, 82, 0.3);
         }
-
         .extrait-card .image-modal {
             position: fixed;
             top: 0;
@@ -263,46 +301,37 @@
             justify-content: center;
             z-index: 1000;
         }
-
         .extrait-card .image-modal.active {
             display: flex;
         }
-
         .extrait-card .image-modal img {
             max-width: 90%;
             max-height: 90%;
             border-radius: 8px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
         }
-
         .extrait-card .image-modal .close-btn {
-            /* Le bouton de fermeture est maintenant masqué */
             display: none;
         }
-
         /* Index section */
         .index-section {
             padding: 3rem 1rem;
             background-color: var(--light-bg);
         }
-
         .index-content {
             max-width: 900px;
             margin: 0 auto;
         }
-
         .index-image {
             text-align: center;
             margin-bottom: 2rem;
         }
-
         .index-image img {
             max-width: 100%;
             height: auto;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
-
         .pdf-note {
             background-color: white;
             border-left: 4px solid var(--accent-color);
@@ -311,50 +340,41 @@
             margin-top: 2rem;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         }
-
         .pdf-note h4 {
             color: var(--primary-color);
             margin-bottom: 0.5rem;
             font-size: 1.1rem;
         }
-
         .pdf-note p {
             color: var(--text-dark);
             font-size: 0.95rem;
             line-height: 1.7;
         }
-
         /* Contact form section */
         .contact-section {
             padding: 3rem 1rem;
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             color: white;
         }
-
         .contact-container {
             max-width: 600px;
             margin: 0 auto;
         }
-
         .contact-section .section-title {
             color: white;
         }
-
         .contact-section .section-title::after {
             background-color: var(--accent-color);
         }
-
         .form-group {
             margin-bottom: 1.5rem;
         }
-
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 500;
             font-size: 0.95rem;
         }
-
         .form-group input,
         .form-group textarea {
             width: 100%;
@@ -367,19 +387,16 @@
             color: var(--text-dark);
             transition: background-color 0.3s ease;
         }
-
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
             background-color: white;
             box-shadow: 0 0 0 3px rgba(243, 156, 18, 0.3);
         }
-
         .form-group textarea {
             resize: vertical;
             min-height: 120px;
         }
-
         .form-submit {
             background-color: var(--accent-color);
             color: white;
@@ -392,12 +409,10 @@
             font-size: 1rem;
             transition: background-color 0.3s ease, transform 0.2s ease;
         }
-
         .form-submit:hover {
             background-color: #e67e22;
             transform: translateY(-2px);
         }
-
         /* Footer */
         footer {
             background-color: var(--primary-color);
@@ -406,84 +421,54 @@
             padding: 2rem 1rem;
             font-size: 0.9rem;
         }
-
         footer p {
             margin: 0.5rem 0;
         }
-
         /* Responsive design */
         @media (max-width: 768px) {
-            header h1 {
-                font-size: 1.8rem;
-            }
-
-            header .subtitle {
-                font-size: 0.95rem;
-            }
-
             .hero {
                 padding: 2rem 1rem;
             }
-
             .hero-cover-top img {
                 max-width: 250px;
             }
-
             .hero-cover img {
                 max-width: 100%;
                 float: none;
                 margin: 0 auto 20px;
             }
-
             .hero-content .description {
                 text-align: left;
             }
-
             .extraits-grid {
                 grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
                 gap: 1rem;
             }
-
             .section-title {
                 font-size: 1.5rem;
             }
-
             nav {
                 gap: 1rem;
             }
-
             nav a {
                 font-size: 0.85rem;
             }
         }
-
         @media (max-width: 480px) {
-            header {
-                padding: 2rem 0.5rem;
-            }
-
-            header h1 {
-                font-size: 1.5rem;
-            }
-
             .hero {
                 padding: 1.5rem 0.5rem;
             }
-
             .extraits-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-
             .section-title {
                 font-size: 1.3rem;
                 margin-bottom: 2rem;
             }
-
             nav {
                 gap: 0.5rem;
                 padding: 0.5rem 0.5rem;
             }
-
             nav a {
                 font-size: 0.8rem;
             }
@@ -507,14 +492,12 @@
 
     <!-- Hero Section with Presentation -->
     <section class="hero" id="presentation">
-        <!-- NOUVELLE STRUCTURE POUR LA COUVERTURE SEULE -->
         <div class="hero-cover-top">
             <img src="images/couverture.png" alt="Couverture - Étoiles et Navigation">
         </div>
         <div class="hero-content">
             <h2>À propos du livre</h2>
             <p class="description">
-                <!-- IMAGE DE 4ÈME DE COUVERTURE DANS LE TEXTE -->
                 <div class="hero-cover" style="float: right; margin-left: 20px; margin-bottom: 20px; max-width: 40%;">
                     <img src="images/4medecouverture.jpeg" alt="4ème de couverture - Étoiles et Navigation" style="max-width: 100%;">
                 </div>
@@ -540,7 +523,6 @@
                     <div class="card-title">Index général</div>
                     <div class="image-modal">
                         <button class="close-btn">&times;</button>
-                        <!-- CORRECTION DU NOM DE FICHIER -->
                         <img src="images/index.png" alt="Index général">
                     </div>
                 </div>
@@ -630,7 +612,7 @@
                 </div>
             </div>
             <div class="pdf-note">
-                <h4>📖 À propos du PDF interactif</h4>
+                <h4>À propos du PDF interactif</h4>
                 <p>
                     La version PDF du livre dispose d'une <strong>indexation interactive</strong> qui vous permet de naviguer facilement entre les chapitres. Les <strong>étoiles en bas de chaque page</strong> servent de boutons de navigation : cliquez sur elles pour revenir à l'index général ou naviguer vers d'autres chapitres. Cette fonctionnalité vous offre une expérience de lecture fluide et intuitive, guidée par les astres, comme il se doit pour un livre sur la navigation astronomique.
                 </p>
@@ -642,7 +624,6 @@
     <section class="contact-section" id="contact">
         <div class="contact-container">
             <h2 class="section-title">Commander une impression</h2>
-            <!-- CORRECTION FINALE DU FORMULAIRE POUR FORMSPREE -->
             <form action="https://formspree.io/f/mblpzwlq" method="POST">
                 <div class="form-group">
                     <label for="name">Nom complet *</label>
@@ -674,30 +655,32 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; Étoiles et Navigation - Jean-Clément Louche</p>
+        <p>© Étoiles et Navigation - Jean-Clément Louche</p>
         <p>Un petit traité de navigation astronomique</p>
         <p>Edition 2025</p>
     </footer>
 
+    <!-- JS : Fallback image + Modales -->
     <script>
+        // Fallback si l'image de fond ne charge pas
+        const img = new Image();
+        img.src = 'https://etoilesetnavigation.github.io/etoiles-navigation/images/fondbandeau.png';
+        img.onload = () => { /* OK */ };
+        img.onerror = () => {
+            document.querySelector('header').classList.add('no-image');
+        };
+
         // Gestion des modales d'images au survol
         document.querySelectorAll('.extrait-card').forEach(card => {
             const modal = card.querySelector('.image-modal');
             const title = card.querySelector('.card-title');
-
-            // Ouvrir la modale au survol
             title.addEventListener('mouseenter', () => {
                 modal.classList.add('active');
             });
-
-            // Fermer la modale lorsque la souris quitte la carte
             card.addEventListener('mouseleave', () => {
                 modal.classList.remove('active');
             });
-
-            // Fermer la modale au clic sur l'image (ou le fond)
             modal.addEventListener('click', (e) => {
-                // Vérifie si le clic est sur le fond de la modale ou l'image elle-même
                 if (e.target === modal || e.target.tagName === 'IMG') {
                     modal.classList.remove('active');
                 }
