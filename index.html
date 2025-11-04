@@ -229,8 +229,7 @@
             color: var(--accent-orange);
         }
 
-        /* === HERO, EXTRAITS, CONTACT, FOOTER === */
-        /* (Identique à la version précédente, avec variables dynamiques) */
+        /* === HERO SECTION === */
         .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
         .hero {
             display: flex;
@@ -244,6 +243,7 @@
             background: linear-gradient(to bottom, #e6f0fa, #f8f9fa);
         }
 
+        .hero-cover-top { text-align: center; margin-bottom: 2rem; width: 100%; }
         .hero-cover-top img {
             max-width: 600px;
             width: 85%;
@@ -255,6 +255,7 @@
         }
         .hero-cover-top img:hover { transform: translateY(-8px); }
 
+        .hero-content { text-align: center; width: 100%; }
         .hero-content h2 {
             font-size: 2.1rem;
             color: white;
@@ -341,6 +342,12 @@
             margin-bottom: 2.5rem;
         }
 
+        .extrait-card {
+            position: relative;
+            cursor: pointer;
+            text-align: center;
+        }
+
         .extrait-card .card-title {
             background-color: var(--card-bg);
             border: 2px solid var(--card-border);
@@ -425,7 +432,20 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        /* === CONTACT & FOOTER === */
+        .pdf-note h4 {
+            color: white;
+            margin-bottom: .6rem;
+            font-size: 1.15rem;
+        }
+        [data-theme="light"] .pdf-note h4 { color: var(--text-light); }
+
+        .pdf-note p {
+            color: var(--text-muted);
+            font-size: .98rem;
+            line-height: 1.8;
+        }
+
+        /* === CONTACT === */
         .contact-section {
             padding: 4rem 1rem;
             background: linear-gradient(135deg, #0b1a2e 0%, #142c44 100%);
@@ -438,16 +458,68 @@
             border-top: 1px solid #eee;
         }
 
+        .contact-container { max-width: 650px; margin: 0 auto; }
+
+        .form-group { margin-bottom: 1.6rem; }
+        .form-group label {
+            display: block;
+            margin-bottom: .6rem;
+            font-weight: 500;
+            font-size: .98rem;
+            color: var(--text-light);
+        }
         .form-group input, .form-group textarea {
+            width: 100%;
+            padding: .85rem;
+            border: none;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: .98rem;
             background-color: var(--input-bg);
-            border: 1px solid var(--input-border);
             color: inherit;
+            border: 1px solid var(--input-border);
+            transition: all .3s;
+        }
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255,255,255,0.6);
+        }
+        [data-theme="light"] .form-group input::placeholder,
+        [data-theme="light"] .form-group textarea::placeholder {
+            color: rgba(0,0,0,0.5);
+        }
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            background-color: rgba(255,255,255,.2);
+            box-shadow: 0 0 0 3px rgba(230,126,34,.4);
+            border-color: var(--accent-orange);
+        }
+        .form-group textarea { resize: vertical; min-height: 130px; }
+
+        .form-submit {
+            background: linear-gradient(135deg, var(--accent-orange), #f39c12);
+            color: white;
+            padding: .9rem 2.2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.05rem;
+            transition: all .3s;
+            box-shadow: 0 4px 15px rgba(230,126,34,0.4);
+        }
+        .form-submit:hover {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(230,126,34,0.6);
         }
 
+        /* === FOOTER === */
         footer {
             background-color: #0b1a2e;
             color: var(--text-muted);
-            text-align:: center;
+            text-align: center;
             padding: 2.5rem 1rem;
             font-size: .92rem;
             border-top: 1px solid rgba(255,255,255,0.1);
@@ -456,6 +528,7 @@
             background-color: #1a3a52;
             color: #bdc3c7;
         }
+        footer p { margin: .6rem 0; }
 
         /* === RESPONSIVE === */
         @media (max-width: 768px) {
@@ -465,6 +538,13 @@
             header h1 { font-size: 2.1rem; }
             .hero-cover-top img { max-width: 280px; }
             .extraits-grid { gap: 1.2rem; }
+            .section-title { font-size: 1.7rem; }
+            nav { gap: 1.2rem; }
+            .extrait-card .click-hint { opacity: 1; font-size: 0.72rem; padding: 4px 10px; }
+        }
+        @media (max-width: 480px) {
+            .extraits-grid { grid-template-columns: repeat(2, 1fr); }
+            nav a { font-size: .82rem; }
         }
     </style>
 </head>
@@ -523,13 +603,71 @@
             <h2 class="section-title">Extraits du livre</h2>
             <p style="text-align: center; margin-bottom: 2rem; color: var(--text-muted);">Cliquez sur les titres pour voir les extraits en grand format</p>
             <div class="extraits-grid">
-                <!-- Répéter pour chaque chapitre -->
+                <!-- Index général -->
                 <div class="extrait-card">
                     <div class="card-title">Index général<span class="click-hint">Cliquez pour agrandir</span></div>
                     <div class="image-modal"><img src="images/index.png" alt="Index général"></div>
                 </div>
-                <!-- ... 12 chapitres ... -->
-                <!-- (identique à la version précédente) -->
+                <!-- Chapitre 1 -->
+                <div class="extrait-card">
+                    <div class="card-title">Chapitre 1<span class="click-hint">Cliquez pour agrandir</span></div>
+                    <div class="image-modal"><img src="images/ch1.png" alt="Chapitre 1"></div>
+                </div>
+                <!-- Chapitre 2 -->
+                <div class="extrait-card">
+                    <div class="card-title">Chapitre 2<span class="click-hint">Cliquez pour agrandir</span></div>
+                    <div class="image-modal"><img src="images/ch2.png" alt="Chapitre 2"></div>
+                </div>
+                <!-- Chapitre 3 -->
+                <div class="extrait-card">
+                    <div class="card-title">Chapitre 3<span class="click-hint">Cliquez pour agrandir</span></div>
+                    <div class="image-modal"><img src="images/ch3.png" alt="Chapitre 3"></div>
+                </div>
+                <!-- Chapitre 4 -->
+                <div class="extrait-card">
+                    <div class="card-title">Chapitre 4<span class="click-hint">Cliquez pour agrandir</span></div>
+                    <div class="image-modal"><img src="images/ch4.png" alt="Chapitre 4"></div>
+                </div>
+                <!-- Chapitre 5 -->
+                <div class="extrait-card">
+                    <div class="card-title">Chapitre 5<span class="click-hint">Cliquez pour agrandir</span></div>
+                    <div class="image-modal"><img src="images/ch5.png" alt="Chapitre 5"></div>
+                </div>
+                <!-- Chapitre 6 -->
+                <div class="extrait-card">
+                    <div class="card-title">Chapitre 6<span class="click-hint">Cliquez pour agrandir</span></div>
+                    <div class="image-modal"><img src="images/ch6.png" alt="Chapitre 6"></div>
+                </div>
+                <!-- Chapitre 7 -->
+                <div class="extrait-card">
+                    <div class="card-title">Chapitre 7<span class="click-hint">Cliquez pour agrandir</span></div>
+                    <div class="image-modal"><img src="images/ch7.png" alt="Chapitre 7"></div>
+                </div>
+                <!-- Chapitre 8 -->
+                <div class="extrait-card">
+                    <div class="card-title">Chapitre 8<span class="click-hint">Cliquez pour agrandir</span></div>
+                    <div class="image-modal"><img src="images/ch8.png" alt="Chapitre 8"></div>
+                </div>
+                <!-- Chapitre 9 -->
+                <div class="extrait-card">
+                    <div class="card-title">Chapitre 9<span class="click-hint">Cliquez pour agrandir</span></div>
+                    <div class="image-modal"><img src="images/ch9.png" alt="Chapitre 9"></div>
+                </div>
+                <!-- Chapitre 10 -->
+                <div class="extrait-card">
+                    <div class="card-title">Chapitre 10<span class="click-hint">Cliquez pour agrandir</span></div>
+                    <div class="image-modal"><img src="images/ch10.png" alt="Chapitre 10"></div>
+                </div>
+                <!-- Chapitre 11 -->
+                <div class="extrait-card">
+                    <div class="card-title">Chapitre 11<span class="click-hint">Cliquez pour agrandir</span></div>
+                    <div class="image-modal"><img src="images/ch11.png" alt="Chapitre 11"></div>
+                </div>
+                <!-- Chapitre 12 -->
+                <div class="extrait-card">
+                    <div class="card-title">Chapitre 12<span class="click-hint">Cliquez pour agrandir</span></div>
+                    <div class="image-modal"><img src="images/ch12.png" alt="Chapitre 12"></div>
+                </div>
             </div>
             <div class="pdf-note">
                 <h4>À propos du PDF interactif</h4>
