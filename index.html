@@ -384,12 +384,12 @@
             transform: translateY(-3px); box-shadow: 0 8px 25px rgba(230,126,34,0.6);
         }
 
-        /* === EXTRAITS === */
+        /* === INDEX VISUALISATION === */
         .extraits-section { padding: 4rem 1rem; background: rgba(15,30,47,0.6); }
         [data-theme="light"] .extraits-section { background: #ffffff; }
 
         .section-title {
-            font-size: 2rem; color: white; text-align: center; margin-bottom: 3rem;
+            font-size: 2rem; color: white; text-align: center; margin-bottom: 1.5rem;
             position: relative; padding-bottom: 1rem;
         }
         [data-theme="light"] .section-title { color: var(--text-light); }
@@ -526,10 +526,35 @@
             padding: 2.5rem 1rem;
             font-size: .92rem;
             border-top: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+            overflow: hidden;
         }
         [data-theme="light"] footer {
             background-color: #1a3a52;
             color: #bdc3c7;
+        }
+
+        /* === ÉTOILES DANS LE FOOTER === */
+        .footer-stars {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            z-index: 0;
+        }
+
+        [data-theme="dark"] .footer-stars,
+        body:not([data-theme]) .footer-stars {
+            opacity: 0.4;
+        }
+
+        .footer-star {
+            position: absolute;
+            color: var(--gold-star);
+            font-size: 0.9rem;
+            animation: twinkle 4s infinite;
+            opacity: 0.6;
         }
 
         @media (max-width: 768px) {
@@ -569,14 +594,14 @@
     <!-- Navigation -->
     <nav>
         <a href="#presentation">Présentation</a>
-        <a href="#extraits">Extraits</a>
+        <a href="#extraits">Visualiser les index</a>
         <a href="#contact">Commander</a>
     </nav>
 
     <!-- Hero -->
     <section class="hero" id="presentation">
         <div class="hero-cover-top">
-            <img src="images/couverture.png" alt="Couverture">
+            <img src="images/couverture.png?v=2025" alt="Couverture">
         </div>
         <div class="hero-content">
             <h2>À propos du livre</h2>
@@ -596,16 +621,19 @@
         </div>
     </section>
 
-    <!-- Extraits -->
+    <!-- Visualisation des index -->
     <section class="extraits-section" id="extraits">
         <div class="container">
-            <h2 class="section-title">Extraits du livre</h2>
-            <p style="text-align: center; margin-bottom: 2rem; color: var(--text-muted);">Cliquez sur les titres pour voir les extraits en grand format</p>
+            <h2 class="section-title">Visualiser les index</h2>
+            <p style="text-align: center; margin-bottom: 2rem; color: var(--text-muted); font-size: 0.95rem;">
+                Cliquez sur un index pour naviguer dans le sommaire interactif du livre
+            </p>
             <div class="extraits-grid">
                 <div class="extrait-card">
                     <div class="card-title">Index général<span class="click-hint">Cliquez pour agrandir</span></div>
                     <div class="image-modal"><img src="images/index.png" alt="Index général"></div>
                 </div>
+                <!-- Les autres chapitres restent inchangés -->
                 <div class="extrait-card">
                     <div class="card-title">Chapitre 1<span class="click-hint">Cliquez pour agrandir</span></div>
                     <div class="image-modal"><img src="images/ch1.png" alt="Chapitre 1"></div>
@@ -699,6 +727,11 @@
 
     <!-- Footer -->
     <footer>
+        <div class="footer-stars">
+            <div class="footer-star" style="top: 15%; left: 10%; animation-delay: 0s;">✦</div>
+            <div class="footer-star" style="top: 40%; left: 75%; animation-delay: 1.5s;">★</div>
+            <div class="footer-star" style="top: 70%; left: 30%; animation-delay: 0.8s;">✦</div>
+        </div>
         <p>© Étoiles et Navigation - Jean-Clément Louche</p>
         <p>Un petit traité de navigation astronomique</p>
         <p>Edition 2025</p>
