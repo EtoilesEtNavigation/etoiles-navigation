@@ -84,6 +84,7 @@
             to { background-position: 200px 200px, 250px 250px, 350px 350px, 400px 400px; }
         }
 
+        /* === HEADER === */
         header {
             position: relative;
             height: 280px;
@@ -417,35 +418,6 @@
             gap: 1.6rem;
         }
 
-        .content-card {
-            background: var(--card-bg);
-            border: 2px solid var(--card-border);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: all .3s;
-            text-align: center;
-        }
-
-        .content-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(44,90,160,.4);
-            border-color: var(--accent-orange);
-        }
-
-        .content-card img {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .content-card .caption {
-            padding: 1rem;
-            color: var(--text-light);
-            font-size: 0.9rem;
-            font-style: italic;
-        }
-
         /* === PDF NOTE === */
         .pdf-note {
             background-color: rgba(26,43,61,0.7);
@@ -550,7 +522,7 @@
     <nav>
         <a href="#accueil">Accueil</a>
         <a href="a-propos.html">À propos de l’auteur</a>
-        <a href="#contact">Commander</a>
+        <a href="#contact" class="scroll-link">Commander</a>
     </nav>
 
     <!-- Accueil -->
@@ -627,11 +599,12 @@
         <div class="container">
             <h2 class="section-title">Visualiser du contenu</h2>
             <div class="content-grid">
-                <div class="content-card">
-                    <img src="images/ch1_pg11.webp" alt="Chapitre 1 - Page 11">
-                    <div class="caption">Chapitre 1 – Page 11</div>
+                <div class="extrait-card">
+                    <div class="card-title">Chapitre 1 – Page 11<span class="click-hint">Cliquez pour agrandir</span></div>
+                    <div class="image-modal">
+                        <img src="images/ch1_pg11.webp" alt="Chapitre 1 - Page 11">
+                    </div>
                 </div>
-                <!-- Ajouter d'autres pages ici -->
             </div>
         </div>
     </section>
@@ -691,9 +664,9 @@
 
     <!-- JavaScript -->
     <script>
+        // Theme Toggle
         const toggle = document.getElementById('themeToggle');
         const body = document.body;
-
         const savedTheme = localStorage.getItem('theme') || 'dark';
         if (savedTheme === 'light') {
             body.setAttribute('data-theme', 'light');
@@ -701,7 +674,6 @@
         } else {
             toggle.textContent = 'Jour';
         }
-
         toggle.addEventListener('click', () => {
             if (body.hasAttribute('data-theme')) {
                 body.removeAttribute('data-theme');
@@ -714,20 +686,34 @@
             }
         });
 
+        // Modal
         document.querySelectorAll('.extrait-card').forEach(card => {
             const title = card.querySelector('.card-title');
             const modal = card.querySelector('.image-modal');
-
             title.addEventListener('click', (e) => {
                 e.stopPropagation();
                 const isActive = card.classList.toggle('active');
                 modal.classList.toggle('active', isActive);
             });
-
             modal.addEventListener('click', (e) => {
                 if (e.target === modal || e.target.tagName === 'IMG') {
                     card.classList.remove('active');
                     modal.classList.remove('active');
+                }
+            });
+        });
+
+        // Scroll fluide
+        document.querySelectorAll('.scroll-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const target = document.querySelector(targetId);
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
                 }
             });
         });
