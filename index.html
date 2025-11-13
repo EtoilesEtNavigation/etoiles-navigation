@@ -336,67 +336,39 @@
         }
         nav a:hover { color: var(--accent-orange); }
 
-        /* === HERO SECTION === */
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
-        .hero {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        /* === ACCUEIL === */
+        .home-section {
             padding: 3rem 1rem;
             background: linear-gradient(to bottom, rgba(11,26,46,0.9), rgba(15,30,47,0.95));
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
         }
-        [data-theme="light"] .hero { background: linear-gradient(to bottom, #e6f0fa, #f8f9fa); }
+        [data-theme="light"] .home-section { background: linear-gradient(to bottom, #e6f0fa, #f8f9fa); }
 
-        .hero-cover-top img {
+        .home-cover img {
             max-width: 600px; width: 85%; height: auto; border-radius: 12px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.4); transition: transform .3s;
             border: 2px solid rgba(212,160,23,0.2);
+            margin-bottom: 2.5rem;
         }
-        .hero-cover-top img:hover { transform: translateY(-8px); }
-
-        .hero-content h2 {
-            font-size: 2rem; color: white; margin-bottom: 1.2rem;
-            position: relative; display: inline-block;
-        }
-        [data-theme="light"] .hero-content h2 { color: var(--text-light); }
-        .hero-content h2::after {
-            content: ''; position: absolute; bottom: -8px; left: 50%;
-            transform: translateX(-50%); width: 70px; height: 3px;
-            background: linear-gradient(90deg, transparent, var(--accent-orange), transparent);
-            border-radius: 2px;
-        }
-
-        .hero-content .description {
-            font-size: 1rem; line-height: 1.9; color: var(--text-muted);
-            margin-bottom: 1.8rem; text-align: justify; max-width: 850px;
-            margin-left: auto; margin-right: auto;
-        }
-
-        .cta-button {
-            display: inline-block; background: linear-gradient(135deg, var(--accent-orange), #f39c12);
-            color: white; padding: .85rem 2.2rem; border-radius: 50px;
-            text-decoration: none; font-weight: 600; font-size: 1.05rem;
-            transition: all .3s; box-shadow: 0 4px 15px rgba(230,126,34,0.4);
-        }
-        .cta-button:hover {
-            background: linear-gradient(135deg, #f39c12, #e67e22);
-            transform: translateY(-3px); box-shadow: 0 8px 25px rgba(230,126,34,0.6);
-        }
+        .home-cover img:hover { transform: translateY(-8px); }
 
         /* === INDEX VISUALISATION === */
-        .extraits-section { padding: 4rem 1rem; background: rgba(15,30,47,0.6); }
-        [data-theme="light"] .extraits-section { background: #ffffff; }
+        .index-section { padding: 0 1rem 3rem; background: rgba(15,30,47,0.6); }
+        [data-theme="light"] .index-section { background: #ffffff; }
 
         .section-title {
-            font-size: 2rem; color: white; text-align: center; margin-bottom: 1.5rem;
+            font-size: 1.8rem; color: white; text-align: center; margin-bottom: 1rem;
             position: relative; padding-bottom: 1rem;
         }
         [data-theme="light"] .section-title { color: var(--text-light); }
         .section-title::after {
             content: ''; position: absolute; bottom: 0; left: 50%;
-            transform: translateX(-50%); width: 80px; height: 3px;
+            transform: translateX(-50%); width: 70px; height: 3px;
             background: var(--accent-orange); border-radius: 2px;
+        }
+
+        .index-hint {
+            text-align: center; margin-bottom: 2rem; color: var(--text-muted); font-size: 0.95rem;
         }
 
         .extraits-grid {
@@ -473,12 +445,52 @@
             border: 3px solid rgba(212,160,23,0.3);
         }
 
+        /* === CONTENU VISUALISATION === */
+        .content-section { padding: 4rem 1rem; background: rgba(15,30,47,0.6); }
+        [data-theme="light"] .content-section { background: #ffffff; }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.6rem;
+        }
+
+        .content-card {
+            background: var(--card-bg);
+            border: 2px solid var(--card-border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all .3s;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(44,90,160,.4);
+            border-color: var(--accent-orange);
+        }
+
+        .content-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .content-card .caption {
+            padding: 1rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            text-align: center;
+            font-style: italic;
+        }
+
+        /* === PDF NOTE === */
         .pdf-note {
             background-color: rgba(26,43,61,0.7);
             border-left: 5px solid var(--accent-orange);
             padding: 1.8rem;
             border-radius: 10px;
-            margin-top: 2.5rem;
+            margin: 3rem auto;
+            max-width: 900px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             backdrop-filter: blur(5px);
         }
@@ -486,24 +498,6 @@
             background-color: #f8f9fa;
             border-left-color: var(--accent-orange);
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
-        /* === iPHONE FIX === */
-        @media (max-width: 480px) {
-            .extrait-card .card-title {
-                font-size: 0.82rem;
-                padding: 1rem 0.6rem;
-                min-height: 72px;
-            }
-            .extraits-grid {
-                gap: 1rem;
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .extrait-card .click-hint {
-                font-size: 0.70rem;
-                padding: 3px 8px;
-                margin-top: 4px;
-            }
         }
 
         /* === CONTACT & FOOTER === */
@@ -534,7 +528,6 @@
             color: #bdc3c7;
         }
 
-        /* === ÉTOILES DANS LE FOOTER === */
         .footer-stars {
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -558,8 +551,8 @@
         }
 
         @media (max-width: 768px) {
-            .hero { padding: 2.5rem 1rem; }
-            .hero-cover-top img { max-width: 280px; }
+            .home-section, .index-section, .content-section { padding: 2rem 1rem; }
+            .home-cover img { max-width: 280px; }
             .section-title { font-size: 1.7rem; }
             nav { gap: 1.2rem; }
         }
@@ -579,7 +572,6 @@
             <div class="header-star" style="top: 75%; left: 20%; animation-delay: 1.5s;">★</div>
         </div>
 
-        <!-- Nuages diffus, lents, plus hauts -->
         <div class="header-clouds">
             <div class="cloud large" style="left: -12%; animation-duration: 65s; animation-delay: 0s;"></div>
             <div class="cloud medium" style="left: -18%; animation-duration: 75s; animation-delay: 12s;"></div>
@@ -593,108 +585,63 @@
 
     <!-- Navigation -->
     <nav>
-        <a href="#presentation">Présentation</a>
-        <a href="#extraits">Visualiser les index</a>
+        <a href="#accueil">Accueil</a>
+        <a href="#index">Visualiser les index</a>
+        <a href="a-propos.html">À propos de l’auteur</a>
         <a href="#contact">Commander</a>
     </nav>
 
-    <!-- Hero -->
-    <section class="hero" id="presentation">
-        <div class="hero-cover-top">
-            <img src="images/couverture.png?v=2025" alt="Couverture">
-        </div>
-        <div class="hero-content">
-            <h2>À propos du livre</h2>
-            <p class="description">
-                <div class="hero-cover" style="float: right; margin-left: 20px; margin-bottom: 20px; max-width: 40%;">
-                    <img src="images/4medecouverture.jpeg" alt="4ème de couverture" style="max-width: 100%;">
-                </div>
-                En 4ème de couverture, un montage photographique, réalisé par son fils Gabriel, capturant Jean-Clément à la barre d'un voilier sur le Grand Large, naviguant sous un ciel étoilé, symbole de sa vie guidée par les astres et la mer.
-                <br><br>
-                Né le 2 septembre 1937 à Loisy, en Saône-et-Loire, et décédé le 29 janvier 2016, Jean-Clément Louche a vécu avec une passion débordante pour le vol à voile, l'aéronautique et la navigation. Mécanicien d'avion breveté, il forgea une carrière exemplaire, passant de mécanicien poids lourds à chef de service à la voirie de la ville de Lyon, après des années de cours du soir et une ascension aux bureaux d'études de la ville.
-                <br><br>
-                Amoureux de la mer, il obtint tous ses permis de navigation – fluvial et hauturier – et s'investit avec ferveur dans l'organisation de la base de voile de la ville de Lyon au Grand Large. Régatier aguerri, il sillonna les eaux, notamment dans la région de Bandol. Également fasciné par l'astronomie, il scrutait les étoiles et s'engagea dans l'observation des objets célestes, devenant membre et enquêteur de la revue Lumière dans la Nuit, explorant le mystère des OVNI.
-                <br><br>
-                Homme de savoir, Jean consacra des années à rédiger une encyclopédie de la navigation astronomique, un ouvrage unique, aujourd'hui mis en page pour une possible édition. Ce livre est un hommage à sa vie, à ses passions et à son héritage, naviguant entre ciel et mer, toujours en quête de l'horizon.
-            </p>
-            <a href="#contact" class="cta-button">Commander une impression</a>
+    <!-- Accueil -->
+    <section class="home-section" id="accueil">
+        <div class="home-cover">
+            <img src="images/couverture.png?v=2025" alt="Couverture du livre">
         </div>
     </section>
 
-    <!-- Visualisation des index -->
-    <section class="extraits-section" id="extraits">
+    <!-- Visualiser les index -->
+    <section class="index-section" id="index">
         <div class="container">
             <h2 class="section-title">Visualiser les index</h2>
-            <p style="text-align: center; margin-bottom: 2rem; color: var(--text-muted); font-size: 0.95rem;">
-                Cliquez sur un index pour naviguer dans le sommaire interactif du livre
-            </p>
+            <p class="index-hint">Pour visualiser le contenu d’un index, cliquez sur l’image correspondante</p>
             <div class="extraits-grid">
                 <div class="extrait-card">
                     <div class="card-title">Index général<span class="click-hint">Cliquez pour agrandir</span></div>
                     <div class="image-modal"><img src="images/index.png" alt="Index général"></div>
                 </div>
-                <!-- Les autres chapitres restent inchangés -->
                 <div class="extrait-card">
                     <div class="card-title">Chapitre 1<span class="click-hint">Cliquez pour agrandir</span></div>
                     <div class="image-modal"><img src="images/ch1.png" alt="Chapitre 1"></div>
                 </div>
-                <div class="extrait-card">
-                    <div class="card-title">Chapitre 2<span class="click-hint">Cliquez pour agrandir</span></div>
-                    <div class="image-modal"><img src="images/ch2.png" alt="Chapitre 2"></div>
-                </div>
-                <div class="extrait-card">
-                    <div class="card-title">Chapitre 3<span class="click-hint">Cliquez pour agrandir</span></div>
-                    <div class="image-modal"><img src="images/ch3.png" alt="Chapitre 3"></div>
-                </div>
-                <div class="extrait-card">
-                    <div class="card-title">Chapitre 4<span class="click-hint">Cliquez pour agrandir</span></div>
-                    <div class="image-modal"><img src="images/ch4.png" alt="Chapitre 4"></div>
-                </div>
-                <div class="extrait-card">
-                    <div class="card-title">Chapitre 5<span class="click-hint">Cliquez pour agrandir</span></div>
-                    <div class="image-modal"><img src="images/ch5.png" alt="Chapitre 5"></div>
-                </div>
-                <div class="extrait-card">
-                    <div class="card-title">Chapitre 6<span class="click-hint">Cliquez pour agrandir</span></div>
-                    <div class="image-modal"><img src="images/ch6.png" alt="Chapitre 6"></div>
-                </div>
-                <div class="extrait-card">
-                    <div class="card-title">Chapitre 7<span class="click-hint">Cliquez pour agrandir</span></div>
-                    <div class="image-modal"><img src="images/ch7.png" alt="Chapitre 7"></div>
-                </div>
-                <div class="extrait-card">
-                    <div class="card-title">Chapitre 8<span class="click-hint">Cliquez pour agrandir</span></div>
-                    <div class="image-modal"><img src="images/ch8.png" alt="Chapitre 8"></div>
-                </div>
-                <div class="extrait-card">
-                    <div class="card-title">Chapitre 9<span class="click-hint">Cliquez pour agrandir</span></div>
-                    <div class="image-modal"><img src="images/ch9.png" alt="Chapitre 9"></div>
-                </div>
-                <div class="extrait-card">
-                    <div class="card-title">Chapitre 10<span class="click-hint">Cliquez pour agrandir</span></div>
-                    <div class="image-modal"><img src="images/ch10.png" alt="Chapitre 10"></div>
-                </div>
-                <div class="extrait-card">
-                    <div class="card-title">Chapitre 11<span class="click-hint">Cliquez pour agrandir</span></div>
-                    <div class="image-modal"><img src="images/ch11.png" alt="Chapitre 11"></div>
-                </div>
-                <div class="extrait-card">
-                    <div class="card-title">Chapitre 12<span class="click-hint">Cliquez pour agrandir</span></div>
-                    <div class="image-modal"><img src="images/ch12.png" alt="Chapitre 12"></div>
-                </div>
-            </div>
-            <div class="pdf-note">
-                <h4>À propos du PDF interactif</h4>
-                <p>
-                    La version PDF du livre dispose d'une <strong>indexation interactive</strong> qui vous permet de naviguer facilement entre les chapitres. Les <strong>étoiles en bas de chaque page</strong> servent de boutons de navigation : cliquez sur elles pour revenir à l'index général ou naviguer vers d'autres chapitres. Cette fonctionnalité vous offre une expérience de lecture fluide et intuitive, guidée par les astres, comme il se doit pour un livre sur la navigation astronomique.
-                </p>
+                <!-- Ajouter les autres chapitres ici -->
             </div>
         </div>
     </section>
 
+    <!-- Visualiser du contenu -->
+    <section class="content-section" id="contenu">
+        <div class="container">
+            <h2 class="section-title">Visualiser du contenu</h2>
+            <div class="content-grid">
+                <div class="content-card">
+                    <img src="images/ch1_pg11.webp" alt="Chapitre 1 - Page 11">
+                    <div class="caption">Chapitre 1 – Page 11</div>
+                </div>
+                <!-- Ajouter d'autres pages ici -->
+            </div>
+        </div>
+    </section>
+
+    <!-- PDF interactif -->
+    <div class="pdf-note">
+        <h4>Une version du livre au format PDF/EPUB interactif sera bientôt disponible</h4>
+        <p>
+            La version PDF du livre dispose d'une <strong>indexation interactive</strong> qui vous permet de naviguer facilement entre les chapitres. Les <strong>étoiles en bas de chaque page</strong> servent de boutons de navigation : cliquez sur elles pour revenir à l'index général ou naviguer vers d'autres chapitres. Cette fonctionnalité vous offre une expérience de lecture fluide et intuitive, guidée par les astres, comme il se doit pour un livre sur la navigation astronomique.
+        </p>
+    </div>
+
     <!-- Contact -->
     <section class="contact-section" id="contact">
-        <div class="contact-container">
+        <div class="container">
             <h2 class="section-title">Commander une impression</h2>
             <form action="https://formspree.io/f/mblpzwlq" method="POST">
                 <div class="form-group">
@@ -761,10 +708,6 @@
                 localStorage.setItem('theme', 'light');
             }
         });
-
-        const img = new Image();
-        img.src = 'https://etoilesetnavigation.github.io/etoiles-navigation/images/fondbandeau.webp';
-        img.onerror = () => document.querySelector('header').classList.add('no-image');
 
         document.querySelectorAll('.extrait-card').forEach(card => {
             const title = card.querySelector('.card-title');
