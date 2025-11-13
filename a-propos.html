@@ -430,35 +430,38 @@
     </footer>
 
     <script>
-        const toggle = document.getElementById('themeToggle');
-        const body = document.body;
-        const savedTheme = localStorage.getItem('theme') || 'dark';
-        if (savedTheme === 'light') {
+    // === Theme Toggle ===
+    const toggle = document.getElementById('themeToggle');
+    const body = document.body;
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    if (savedTheme === 'light') {
+        body.setAttribute('data-theme', 'light');
+        toggle.textContent = 'Nuit';
+    } else {
+        toggle.textContent = 'Jour';
+    }
+    toggle.addEventListener('click', () => {
+        if (body.hasAttribute('data-theme')) {
+            body.removeAttribute('data-theme');
+            toggle.textContent = 'Jour';
+            localStorage.setItem('theme', 'dark');
+        } else {
             body.setAttribute('data-theme', 'light');
             toggle.textContent = 'Nuit';
-        } else {
-            toggle.textContent = 'Jour';
+            localStorage.setItem('theme', 'light');
         }
-        toggle.addEventListener('click', () => {
-            if (body.hasAttribute('data-theme')) {
-                body.removeAttribute('data-theme');
-                toggle.textContent = 'Jour';
-                localStorage.setItem('theme', 'dark');
-            } else {
-                body.setAttribute('data-theme', 'light');
-                toggle.textContent = 'Nuit';
-                localStorage.setItem('theme', 'light');
+    });
+
+    // === Redirection fluide vers index.html#contact ===
+    document.querySelectorAll('.scroll-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const href = this.getAttribute('href');
+            if (href.includes('#contact')) {
+                window.location.href = href; // Redirige proprement avec ancre
             }
         });
-
-        document.querySelectorAll('.scroll-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                if (this.getAttribute('href').includes('#')) {
-                    e.preventDefault();
-                    window.location.href = 'index.html' + this.getAttribute('href').split('#')[1];
-                }
-            });
-        });
-    </script>
+    });
+</script>
 </body>
 </html>
