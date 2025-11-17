@@ -6,25 +6,85 @@
     <title>À propos de l’auteur - Étoiles et Navigation</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:'Segoe UI',sans-serif;background:#0b1a2e;color:#ecf0f1;min-height:100vh;position:relative}
-        body::before{content:'';position:fixed;inset:0;background:radial-gradient(2px 2px at 20% 30%,#d4a017,transparent),radial-gradient(1.5px 1.5px at 80% 70%,#d4a017,transparent);background-size:200px 200px,300px 300px;opacity:.6;pointer-events:none;animation:stars 120s linear infinite}
+        body{
+            font-family:'Segoe UI',sans-serif;background:#0b1a2e;color:#ecf0f1;min-height:100vh;position:relative
+        }
+        body::before{
+            content:'';position:fixed;inset:0;
+            background:radial-gradient(2px 2px at 20% 30%,#d4a017,transparent),
+                       radial-gradient(1.5px 1.5px at 80% 70%,#d4a017,transparent);
+            background-size:200px 200px,300px 300px;opacity:.6;pointer-events:none;
+            animation:stars 120s linear infinite
+        }
         @keyframes stars{from{background-position:0 0,50px 50px}to{background-position:200px 200px,250px 250px}}
-        nav{background:#142c44;padding:1.2rem 2rem;position:fixed;top:0;left:0;right:0;z-index:999;display:flex;justify-content:center;gap:4rem;box-shadow:0 6px 25px rgba(0,0,0,.6)}
+
+        nav{
+            background:#142c44;padding:1.2rem 2rem;position:fixed;top:0;left:0;right:0;z-index:999;
+            display:flex;justify-content:center;gap:4rem;box-shadow:0 6px 25px rgba(0,0,0,.6)
+        }
         nav a{color:white;text-decoration:none;font-weight:600;font-size:1.1rem}
         nav a:hover{color:#e67e22}
+
         main{margin-top:90px;padding:2rem}
-        .author-page{max-width:900px;margin:0 auto;background:rgba(15,30,47,.75);padding:3rem 2.5rem;border-radius:16px;box-shadow:0 15px 50px rgba(0,0,0,.6);line-height:1.9;text-align:justify}
-        .author-page h1{text-align:center;color:#d4a017;font-size:2.4rem;margin-bottom:2.5rem;position:relative}
-        .author-page h1::after{content:'';position:absolute;bottom:-12px;left:50%;transform:translateX(-50%);width:100px;height:4px;background:#e67e22;border-radius:2px}
-        .author-page img{float:right;margin:0 0 25px 30px;max-width:38%;border-radius:14px;box-shadow:0 15px 40px rgba(0,0,0,.7);border:4px solid rgba(212,160,23,.4)}
-        .grand-large-section{text-align:center;margin:6rem auto 4rem;padding:4rem 2rem;background:linear-gradient(135deg,rgba(11,26,46,.95),rgba(20,44,68,.95));border-radius:20px;max-width:1100px;box-shadow:0 20px 60px rgba(0,0,0,.7)}
-        .grand-large-section img{max-width:100%;border-radius:18px;margin:2rem 0;box-shadow:0 25px 70px rgba(0,0,0,.8);border:5px solid rgba(212,160,23,.5)}
-        .grand-large-text{font-size:1.35rem;font-style:italic;color:#e67e22;line-height:1.9;margin:2rem 0}
-        footer{background:#0b1a2e;padding:4rem 1rem;text-align:center;color:#bdc3c7;border-top:1px solid rgba(255,255,255,.1);font-size:.95rem}
+
+        .author-page{
+            max-width:900px;margin:0 auto;background:rgba(15,30,47,.75);padding:3rem 2.5rem;
+            border-radius:16px;box-shadow:0 15px 50px rgba(0,0,0,.6);line-height:1.9;text-align:justify
+        }
+        .author-page h1{
+            text-align:center;color:#d4a017;font-size:2.4rem;margin-bottom:2.5rem;position:relative
+        }
+        .author-page h1::after{
+            content:'';position:absolute;bottom:-12px;left:50%;transform:translateX(-50%);
+            width:100px;height:4px;background:#e67e22;border-radius:2px
+        }
+
+        /* IMAGE 4ᵉ DE COUVERTURE AGRANDIE */
+        .author-page img{
+            float:right;
+            margin:0 0 30px 40px;
+            max-width:48%;
+            border-radius:16px;
+            box-shadow:0 20px 50px rgba(0,0,0,.7);
+            border:4px solid rgba(212,160,23,.4);
+            display:block
+        }
+
+        .grand-large-section{
+            text-align:center;margin:6rem auto 4rem;padding:4rem 2rem;
+            background:linear-gradient(135deg,rgba(11,26,46,.95),rgba(20,44,68,.95));
+            border-radius:20px;max-width:1100px;box-shadow:0 20px 60px rgba(0,0,0,.7)
+        }
+        .grand-large-section img{
+            max-width:100%;border-radius:18px;margin:2rem 0;
+            box-shadow:0 25px 70px rgba(0,0,0,.8);border:5px solid rgba(212,160,23,.5);
+            width:100%;max-height:680px;object-fit:cover
+        }
+        .grand-large-text{
+            font-size:1.35rem;font-style:italic;color:#e67e22;line-height:1.9;margin:2rem 0
+        }
+
+        footer{
+            background:#0b1a2e;padding:4rem 1rem;text-align:center;color:#bdc3c7;
+            border-top:1px solid rgba(255,255,255,.1);font-size:.95rem
+        }
+
+        /* RESPONSIVE – IMAGE 4ᵉ DE COUVERTURE ENCORE PLUS GRANDE SUR ORDI */
+        @media(min-width:992px){
+            .author-page img{
+                max-width:52% !important;
+                margin-left:50px;
+            }
+        }
         @media(max-width:768px){
             nav{gap:2rem;padding:1rem}
             main{margin-top:80px}
-            .author-page img{float:none;max-width:90%;display:block;margin:0 auto 25px}
+            .author-page img{
+                float:none !important;
+                max-width:90% !important;
+                margin:20px auto !important;
+                display:block;
+            }
             .grand-large-text{font-size:1.2rem}
         }
     </style>
@@ -39,12 +99,16 @@
     <main>
         <section class="author-page">
             <h1>À propos de l’auteur</h1>
-            <img src="images/4medecouverture.jpeg" alt="Jean-Clément Louche à la barre">
+
+            <img src="images/4medecouverture.jpeg" alt="Jean-Clément Louche à la barre – 4ᵉ de couverture">
 
             <p>En 4ème de couverture, un montage photographique, réalisé par son fils Gabriel, capturant Jean-Clément à la barre d’un voilier sur le Grand Large, naviguant sous un ciel étoilé, symbole de sa vie guidée par les astres et la mer.</p>
 
-            <p>Né le 2 septembre 1937 à Loisy, en Saône-et-Loire, et décédé le 29 janvier 2016, Jean-Clément Louche a vécu avec une passion débordante pour le vol à voile, l’aéronautique et la navigation…</p>
-            <!-- Ta bio complète ici -->
+            <p>Né le 2 septembre 1937 à Loisy, en Saône-et-Loire, et décédé le 29 janvier 2016, Jean-Clément Louche a vécu avec une passion débordante pour le vol à voile, l’aéronautique et la navigation. Mécanicien d’avion breveté, il forgea une carrière exemplaire, passant de mécanicien poids lourds à chef de service à la voirie de la ville de Lyon, après des années de cours du soir et une ascension aux bureaux d’études de la ville.</p>
+
+            <p>Amoureux de la mer, il obtint tous ses permis de navigation – fluvial et hauturier – et s’investit avec ferveur dans l’organisation de la base de voile de la ville de Lyon au Grand Large. Régatier aguerri, il sillonna les eaux, notamment dans la région de Bandol. Également fasciné par l’astronomie, il scrutait les étoiles et s’engagea dans l’observation des objets célestes, devenant membre et enquêteur de la revue <em>Lumière dans la Nuit</em>, explorant le mystère des OVNI.</p>
+
+            <p>Homme de savoir, Jean consacra des années à rédiger une encyclopédie de la navigation astronomique, un ouvrage unique, aujourd’hui mis en page pour une possible édition. Ce livre est un hommage à sa vie, à ses passions et à son héritage, naviguant entre ciel et mer, toujours en quête de l’horizon.</p>
         </section>
 
         <section class="grand-large-section">
