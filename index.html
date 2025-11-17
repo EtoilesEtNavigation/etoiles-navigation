@@ -7,207 +7,201 @@
     <title>Étoiles et Navigation - Navigation Astronomique</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
-        html,body{width:100%;overflow-x:hidden;transition:background-color .6s ease,color .6s ease}
-        :root{
-            --bg-night:#0b1a2e;--header-bg:#0f1e2f;--nav-bg:#142c44;--accent-orange:#e67e22;
-            --text-light:#ecf0f1;--text-muted:#bdc3c7;--gold-star:#d4a017;--card-bg:#1a2b3d;--card-border:#2c5aa0;
-            --body-bg:var(--bg-night)
-        }
-        [data-theme="light"]{
-            --bg-night:#f5f8fa;--header-bg:#e6f0fa;--nav-bg:#1a3a52;--accent-orange:#f39c12;
-            --text-light:#2c3e50;--text-muted:#7f8c8d;--gold-star:#b8860b;--card-bg:#ffffff;--card-border:#1a3a52;
-            --body-bg:#f8f9fa
-        }
         body{
-            font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;line-height:1.7;color:var(--text-light);
-            background-color:var(--body-bg);
+            font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;line-height:1.7;color:#ecf0f1;
+            background:#0b1a2e;background-attachment:fixed;position:relative;min-height:100vh;
             background-image:radial-gradient(circle at 20% 80%,rgba(120,119,198,.08)0%,transparent 50%),
-                             radial-gradient(circle at 80% 20%,rgba(120,119,198,.08)0%,transparent 50%);
-            background-attachment:fixed;position:relative
+                             radial-gradient(circle at 80% 20%,rgba(120,119,198,.08)0%,transparent 50%)
         }
         body::before{
-            content:'';position:fixed;top:0;left:0;right:0;bottom:0;
-            background:radial-gradient(2px 2px at 20% 30%,var(--gold-star),transparent),
-                       radial-gradient(1.5px 1.5px at 80% 70%,var(--gold-star),transparent),
-                       radial-gradient(1px 1px at 40% 90%,var(--gold-star),transparent),
-                       radial-gradient(1.8px 1.8px at 60% 20%,var(--gold-star),transparent);
-            background-size:200px 200px,300px 300px,250px 250px,350px 350px;
-            background-position:0 0,50px 50px,100px 100px,150px 150px;
-            opacity:.6;pointer-events:none;z-index:-1;
-            animation:stars-move 120s linear infinite
+            content:'';position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:-1;
+            background:radial-gradient(2px 2px at 20% 30%,#d4a017,transparent),
+                       radial-gradient(1.5px 1.5px at 80% 70%,#d4a017,transparent),
+                       radial-gradient(1px 1px at 40% 90%,#d4a017,transparent),
+                       radial-gradient(1.8px 1.8px at 60% 20%,#d4a017,transparent);
+            background-size:200px 200px,300px 300px,250px 250px,350px 350px;opacity:.6;
+            animation:stars 120s linear infinite
         }
-        [data-theme="light"]::before{opacity:0}
-        @keyframes stars-move{from{background-position:0 0,50px 50px,100px 100px,150px 150px}to{background-position:200px 200px,250px 250px,350px 350px,400px 400px}}
+        @keyframes stars{from{background-position:0 0,50px 50px,100px 100px,150px 150px}to{background-position:200px 200px,250px 250px,350px 350px,400px 400px}}
         @keyframes twinkle{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:.9;transform:scale(1.3)}}
 
-        /* HEADER ULTRA-LÉGER */
-        header{
-            height:120px;min-height:120px;background:transparent;position:relative;padding:1rem;
-            display:flex;align-items:center;justify-content:center;flex-direction:column
-        }
-        .theme-toggle{
-            position:absolute;top:12px;left:12px;background:rgba(255,255,255,.15);color:white;padding:6px 14px;
-            border-radius:50px;font-size:.82rem;font-weight:600;cursor:pointer;z-index:100;backdrop-filter:blur(8px);
-            border:1px solid rgba(255,255,255,.3);transition:all .4s
-        }
-        [data-theme="light"] .theme-toggle{left:auto;right:12px;background:rgba(0,0,0,.1);color:#2c3e50;border-color:rgba(0,0,0,.2)}
-        .header-stars{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none;opacity:1}
-        .header-star{position:absolute;color:var(--gold-star);font-size:1.1rem;animation:twinkle 3s infinite}
+        :root{--nav:#142c44;--accent:#e67e22;--gold:#d4a017}
+        [data-theme="light"]{--nav:#1a3a52;--accent:#f39c12;--gold:#b8860b}
+        [data-theme="light"] body{background:#f8f9fa;color:#2c3e50}
+        [data-theme="light"] body::before{opacity:0}
 
-        /* MENU */
+        /* MENU FIXE TOUT EN HAUT */
         nav{
-            background:var(--nav-bg);padding:1.2rem;display:flex;justify-content:center;gap:2.5rem;flex-wrap:wrap;
-            box-shadow:0 4px 20px rgba(0,0,0,.4);position:relative;z-index:99
+            background:var(--nav);padding:1rem 2rem;display:flex;justify-content:center;gap:3.5rem;flex-wrap:wrap;
+            position:fixed;top:0;left:0;right:0;z-index:999;box-shadow:0 4px 20px rgba(0,0,0,.5)
         }
-        nav a{color:white;text-decoration:none;font-weight:500;transition:color .3s}
-        nav a:hover{color:var(--accent-orange)}
+        nav a{color:white;text-decoration:none;font-weight:600;font-size:1.05rem;transition:.3s}
+        nav a:hover{color:var(--accent)}
 
-        /* SECTIONS COMMUNES */
-        .home-section{padding:3rem 1rem;background:linear-gradient(to bottom,rgba(11,26,46,.9),rgba(15,30,47,.95));text-align:center}
-        [data-theme="light"] .home-section{background:linear-gradient(to bottom,#e6f0fa,#f8f9fa)}
-        .home-cover img{max-width:600px;width:85%;border-radius:12px;box-shadow:0 15px 40px rgba(0,0,0,.4);border:2px solid rgba(212,160,23,.2);transition:transform .3s}
-        .home-cover img:hover{transform:translateY(-8px)}
+        /* BOUTON JOUR/NUIT SOUS LE MENU */
+        .theme-toggle{
+            position:fixed;top:64px;left:50%;transform:translateX(-50%);z-index:998;
+            background:rgba(255,255,255,.2);color:white;padding:8px 24px;border-radius:50px;font-weight:600;cursor:pointer;
+            border:1px solid rgba(255,255,255,.3);backdrop-filter:blur(8px);transition:all .4s
+        }
+        [data-theme="light"] .theme-toggle{background:rgba(0,0,0,.1);color:#2c3e50;border-color:rgba(0,0,0,.2)}
 
-        .section-title{font-size:1.8rem;color:white;text-align:center;margin-bottom:1rem;position:relative;padding-bottom:1rem}
-        [data-theme="light"] .section-title{color:var(--text-light)}
-        .section-title::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:70px;height:3px;background:var(--accent-orange);border-radius:2px}
-        .index-hint,.content-grid p{text-align:center;margin-bottom:2rem;color:var(--text-muted);font-size:.95rem}
+        main{margin-top:110px;padding:2rem 1rem}
+
+        /* COUVERTURE + ÉTOILES AUTOUR */
+        .cover-container{
+            text-align:center;padding:4rem 1rem 3rem;position:relative;max-width:800px;margin:0 auto
+        }
+        .cover-container img{
+            max-width:100%;height:auto;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.7);
+            border:4px solid rgba(212,160,23,.4);transition:transform .4s
+        }
+        .cover-container img:hover{transform:scale(1.02)}
+        .cover-stars{position:absolute;inset:0;pointer-events:none}
+        .cover-star{position:absolute;color:var(--gold);font-size:1.3rem;animation:twinkle 4s infinite}
+
+        .section-title{
+            font-size:2rem;text-align:center;margin:4rem 0 2rem;color:var(--gold);position:relative
+        }
+        .section-title::after{
+            content:'';position:absolute;bottom:-12px;left:50%;transform:translateX(-50%);
+            width:90px;height:4px;background:var(--accent);border-radius:2px
+        }
+        .hint{text-align:center;color:#bdc3c7;margin-bottom:2rem;font-size:1rem}
 
         .extraits-grid,.content-grid{
-            display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1.6rem;margin-bottom:2.5rem
+            display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:2rem;
+            max-width:1300px;margin:0 auto;padding:0 1rem
         }
         .extrait-card .card-title{
-            background:var(--card-bg);border:2px solid var(--card-border);border-radius:12px;padding:1.2rem .8rem;
-            color:var(--text-light);font-weight:600;font-size:.88rem;transition:all .3s;text-align:center;
-            min-height:78px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative
+            background:#1a2b3d;border:2px solid #2c5aa0;border-radius:14px;padding:1.4rem 1rem;
+            text-align:center;color:#ecf0f1;font-weight:600;font-size:.95rem;transition:all .3s;cursor:pointer;
+            min-height:90px;display:flex;flex-direction:column;justify-content:center
         }
         .extrait-card:hover .card-title,.extrait-card.active .card-title{
-            background:var(--card-border);color:white;transform:scale(1.06);box-shadow:0 6px 18px rgba(44,90,160,.5);border-color:var(--accent-orange)
+            background:#2c5aa0;color:white;transform:scale(1.08);border-color:var(--accent);box-shadow:0 8px 25px rgba(44,90,160,.6)
         }
-        .click-hint{
-            margin-top:6px;background:rgba(0,0,0,.75);color:white;font-size:.74rem;padding:4px 10px;border-radius:6px;
-            opacity:0;transition:opacity .3s;pointer-events:none
-        }
+        .click-hint{font-size:.8rem;margin-top:8px;color:#e67e22;opacity:0;transition:.3s}
         .extrait-card:hover .click-hint,.extrait-card.active .click-hint{opacity:1}
 
         .image-modal{
-            position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.92);
-            display:none;align-items:center;justify-content:center;z-index:1000;backdrop-filter:blur(4px)
+            position:fixed;inset:0;background:rgba(0,0,0,.96);display:none;align-items:center;justify-content:center;
+            z-index:1000;backdrop-filter:blur(10px)
         }
         .image-modal.active{display:flex}
         .image-modal img{
-            max-width:92%;max-height:92%;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.6);
-            border:3px solid rgba(212,160,23,.3)
+            max-width:94%;max-height:94%;border-radius:16px;border:5px solid rgba(212,160,23,.5);
+            box-shadow:0 30px 100px rgba(0,0,0,.9)
         }
 
         .pdf-note{
-            background:rgba(26,43,61,.7);border-left:5px solid var(--accent-orange);padding:1.8rem;border-radius:10px;
-            margin:3rem auto;max-width:900px;box-shadow:0 4px 15px rgba(0,0,0,.2);backdrop-filter:blur(5px)
+            background:rgba(26,43,61,.85);border-left:6px solid var(--accent);padding:2.5rem;margin:5rem auto;
+            max-width:1000px;border-radius:14px;text-align:center;font-size:1.1rem;box-shadow:0 15px 40px rgba(0,0,0,.5)
         }
-        [data-theme="light"] .pdf-note{background:#f8f9fa;border-left-color:var(--accent-orange);box-shadow:0 2px 8px rgba(0,0,0,.1)}
 
-        .contact-section{padding:4rem 1rem;background:linear-gradient(135deg,#0b1a2e,#142c44);color:white}
-        [data-theme="light"] .contact-section{background:#ffffff;color:var(--text-light)}
+        .contact-section{
+            background:linear-gradient(135deg,#0b1a2e,#142c44);padding:5rem 1rem;text-align:center;color:white
+        }
 
         footer{
-            background:#0b1a2e;color:var(--text-muted);text-align:center;padding:2.5rem 1rem;font-size:.92rem;
-            border-top:1px solid rgba(255,255,255,.1);position:relative;overflow:hidden
+            background:#0b1a2e;color:#bdc3c7;text-align:center;padding:4rem 1rem;border-top:1px solid rgba(255,255,255,.1);
+            font-size:.95rem
         }
-        [data-theme="light"] footer{background:#1a3a52;color:#bdc3c7}
-        .footer-stars{position:absolute;inset:0;pointer-events:none;opacity:.4}
-        .footer-star{position:absolute;color:var(--gold-star);font-size:.9rem;animation:twinkle 4s infinite}
 
         @media(max-width:768px){
-            .home-section,.content-section{padding:2rem 1rem}
-            .home-cover img{max-width:280px}
-            nav{gap:1.2rem}
+            nav{gap:1.8rem;padding:1rem;font-size:.95rem}
+            .theme-toggle{top:60px;padding:7px 18px}
+            main{margin-top:100px}
         }
     </style>
 </head>
 <body>
 
-    <!-- Header ultra-léger avec étoiles -->
-    <header>
-        <div class="theme-toggle" id="themeToggle">Jour</div>
-        <div class="header-stars">
-            <div class="header-star" style="top:20%;left:10%;animation-delay:0s">★</div>
-            <div class="header-star" style="top:30%;left:80%;animation-delay:1s">✦</div>
-            <div class="header-star" style="top:50%;left:25%;animation-delay:2s">★</div>
-            <div class="header-star" style="top:70%;left:70%;animation-delay:.5s">✦</div>
-            <div class="header-star" style="top:15%;left:60%;animation-delay:1.8s">★</div>
-        </div>
-    </header>
-
-    <!-- Menu -->
+    <!-- MENU TOUT EN HAUT -->
     <nav>
         <a href="#accueil">Accueil</a>
         <a href="a-propos.html">À propos de l’auteur</a>
         <a href="#contact" class="scroll-link">Commander</a>
     </nav>
 
-    <!-- Accueil -->
-    <section class="home-section" id="accueil">
-        <div class="home-cover">
-            <img src="images/couverture.png?v=2025" alt="Couverture du livre">
-        </div>
-    </section>
+    <!-- BOUTON JOUR/NUIT -->
+    <div class="theme-toggle" id="themeToggle">Jour</div>
 
-    <!-- Visualiser les index (inchangé) -->
-    <section class="index-section">
-        <div class="container">
-            <h2 class="section-title">Visualiser les index</h2>
-            <p class="index-hint">Pour visualiser le contenu d’un index, cliquez sur l’image correspondante</p>
-            <div class="extraits-grid">
-                <!-- Tes 13 cartes d’index ici (je les remets pour être complet) -->
-                <div class="extrait-card"><div class="card-title">Index général<span class="click-hint">Cliquez pour agrandir</span></div><div class="image-modal"><img src="images/index.png" alt="Index général"></div></div>
-                <div class="extrait-card"><div class="card-title">Chapitre 1<span class="click-hint">Cliquez pour agrandir</span></div><div class="image-modal"><img src="images/ch1.png" alt="Chapitre 1"></div></div>
-                <div class="extrait-card"><div class="card-title">Chapitre 2<span class="click-hint">Cliquez pour agrandir</span></div><div class="image-modal"><img src="images/ch2.png" alt="Chapitre 2"></div></div>
-                <div class="extrait-card"><div class="card-title">Chapitre 3<span class="click-hint">Cliquez pour agrandir</span></div><div class="image-modal"><img src="images/ch3.png" alt="Chapitre 3"></div></div>
-                <div class="extrait-card"><div class="card-title">Chapitre 4<span class="click-hint">Cliquez pour agrandir</span></div><div class="image-modal"><img src="images/ch4.png" alt="Chapitre 4"></div></div>
-                <div class="extrait-card"><div class="card-title">Chapitre 5<span class="click-hint">Cliquez pour agrandir</span></div><div class="image-modal"><img src="images/ch5.png" alt="Chapitre 5"></div></div>
-                <div class="extrait-card"><div class="card-title">Chapitre 6<span class="click-hint">Cliquez pour agrandir</span></div><div class="image-modal"><img src="images/ch6.png" alt="Chapitre 6"></div></div>
-                <div class="extrait-card"><div class="card-title">Chapitre 7<span class="click-hint">Cliquez pour agrandir</span></div><div class="image-modal"><img src="images/ch7.png" alt="Chapitre 7"></div></div>
-                <div class="extrait-card"><div class="card-title">Chapitre 8<span class="click-hint">Cliquez pour agrandir</span></div><div class="image-modal"><img src="images/ch8.png" alt="Chapitre 8"></div></div>
-                <div class="extrait-card"><div class="card-title">Chapitre 9<span class="click-hint">Cliquez pour agrandir</span></div><div class="image-modal"><img src="images/ch9.png" alt="Chapitre 9"></div></div>
-                <div class="extrait-card"><div class="card-title">Chapitre 10<span class="click-hint">Cliquez pour agrandir</span></div><div class="image-modal"><img src="images/ch10.png" alt="Chapitre 10"></div></div>
-                <div class="extrait-card"><div class="card-title">Chapitre 11<span class="click-hint">Cliquez pour agrandir</span></div><div class="image-modal"><img src="images/ch11.png" alt="Chapitre 11"></div></div>
-                <div class="extrait-card"><div class="card-title">Chapitre 12<span class="click-hint">Cliquez pour agrandir</span></div><div class="image-modal"><img src="images/ch12.png" alt="Chapitre 12"></div></div>
+    <main>
+        <!-- COUVERTURE + ÉTOILES AUTOUR -->
+        <div class="cover-container" id="accueil">
+            <div class="cover-stars">
+                <div class="cover-star" style="top:8%;left:6%;animation-delay:0s">★</div>
+                <div class="cover-star" style="top:12%;right:8%;animation-delay:1.2s">✦</div>
+                <div class="cover-star" style="bottom:15%;left:10%;animation-delay:2s">★</div>
+                <div class="cover-star" style="bottom:10%;right:7%;animation-delay:.8s">✦</div>
+                <div class="cover-star" style="top:45%;left:3%;animation-delay:1.6s">★</div>
+                <div class="cover-star" style="top:50%;right:4%;animation-delay:.4s">✦</div>
             </div>
+            <img src="images/couverture.png?v=2025" alt="Couverture du livre Étoiles et Navigation">
         </div>
-    </section>
 
-    <!-- Visualiser du contenu (tes 4 pages WEBP) -->
-    <section class="content-section" id="contenu">
-        <div class="container">
-            <h2 class="section-title">Visualiser du contenu</h2>
-            <p class="index-hint">Cliquez sur une page pour l’agrandir</p>
-            <div class="content-grid">
-                <div class="extrait-card"><div class="card-title">Chapitre 1 – Page 11<span class="click-hint">Cliquez pour agrandir</span></div><div class="image-modal"><img src="images/ch1_pg11.webp" alt="Chapitre 1 - Page 11"></div></div>
-                <div class="extrait-card"><div class="card-title">Chapitre 2 – Page 23<span class="click-hint">Cliquez pour agrandir</span></div><div class="image-modal"><img src="images/ch2_pg23.webp" alt="Chapitre 2 - Page 23"></div></div>
-                <div class="extrait-card"><div class="card-title">Chapitre 3 – Page 54<span class="click-hint">Cliquez pour agrandir</span></div><div class="image-modal"><img src="images/ch3_pg54.webp" alt="Chapitre 3 - Page 54"></div></div>
-                <div class="extrait-card"><div class="card-title">Chapitre 4 – Page 58<span class="click-hint">Cliquez pour agrandir</span></div><div class="image-modal"><img src="images/ch4_pg58.webp" alt="Chapitre 4 - Page 58"></div></div>
-            </div>
+        <!-- VISUALISER LES INDEX -->
+        <h2 class="section-title">Visualiser les index</h2>
+        <p class="hint">Cliquez sur un index pour l’agrandir</p>
+        <div class="extraits-grid">
+            <div class="extrait-card"><div class="card-title">Index général<span class="click-hint">Cliquez pour agrandir</span></div><div class="image-modal"><img src="images/index.png" alt="Index général"></div></div>
+            <div class="extrait-card"><div class="card-title">Chapitre 1<span class="click-hint">Cliquez pour agrandir</span></div><div class="image-modal"><img src="images/ch1.png" alt="Chapitre 1"></div></div>
+            <div class="extrait-card"><div class="card-title">Chapitre 2<span class="click-hint">Cliquez pour agrandir</span></div><div class="image-modal"><img src="images/ch2.png" alt="Chapitre 2"></div></div>
+            <div class="extrait-card"><div class="card-title">Chapitre 3<span class="click-hint">Cliquez pour agrandir</span></div><div class="image-modal"><img src="images/ch3.png" alt="Chapitre 3"></div></div>
+            <div class="extrait-card"><div class="card-title">Chapitre 4<span class="click-hint">Cliquez pour agrandir</span></div><div class="image-modal"><img src="images/ch4.png" alt="Chapitre 4"></div></div>
+            <div class="extrait-card"><div class="card-title">Chapitre 5<span class="click-hint">Cliquez pour agrandir</span></div><div class="image-modal"><img src="images/ch5.png" alt="Chapitre 5"></div></div>
+            <div class="extrait-card"><div class="card-title">Chapitre 6<span class="click-hint">Cliquez pour agrandir</span></div><div class="image-modal"><img src="images/ch6.png" alt="Chapitre 6"></div></div>
+            <div class="extrait-card"><div class="card-title">Chapitre 7<span class="click-hint">Cliquez pour agrandir</span></div><div class="image-modal"><img src="images/ch7.png" alt="Chapitre 7"></div></div>
+            <div class="extrait-card"><div class="card-title">Chapitre 8<span class="click-hint">Cliquez pour agrandir</span></div><div class="image-modal"><img src="images/ch8.png" alt="Chapitre 8"></div></div>
+            <div class="extrait-card"><div class="card-title">Chapitre 9<span class="click-hint">Cliquez pour agrandir</span></div><div class="image-modal"><img src="images/ch9.png" alt="Chapitre 9"></div></div>
+            <div class="extrait-card"><div class="card-title">Chapitre 10<span class="click-hint">Cliquez pour agrandir</span></div><div class="image-modal"><img src="images/ch10.png" alt="Chapitre 10"></div></div>
+            <div class="extrait-card"><div class="card-title">Chapitre 11<span class="click-hint">Cliquez pour agrandir</span></div><div class="image-modal"><img src="images/ch11.png" alt="Chapitre 11"></div></div>
+            <div class="extrait-card"><div class="card-title">Chapitre 12<span class="click-hint">Cliquez pour agrandir</span></div><div class="image-modal"><img src="images/ch12.png" alt="Chapitre 12"></div></div>
         </div>
-    </section>
 
-    <!-- PDF interactif + Contact + Footer (inchangés) -->
-    <div class="pdf-note">…</div>
-    <section class="contact-section" id="contact">…</section>
-    <footer>…</footer>
+        <!-- VISUALISER DU CONTENU -->
+        <h2 class="section-title">Visualiser du contenu</h2>
+        <p class="hint">Cliquez sur une page pour l’agrandir</p>
+        <div class="content-grid">
+            <div class="extrait-card"><div class="card-title">Chapitre 1 – Page 11<span class="click-hint">Cliquez pour agrandir</span></div><div class="image-modal"><img src="images/ch1_pg11.webp" alt="Chapitre 1 - Page 11"></div></div>
+            <div class="extrait-card"><div class="card-title">Chapitre 2 – Page 23<span class="click-hint">Cliquez pour agrandir</span></div><div class="image-modal"><img src="images/ch2_pg23.webp" alt="Chapitre 2 - Page 23"></div></div>
+            <div class="extrait-card"><div class="card-title">Chapitre 3 – Page 54<span class="click-hint">Cliquez pour agrandir</span></div><div class="image-modal"><img src="images/ch3_pg54.webp" alt="Chapitre 3 - Page 54"></div></div>
+            <div class="extrait-card"><div class="card-title">Chapitre 4 – Page 58<span class="click-hint">Cliquez pour agrandir</span></div><div class="image-modal"><img src="images/ch4_pg58.webp" alt="Chapitre 4 - Page 58"></div></div>
+        </div>
+
+        <!-- PDF INTERACTIF -->
+        <div class="pdf-note">
+            <h4>Une version du livre au format PDF/EPUB interactif sera bientôt disponible</h4>
+            <p>La version PDF du livre dispose d'une <strong>indexation interactive</strong> qui vous permet de naviguer facilement entre les chapitres. Les <strong>étoiles en bas de chaque page</strong> servent de boutons de navigation : cliquez sur elles pour revenir à l'index général ou naviguer vers d'autres chapitres. Cette fonctionnalité vous offre une expérience de lecture fluide et intuitive, guidée par les astres, comme il se doit pour un livre sur la navigation astronomique.</p>
+        </div>
+
+        <!-- CONTACT (en attendant ton 123FormBuilder) -->
+        <section class="contact-section" id="contact">
+            <h2 class="section-title">Commander une impression</h2>
+            <p>(Le formulaire avancé arrive très bientôt)</p>
+        </section>
+
+        <footer>
+            <p>© Étoiles et Navigation - Jean-Clément Louche</p>
+            <p>Un petit traité de navigation astronomique • Édition 2025</p>
+        </footer>
+    </main>
 
     <script>
         const toggle=document.getElementById('themeToggle'),body=document.body;
         const saved=localStorage.getItem('theme')||'dark';
         if(saved==='light'){body.setAttribute('data-theme','light');toggle.textContent='Nuit'}else{toggle.textContent='Jour'}
-        toggle.addEventListener('click',()=>{if(body.hasAttribute('data-theme')){body.removeAttribute('data-theme');toggle.textContent='Jour';localStorage.setItem('theme','dark')}
-        else{body.setAttribute('data-theme','light');toggle.textContent='Nuit';localStorage.setItem('theme','light')}});
+        toggle.onclick=()=>{if(body.hasAttribute('data-theme')){body.removeAttribute('data-theme');toggle.textContent='Jour';localStorage.setItem('theme','dark')}
+        else{body.setAttribute('data-theme','light');toggle.textContent='Nuit';localStorage.setItem('theme','light')}};
 
-        document.querySelectorAll('.extrait-card').forEach(c=>{const t=c.querySelector('.card-title'),m=c.querySelector('.image-modal');
-        t.addEventListener('click',e=>{e.stopPropagation();c.classList.toggle('active');m.classList.toggle('active')});
-        m.addEventListener('click',e=>{if(e.target===m||e.target.tagName==='IMG'){c.classList.remove('active');m.classList.remove('active')}})});
+        document.querySelectorAll('.extrait-card').forEach(card=>{
+            const title=card.querySelector('.card-title'),modal=card.querySelector('.image-modal');
+            title.onclick=e=>{e.stopPropagation();card.classList.toggle('active');modal.classList.toggle('active')};
+            modal.onclick=e=>{if(e.target===modal||e.target.tagName==='IMG'){card.classList.remove('active');modal.classList.remove('active')}}});
 
-        document.querySelectorAll('.scroll-link').forEach(l=>{l.addEventListener('click',e=>{e.preventDefault();
-        const t=document.querySelector(l.getAttribute('href'));if(t){window.scrollTo({top:t.offsetTop-80,behavior:'smooth'})}})});
+        document.querySelectorAll('.scroll-link').forEach(l=>{
+            l.onclick=e=>{e.preventDefault();document.querySelector(l.getAttribute('href'))?.scrollIntoView({behavior:'smooth'})}});
     </script>
 </body>
 </html>
