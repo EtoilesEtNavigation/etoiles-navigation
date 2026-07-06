@@ -11,13 +11,12 @@
     <meta name="author" content="Jean-Clément Louche">
     <meta name="robots" content="index, follow">
 
-    <!-- Open Graph / Réseaux sociaux -->
+    <!-- Open Graph -->
     <meta property="og:title" content="Étoiles et Navigation - Jean-Clément Louche">
     <meta property="og:description" content="Traité rare de navigation astronomique. Version numérique et exemplaires imprimés limités.">
     <meta property="og:image" content="https://etoilesetnavigation.fr/images/couverture.webp">
     <meta property="og:url" content="https://etoilesetnavigation.fr">
     <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
 
     <style>
         * { margin:0; padding:0; box-sizing:border-box; }
@@ -93,6 +92,51 @@
             border-radius: 2px;
         }
 
+        /* Grilles d'images */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+        .card {
+            background: rgba(255,255,255,.05);
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: .3s;
+            border: 1px solid rgba(212,160,23,.2);
+        }
+        .card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 15px 40px rgba(0,0,0,.6);
+        }
+        .card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,.92);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal.active { display: flex; }
+        .modal img {
+            max-width: 95%;
+            max-height: 95%;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,.8);
+        }
+
         .stripe-button {
             display: inline-block;
             background: #e67e22;
@@ -144,12 +188,32 @@
             <p>Un hommage vivant à un père qui a passé des centaines de nuits à scruter les étoiles et à transmettre sa passion pour la mer et l’astronomie.</p>
         </div>
 
+        <!-- VISUALISER LES INDEX -->
+        <h2 class="section-title">Visualiser les index</h2>
+        <p style="text-align:center;margin-bottom:2rem;color:#999;">Cliquez sur un index pour l’agrandir</p>
+        <div class="grid">
+            <!-- Ajoute ici tes cartes d'index (index.png, ch1.png ... ch12.png) -->
+            <div class="card" onclick="openModal('images/index.png')"><img src="images/index.png" alt="Index Général"></div>
+            <!-- Exemples : -->
+            <div class="card" onclick="openModal('images/ch1.png')"><img src="images/ch1.png" alt="Chapitre 1"></div>
+            <div class="card" onclick="openModal('images/ch2.png')"><img src="images/ch2.png" alt="Chapitre 2"></div>
+            <!-- ... ajoute les autres chapitres de la même façon -->
+        </div>
+
+        <!-- VISUALISER DU CONTENU -->
+        <h2 class="section-title">Visualiser du contenu</h2>
+        <div class="grid">
+            <div class="card" onclick="openModal('images/ch1_pg11.webp')"><img src="images/ch1_pg11.webp" alt="Chapitre 1 - page 11"></div>
+            <div class="card" onclick="openModal('images/ch2_pg23.webp')"><img src="images/ch2_pg23.webp" alt="Chapitre 2 - page 23"></div>
+            <div class="card" onclick="openModal('images/ch3_pg54.webp')"><img src="images/ch3_pg54.webp" alt="Chapitre 3 - page 54"></div>
+            <div class="card" onclick="openModal('images/ch4_pg58.webp')"><img src="images/ch4_pg58.webp" alt="Chapitre 4 - page 58"></div>
+        </div>
+
         <!-- SECTION CONTACT -->
         <section class="contact-section" id="contact">
             <div class="container" style="max-width:1000px;margin:0 auto;padding:2rem">
                 <h2 class="section-title">Plus d’infos et commande</h2>
 
-                <!-- Disponibilité imprimés -->
                 <div style="text-align:center; background:rgba(212,160,23,.15); border:1px solid rgba(212,160,23,.4); border-radius:12px; padding:2rem; margin-bottom:3rem; color:#e67e22; font-weight:500;">
                     Le livre a été imprimé à <strong>25 exemplaires</strong> seulement.<br>
                     <strong>21 exemplaires</strong> restent disponibles à la vente au prix de <strong>25 €</strong> l’exemplaire<br>
@@ -159,7 +223,6 @@
                     Nous vous répondrons par email afin d’organiser le paiement (PayPal, virement bancaire ou chèque) et l’envoi.
                 </div>
 
-                <!-- Bouton Stripe -->
                 <div style="text-align:center; margin:3rem 0 4rem 0;">
                     <a href="https://buy.stripe.com/7sY28s7N353w34h9jg67S01" 
                        target="_blank"
@@ -171,12 +234,12 @@
                     </p>
                 </div>
 
-                <!-- Formulaire Tally -->
+                <!-- Tally -->
                 <div style="background:rgba(255,255,255,.05);border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.7);border:3px solid rgba(212,160,23,.3);">
                     <iframe data-tally-src="https://tally.so/embed/GxeeRe?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" 
-                            loading="lazy" width="100%" height="1200" frameborder="0" marginheight="0" marginwidth="0" 
+                            loading="lazy" width="100%" height="1200" frameborder="0" marginheight="0" marginwidth="0"
                             title="Commande imprimée"></iframe>
-                    <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
+                    <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w;s.onload=v;s.onerror=v;d.body.appendChild(s);}</script>
                 </div>
             </div>
         </section>
@@ -186,7 +249,18 @@
         </footer>
     </main>
 
+    <!-- Modal Image -->
+    <div class="modal" id="image-modal" onclick="if(event.target===this)this.classList.remove('active')">
+        <img id="modal-image" src="" alt="">
+    </div>
+
     <script>
+        function openModal(src) {
+            document.getElementById('modal-image').src = src;
+            document.getElementById('image-modal').classList.add('active');
+        }
+
+        // Smooth scroll
         document.querySelectorAll('.scroll-link').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
