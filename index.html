@@ -7,8 +7,7 @@
     <!-- SEO -->
     <title>Étoiles et Navigation - Traité de navigation astronomique par Jean-Clément Louche</title>
     <meta name="description" content="Étoiles et Navigation : traité unique de navigation astronomique par Jean-Clément Louche. Version numérique à 15,90 € et 21 exemplaires imprimés limités à 25 €.">
-    <meta name="keywords" content="navigation astronomique, sextant, étoiles, navigation marine, Jean-Clément Louche">
-    <meta name="author" content="Jean-Clément Louche">
+    <meta name="keywords" content="navigation astronomique, sextant, étoiles, Jean-Clément Louche">
 
     <style>
         * { margin:0; padding:0; box-sizing:border-box; }
@@ -21,7 +20,7 @@
             overflow-x: hidden;
         }
 
-        /* Étoiles améliorées - plus naturelles */
+        /* Étoiles améliorées */
         body::before {
             content: '';
             position: fixed;
@@ -32,8 +31,7 @@
                 radial-gradient(1.1px 1.1px at 35% 70%, #d4a017, transparent),
                 radial-gradient(2.3px 2.3px at 68% 18%, #d4a017, transparent),
                 radial-gradient(0.9px 0.9px at 22% 82%, #d4a017, transparent),
-                radial-gradient(1.6px 1.6px at 88% 65%, #d4a017, transparent),
-                radial-gradient(1.2px 1.2px at 55% 35%, #d4a017, transparent);
+                radial-gradient(1.6px 1.6px at 88% 65%, #d4a017, transparent);
             background-size: 260px 260px, 380px 380px, 450px 450px;
             opacity: 0.72;
             animation: stars-slow 160s linear infinite;
@@ -47,8 +45,7 @@
             background: 
                 radial-gradient(1px 1px at 25% 45%, #fff, transparent),
                 radial-gradient(1.4px 1.4px at 75% 60%, #fff, transparent),
-                radial-gradient(0.8px 0.8px at 45% 85%, #fff, transparent),
-                radial-gradient(1.2px 1.2px at 80% 25%, #fff, transparent);
+                radial-gradient(0.8px 0.8px at 45% 85%, #fff, transparent);
             background-size: 200px 200px, 320px 320px;
             opacity: 0.4;
             animation: stars-fast 95s linear infinite;
@@ -57,19 +54,51 @@
         @keyframes stars-slow { from { background-position: 0 0; } to { background-position: 280px 280px; } }
         @keyframes stars-fast  { from { background-position: 0 0; } to { background-position: 220px 220px; } }
 
+        /* Navigation avec burger */
         nav {
             background: rgba(20,44,68,0.95);
             padding: 0.9rem 1rem;
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
             position: fixed;
             top: 0; left: 0; right: 0;
             z-index: 999;
             box-shadow: 0 4px 15px rgba(0,0,0,.5);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        nav a { color: white; text-decoration: none; font-weight: 600; font-size: 1.05rem; }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+        .burger {
+            display: none;
+            font-size: 1.8rem;
+            color: white;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: #142c44;
+                padding: 1rem;
+                gap: 1rem;
+                box-shadow: 0 10px 20px rgba(0,0,0,.5);
+            }
+            .nav-links.active { display: flex; }
+            .burger { display: block; }
+        }
 
         main { margin-top: 72px; padding: 1rem; }
         .cover-container { text-align: center; padding: 2rem 1rem 1.5rem; }
@@ -82,12 +111,7 @@
             border: 4px solid rgba(212,160,23,.4);
         }
 
-        .section-title {
-            font-size: 1.95rem;
-            text-align: center;
-            margin: 3rem 0 1.5rem;
-            color: #d4a017;
-        }
+        .section-title { font-size: 1.95rem; text-align: center; margin: 3rem 0 1.5rem; color: #d4a017; }
 
         .grid {
             display: grid;
@@ -137,9 +161,12 @@
 <body>
 
     <nav>
-        <a href="#accueil">Accueil</a>
-        <a href="a-propos.html">À propos de l’auteur</a>
-        <a href="#contact" class="scroll-link">Commander</a>
+        <div class="nav-links" id="nav-links">
+            <a href="#accueil">Accueil</a>
+            <a href="a-propos.html">À propos de l’auteur</a>
+            <a href="#contact" class="scroll-link">Commander</a>
+        </div>
+        <div class="burger" id="burger">☰</div>
     </nav>
 
     <main>
@@ -211,6 +238,7 @@
 
         <footer>
             <p>© Étoiles et Navigation - Jean-Clément Louche • Édition 2025</p>
+            <p>Mise à jour du site - juillet 2026</p>
         </footer>
     </main>
 
@@ -224,6 +252,22 @@
             document.getElementById('modal-image').src = src;
             document.getElementById('image-modal').classList.add('active');
         }
+
+        // Burger Menu
+        const burger = document.getElementById('burger');
+        const navLinks = document.getElementById('nav-links');
+        burger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('.scroll-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+                if (window.innerWidth <= 768) navLinks.classList.remove('active');
+            });
+        });
     </script>
 </body>
 </html>
