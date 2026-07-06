@@ -7,15 +7,8 @@
     <!-- SEO -->
     <title>Étoiles et Navigation - Traité de navigation astronomique par Jean-Clément Louche</title>
     <meta name="description" content="Étoiles et Navigation : traité unique de navigation astronomique par Jean-Clément Louche. Version numérique à 15,90 € et 21 exemplaires imprimés limités à 25 €.">
-    <meta name="keywords" content="navigation astronomique, sextant, étoiles, navigation marine, Jean-Clément Louche, livre navigation">
+    <meta name="keywords" content="navigation astronomique, sextant, étoiles, navigation marine, Jean-Clément Louche">
     <meta name="author" content="Jean-Clément Louche">
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="Étoiles et Navigation - Jean-Clément Louche">
-    <meta property="og:description" content="Traité rare de navigation astronomique. Version numérique et exemplaires imprimés limités.">
-    <meta property="og:image" content="https://etoilesetnavigation.fr/images/couverture.webp">
-    <meta property="og:url" content="https://etoilesetnavigation.fr">
-    <meta property="og:type" content="website">
 
     <style>
         * { margin:0; padding:0; box-sizing:border-box; }
@@ -31,34 +24,35 @@
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
             background: radial-gradient(2px 2px at 20% 30%, #d4a017, transparent),
-                        radial-gradient(1.5px 1.5px at 80% 70%, #d4a017, transparent),
-                        radial-gradient(1px 1px at 40% 90%, #d4a017, transparent);
-            background-size: 200px 200px, 300px 300px, 250px 250px;
+                        radial-gradient(1.5px 1.5px at 80% 70%, #d4a017, transparent);
+            background-size: 200px 200px, 300px 300px;
             opacity: 0.65;
             z-index: -1;
             animation: stars 140s linear infinite;
         }
-        @keyframes stars { from { background-position: 0 0, 50px 50px, 100px 100px; } to { background-position: 200px 200px, 250px 250px, 350px 350px; } }
+        @keyframes stars { from { background-position: 0 0; } to { background-position: 200px 200px; } }
 
         nav {
             background: rgba(20,44,68,0.95);
-            padding: 1.1rem 2rem;
+            padding: 1rem 1.5rem;
             display: flex;
             justify-content: center;
-            gap: 4rem;
+            gap: 2.5rem;
             flex-wrap: wrap;
             position: fixed;
             top: 0; left: 0; right: 0;
             z-index: 999;
             box-shadow: 0 4px 20px rgba(0,0,0,.5);
+            font-size: 1.05rem;
         }
-        nav a { color: white; text-decoration: none; font-weight: 600; font-size: 1.1rem; }
+        nav a { color: white; text-decoration: none; font-weight: 600; }
         nav a:hover { color: #e67e22; }
 
-        main { margin-top: 85px; padding: 1rem; }
-        .cover-container { text-align: center; padding: 2.5rem 1rem 2rem; }
+        main { margin-top: 78px; padding: 1rem; }
+        .cover-container { text-align: center; padding: 2rem 1rem 1.5rem; }
         .cover-container img {
-            max-width: 100%;
+            max-width: 520px;   /* ← réduit */
+            width: 100%;
             height: auto;
             border-radius: 16px;
             box-shadow: 0 25px 70px rgba(0,0,0,.75);
@@ -66,40 +60,34 @@
         }
 
         .section-title {
-            font-size: 2.1rem;
+            font-size: 2rem;
             text-align: center;
-            margin: 3.5rem 0 1.5rem;
+            margin: 3rem 0 1.5rem;
             color: #d4a017;
-            position: relative;
-        }
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background: #e67e22;
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-            gap: 1.8rem;
-            max-width: 1250px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.2rem;
+            max-width: 1200px;
             margin: 2rem auto;
         }
         .card {
-            background: rgba(255,255,255,.06);
-            border-radius: 14px;
-            overflow: hidden;
+            background: rgba(255,255,255,.08);
+            border: 1px solid rgba(212,160,23,.3);
+            border-radius: 12px;
+            padding: 1.2rem;
+            text-align: center;
             cursor: pointer;
-            transition: all .3s;
-            border: 1px solid rgba(212,160,23,.25);
+            transition: .3s;
+            color: #e67e22;
+            font-weight: 500;
         }
-        .card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(0,0,0,.6); }
-        .card img { width: 100%; height: auto; display: block; }
+        .card:hover {
+            background: rgba(230,126,34,.15);
+            transform: translateY(-4px);
+        }
 
         .modal {
             display: none;
@@ -118,37 +106,23 @@
             max-height: 94vh;
             border-radius: 12px;
             box-shadow: 0 30px 80px rgba(0,0,0,.9);
-            cursor: pointer;
         }
 
         .stripe-button {
             display: inline-block;
             background: #e67e22;
             color: white;
-            padding: 18px 48px;
-            font-size: 1.28rem;
+            padding: 17px 46px;
+            font-size: 1.25rem;
             font-weight: 600;
             border-radius: 50px;
             text-decoration: none;
             box-shadow: 0 12px 35px rgba(230,126,34,.45);
-            transition: all 0.3s;
         }
-        .stripe-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 50px rgba(230,126,34,.55);
-        }
+        .stripe-button:hover { transform: translateY(-4px); }
 
-        .contact-section {
-            background: linear-gradient(135deg, #0b1a2e, #142c44);
-            padding: 4rem 1rem;
-            margin-top: 2rem;
-        }
-        footer {
-            background: #0b1a2e;
-            color: #bdc3c7;
-            text-align: center;
-            padding: 3rem 1rem;
-        }
+        .contact-section { background: linear-gradient(135deg, #0b1a2e, #142c44); padding: 4rem 1rem; }
+        footer { background: #0b1a2e; color: #bdc3c7; text-align: center; padding: 3rem 1rem; }
     </style>
 </head>
 <body>
@@ -173,30 +147,30 @@
 
         <!-- VISUALISER LES INDEX -->
         <h2 class="section-title">Visualiser les index</h2>
-        <p style="text-align:center;margin-bottom:2rem;color:#aaa;">Cliquez sur un index pour l’agrandir</p>
+        <p style="text-align:center;margin-bottom:2rem;color:#aaa;">Cliquez sur un titre pour ouvrir l’index</p>
         <div class="grid">
-            <div class="card" onclick="openModal('images/index.png')"><img src="images/index.png" alt="Index Général"></div>
-            <div class="card" onclick="openModal('images/ch1.png')"><img src="images/ch1.png" alt="Chapitre 1"></div>
-            <div class="card" onclick="openModal('images/ch2.png')"><img src="images/ch2.png" alt="Chapitre 2"></div>
-            <div class="card" onclick="openModal('images/ch3.png')"><img src="images/ch3.png" alt="Chapitre 3"></div>
-            <div class="card" onclick="openModal('images/ch4.png')"><img src="images/ch4.png" alt="Chapitre 4"></div>
-            <div class="card" onclick="openModal('images/ch5.png')"><img src="images/ch5.png" alt="Chapitre 5"></div>
-            <div class="card" onclick="openModal('images/ch6.png')"><img src="images/ch6.png" alt="Chapitre 6"></div>
-            <div class="card" onclick="openModal('images/ch7.png')"><img src="images/ch7.png" alt="Chapitre 7"></div>
-            <div class="card" onclick="openModal('images/ch8.png')"><img src="images/ch8.png" alt="Chapitre 8"></div>
-            <div class="card" onclick="openModal('images/ch9.png')"><img src="images/ch9.png" alt="Chapitre 9"></div>
-            <div class="card" onclick="openModal('images/ch10.png')"><img src="images/ch10.png" alt="Chapitre 10"></div>
-            <div class="card" onclick="openModal('images/ch11.png')"><img src="images/ch11.png" alt="Chapitre 11"></div>
-            <div class="card" onclick="openModal('images/ch12.png')"><img src="images/ch12.png" alt="Chapitre 12"></div>
+            <div class="card" onclick="openModal('images/index.png')">Index Général</div>
+            <div class="card" onclick="openModal('images/ch1.png')">Chapitre 1</div>
+            <div class="card" onclick="openModal('images/ch2.png')">Chapitre 2</div>
+            <div class="card" onclick="openModal('images/ch3.png')">Chapitre 3</div>
+            <div class="card" onclick="openModal('images/ch4.png')">Chapitre 4</div>
+            <div class="card" onclick="openModal('images/ch5.png')">Chapitre 5</div>
+            <div class="card" onclick="openModal('images/ch6.png')">Chapitre 6</div>
+            <div class="card" onclick="openModal('images/ch7.png')">Chapitre 7</div>
+            <div class="card" onclick="openModal('images/ch8.png')">Chapitre 8</div>
+            <div class="card" onclick="openModal('images/ch9.png')">Chapitre 9</div>
+            <div class="card" onclick="openModal('images/ch10.png')">Chapitre 10</div>
+            <div class="card" onclick="openModal('images/ch11.png')">Chapitre 11</div>
+            <div class="card" onclick="openModal('images/ch12.png')">Chapitre 12</div>
         </div>
 
         <!-- VISUALISER DU CONTENU -->
         <h2 class="section-title">Visualiser du contenu</h2>
         <div class="grid">
-            <div class="card" onclick="openModal('images/ch1_pg11.webp')"><img src="images/ch1_pg11.webp" alt="Chapitre 1"></div>
-            <div class="card" onclick="openModal('images/ch2_pg23.webp')"><img src="images/ch2_pg23.webp" alt="Chapitre 2"></div>
-            <div class="card" onclick="openModal('images/ch3_pg54.webp')"><img src="images/ch3_pg54.webp" alt="Chapitre 3"></div>
-            <div class="card" onclick="openModal('images/ch4_pg58.webp')"><img src="images/ch4_pg58.webp" alt="Chapitre 4"></div>
+            <div class="card" onclick="openModal('images/ch1_pg11.webp')">Chapitre 1 - Extrait</div>
+            <div class="card" onclick="openModal('images/ch2_pg23.webp')">Chapitre 2 - Extrait</div>
+            <div class="card" onclick="openModal('images/ch3_pg54.webp')">Chapitre 3 - Extrait</div>
+            <div class="card" onclick="openModal('images/ch4_pg58.webp')">Chapitre 4 - Extrait</div>
         </div>
 
         <!-- CONTACT -->
@@ -213,14 +187,12 @@
                 </div>
 
                 <div style="text-align:center; margin:3rem 0 4rem;">
-                    <a href="https://buy.stripe.com/7sY28s7N353w34h9jg67S01" 
-                       target="_blank" class="stripe-button">
+                    <a href="https://buy.stripe.com/7sY28s7N353w34h9jg67S01" target="_blank" class="stripe-button">
                         Acheter la version numérique - 15,90 €
                     </a>
                     <p style="margin-top:1.2rem; color:#aaa;">Paiement sécurisé • Livraison du PDF à l'email renseigné</p>
                 </div>
 
-                <!-- Tally Form -->
                 <div style="background:rgba(255,255,255,.05);border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.7);">
                     <iframe data-tally-src="https://tally.so/embed/GxeeRe?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" 
                             loading="lazy" width="100%" height="1250" frameborder="0" title="Commande imprimée"></iframe>
@@ -246,9 +218,9 @@
         }
 
         document.querySelectorAll('.scroll-link').forEach(link => {
-            link.addEventListener('click', e => {
+            link.addEventListener('click', function(e) {
                 e.preventDefault();
-                document.querySelector(link.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
             });
         });
     </script>
