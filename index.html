@@ -3,9 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Étoiles et Navigation - Jean-Clément Louche</title>
-    <meta name="description" content="Traité de navigation astronomique par Jean-Clément Louche. Version numérique à 15,90 € et exemplaires imprimés limités (21 disponibles).">
-    <meta name="keywords" content="navigation astronomique, sextant, étoiles, Jean-Clément Louche, livre navigation">
+    
+    <!-- SEO -->
+    <title>Étoiles et Navigation - Traité de navigation astronomique par Jean-Clément Louche</title>
+    <meta name="description" content="Étoiles et Navigation : traité unique de navigation astronomique par Jean-Clément Louche. Version numérique à 15,90 € (PDF interactif) et 21 exemplaires imprimés disponibles à 25 €.">
+    <meta name="keywords" content="navigation astronomique, sextant, étoiles, navigation marine, Jean-Clément Louche, livre navigation, Grand Large, astronomie">
+    <meta name="author" content="Jean-Clément Louche">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Réseaux sociaux -->
+    <meta property="og:title" content="Étoiles et Navigation - Jean-Clément Louche">
+    <meta property="og:description" content="Traité rare de navigation astronomique. Version numérique et exemplaires imprimés limités.">
+    <meta property="og:image" content="https://etoilesetnavigation.fr/images/couverture.webp">
+    <meta property="og:url" content="https://etoilesetnavigation.fr">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
 
     <style>
         * { margin:0; padding:0; box-sizing:border-box; }
@@ -15,6 +27,7 @@
             color: #ecf0f1;
             background: #0b1a2e;
             background-attachment: fixed;
+            position: relative;
         }
         body::before {
             content: '';
@@ -121,13 +134,14 @@
     <main>
         <!-- COUVERTURE -->
         <div class="cover-container" id="accueil">
-            <img src="images/couverture.webp" alt="Couverture Étoiles et Navigation">
+            <img src="images/couverture.webp" alt="Couverture du livre Étoiles et Navigation">
         </div>
 
-        <!-- PRÉSENTATION -->
+        <!-- TEXTE DE PRÉSENTATION -->
         <div style="max-width:900px;margin:0 auto;padding:2rem;text-align:justify;color:#bdc3c7;background:rgba(0,0,0,.3);border-radius:16px;margin-bottom:4rem">
-            <p><strong>Étoiles et Navigation</strong> est un traité unique de navigation astronomique rédigé par Jean-Clément Louche.</p>
-            <p>Calculs de position au sextant, lecture des constellations, tables astronomiques, croquis originaux… Un ouvrage rare et précieux pour tous les passionnés de voile et d’astronomie.</p>
+            <p><strong>Étoiles et Navigation</strong> est un traité unique de navigation astronomique rédigé par Jean-Clément Louche, passionné de voile et d'astronomie.</p>
+            <p>Écrit avec patience et précision, cet ouvrage rassemble des décennies d’expérience : calculs de position au sextant, lecture des constellations, tables astronomiques détaillées et croquis originaux.</p>
+            <p>Un hommage vivant à un père qui a passé des centaines de nuits à scruter les étoiles et à transmettre sa passion pour la mer et l’astronomie.</p>
         </div>
 
         <!-- SECTION CONTACT -->
@@ -135,7 +149,7 @@
             <div class="container" style="max-width:1000px;margin:0 auto;padding:2rem">
                 <h2 class="section-title">Plus d’infos et commande</h2>
 
-                <!-- Disponibilité imprimés + méthode de paiement -->
+                <!-- Disponibilité imprimés -->
                 <div style="text-align:center; background:rgba(212,160,23,.15); border:1px solid rgba(212,160,23,.4); border-radius:12px; padding:2rem; margin-bottom:3rem; color:#e67e22; font-weight:500;">
                     Le livre a été imprimé à <strong>25 exemplaires</strong> seulement.<br>
                     <strong>21 exemplaires</strong> restent disponibles à la vente au prix de <strong>25 €</strong> l’exemplaire<br>
@@ -145,7 +159,7 @@
                     Nous vous répondrons par email afin d’organiser le paiement (PayPal, virement bancaire ou chèque) et l’envoi.
                 </div>
 
-                <!-- Bouton Stripe Version Numérique -->
+                <!-- Bouton Stripe -->
                 <div style="text-align:center; margin:3rem 0 4rem 0;">
                     <a href="https://buy.stripe.com/7sY28s7N353w34h9jg67S01" 
                        target="_blank"
@@ -174,9 +188,9 @@
 
     <script>
         document.querySelectorAll('.scroll-link').forEach(link => {
-            link.addEventListener('click', e => {
+            link.addEventListener('click', function(e) {
                 e.preventDefault();
-                document.querySelector(link.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
             });
         });
     </script>
