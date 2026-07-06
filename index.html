@@ -16,7 +16,6 @@
             background: #0b1a2e;
             background-attachment: fixed;
         }
-        /* Stars background */
         body::before {
             content: '';
             position: fixed;
@@ -136,15 +135,17 @@
             <div class="container" style="max-width:1000px;margin:0 auto;padding:2rem">
                 <h2 class="section-title">Plus d’infos et commande</h2>
 
-                <!-- Disponibilité imprimés -->
-                <div style="text-align:center; background:rgba(212,160,23,.15); border:1px solid rgba(212,160,23,.4); border-radius:12px; padding:1.8rem; margin-bottom:3rem; color:#e67e22; font-weight:500;">
+                <!-- Disponibilité imprimés + méthode de paiement -->
+                <div style="text-align:center; background:rgba(212,160,23,.15); border:1px solid rgba(212,160,23,.4); border-radius:12px; padding:2rem; margin-bottom:3rem; color:#e67e22; font-weight:500;">
                     Le livre a été imprimé à <strong>25 exemplaires</strong> seulement.<br>
                     <strong>21 exemplaires</strong> restent disponibles à la vente au prix de <strong>25 €</strong> l’exemplaire<br>
-                    (frais de port en sus en cas d’envoi : 11€ par La Poste avec suivi).<br>
-                    Pour chaque exemplaire imprimé acheté, la <strong>version numérique</strong> vous est <strong>offerte</strong> gratuitement.
+                    (frais de port en sus en cas d’envoi : 11€ par La Poste avec suivi).<br><br>
+                    <strong>Pour commander un exemplaire imprimé :</strong><br>
+                    Utilisez le formulaire ci-dessous pour prendre contact.<br>
+                    Nous vous répondrons par email afin d’organiser le paiement (PayPal, virement bancaire ou chèque) et l’envoi.
                 </div>
 
-                <!-- Bouton Stripe Production -->
+                <!-- Bouton Stripe Version Numérique -->
                 <div style="text-align:center; margin:3rem 0 4rem 0;">
                     <a href="https://buy.stripe.com/7sY28s7N353w34h9jg67S01" 
                        target="_blank"
@@ -172,7 +173,6 @@
     </main>
 
     <script>
-        // Smooth scroll
         document.querySelectorAll('.scroll-link').forEach(link => {
             link.addEventListener('click', e => {
                 e.preventDefault();
