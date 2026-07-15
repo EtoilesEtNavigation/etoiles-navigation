@@ -6,7 +6,7 @@
     
     <!-- SEO -->
     <title>Étoiles et Navigation - Traité de navigation astronomique par Jean-Clément Louche</title>
-    <meta name="description" content="Étoiles et Navigation : traité unique de navigation astronomique par Jean-Clément Louche. Version numérique à 15,90 € et 21 exemplaires imprimés limités à 25 €.">
+    <meta name="description" content="Étoiles et Navigation : traité unique de navigation astronomique par Jean-Clément Louche. Version numérique interactive à 15,90 € et 21 exemplaires imprimés limités à 25 €.">
     <meta name="keywords" content="navigation astronomique, sextant, étoiles, Jean-Clément Louche">
 
     <style>
@@ -52,9 +52,8 @@
         }
 
         @keyframes stars-slow { from { background-position: 0 0; } to { background-position: 280px 280px; } }
-        @keyframes stars-fast  { from { background-position: 0 0; } to { background-position: 220px 220px; } }
+        @keyframes stars-fast { from { background-position: 0 0; } to { background-position: 220px 220px; } }
 
-        /* Navigation avec burger */
         nav {
             background: rgba(20,44,68,0.95);
             padding: 0.9rem 1rem;
@@ -66,36 +65,12 @@
             justify-content: space-between;
             align-items: center;
         }
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.05rem;
-        }
-        .burger {
-            display: none;
-            font-size: 1.8rem;
-            color: white;
-            cursor: pointer;
-        }
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 600; font-size: 1.05rem; }
+        .burger { display: none; font-size: 1.8rem; color: white; cursor: pointer; }
 
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: #142c44;
-                padding: 1rem;
-                gap: 1rem;
-                box-shadow: 0 10px 20px rgba(0,0,0,.5);
-            }
+            .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: #142c44; padding: 1rem; gap: 1rem; box-shadow: 0 10px 20px rgba(0,0,0,.5); }
             .nav-links.active { display: flex; }
             .burger { display: block; }
         }
@@ -176,9 +151,13 @@
         </div>
 
         <!-- PRÉSENTATION -->
-        <div style="max-width:900px;margin:0 auto;padding:2rem;text-align:justify;color:#bdc3c7;background:rgba(0,0,0,.35);border-radius:16px;margin-bottom:3rem">
+        <div style="max-width:920px;margin:0 auto;padding:2rem;text-align:justify;color:#bdc3c7;background:rgba(0,0,0,.35);border-radius:16px;margin-bottom:3rem">
             <p><strong>Étoiles et Navigation</strong> est un traité unique de navigation astronomique rédigé par Jean-Clément Louche.</p>
             <p>Calculs de position au sextant, lecture des constellations, tables astronomiques détaillées et croquis originaux… Un ouvrage rare et précieux.</p>
+            
+            <p>La <strong>version numérique (PDF)</strong> est conçue pour être particulièrement interactive : un système de navigation avancé par étoiles en bas de page permet de passer rapidement d’un index à une page, et de circuler librement entre les chapitres grâce à des liens intelligents. C’est un véritable outil de travail vivant et pratique pour les navigateurs et passionnés d’astronomie marine.</p>
+            
+            <p>Ce PDF est un travail en évolution permanente. Un <strong>Chapitre XIII</strong> est en cours de rédaction et sera progressivement intégré. Les détenteurs de la version numérique sont invités à contribuer : remarques, corrections, suggestions ou compléments seront étudiés avec attention pour enrichir les futures mises à jour.</p>
         </div>
 
         <!-- VISUALISER LES INDEX -->
@@ -213,19 +192,19 @@
             <div style="max-width:1000px;margin:0 auto;padding:2rem">
                 <h2 class="section-title">Plus d’infos et commande</h2>
 
+                <div style="text-align:center; margin:3rem 0 4rem;">
+                    <a href="https://buy.stripe.com/7sY28s7N353w34h9jg67S01" target="_blank" class="stripe-button">
+                        Acheter la version numérique - 15,90 €
+                    </a>
+                    <p style="margin-top:1rem; color:#999;">Paiement sécurisé • Livraison du PDF à l'email renseigné</p>
+                </div>
+
                 <div style="text-align:center; background:rgba(212,160,23,.15); border:1px solid rgba(212,160,23,.4); border-radius:12px; padding:2rem; margin-bottom:3rem; color:#e67e22; font-weight:500;">
                     Le livre a été imprimé à <strong>25 exemplaires</strong> seulement.<br>
                     <strong>6 exemplaires</strong> restent disponibles à la vente au prix de <strong>25 €</strong> l’exemplaire<br>
                     (frais de port en sus : 11€ par La Poste avec suivi).<br><br>
                     <strong>Pour commander un exemplaire imprimé :</strong><br>
                     Utilisez le formulaire ci-dessous. Nous vous répondrons par email pour organiser le paiement (PayPal, virement ou chèque).
-                </div>
-
-                <div style="text-align:center; margin:3rem 0 4rem;">
-                    <a href="https://buy.stripe.com/7sY28s7N353w34h9jg67S01" target="_blank" class="stripe-button">
-                        Acheter la version numérique - 15,90 €
-                    </a>
-                    <p style="margin-top:1rem; color:#999;">Paiement sécurisé • Livraison du PDF à l'email renseigné</p>
                 </div>
 
                 <div style="background:rgba(255,255,255,.05);border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.7);">
@@ -238,7 +217,7 @@
 
         <footer>
             <p>© Étoiles et Navigation - Jean-Clément Louche • Édition 2025</p>
-            <p>Mise à jour du site - 14 juillet 2026</p>
+            <p>Mise à jour du site - 15 juillet 2026</p>
         </footer>
     </main>
 
